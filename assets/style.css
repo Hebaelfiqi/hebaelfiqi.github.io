@@ -99,6 +99,13 @@ img{max-width:100%;display:block}
 .pub-output .lead{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.06em;
   text-transform:uppercase;color:var(--teal-deep);margin-right:6px}
 .role-tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--teal-deep)}
+.thesis{margin:3px 0 0;color:var(--ink-2);font-style:italic;font-size:1.02rem;line-height:1.42}
+.hdr-meta{display:flex;flex-wrap:wrap;gap:10px 30px;margin:12px 0 0;padding:0}
+.hdr-meta > div{display:flex;flex-direction:column;gap:2px}
+.hdr-meta dt{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted)}
+.hdr-meta dd{margin:0;font-size:.92rem;color:#2C3E51}
+.hdr-meta dd.role{color:var(--teal-deep);font-weight:600}
 .pub-meta em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:.7rem;
   letter-spacing:.08em;text-transform:uppercase;color:#9A6A14;background:#FBF0DC;
   border:1px solid #EDD9B0;border-radius:999px;padding:2px 9px}
