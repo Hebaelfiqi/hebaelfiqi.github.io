@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -176,7 +176,7 @@
     <p class="eyebrow">Selected results</p>
     <h2 class="sec-title">Paper gallery, in plain language</h2>
     <hr class="sec-rule">
-    <p class="prose" style="margin:0 0 4px">One panel per idea, redrawn in the site style. Each captures the core method and headline result. Use the tabs to switch between papers.</p>
+    <p class="prose" style="margin:0 0 4px">One panel per idea, redrawn in the site style. Each captures the core method and headline result.</p>
     <div class="paper-tabs" role="tablist" aria-label="Switch between papers">
       <button class="paper-tab" role="tab" aria-selected="true" aria-controls="paper-wglae" id="tab-paper-wglae">Missing-channel recovery<span class="pt-venue">IEEE T-Cybernetics</span></button>
       <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-limits" id="tab-paper-limits">Limits of shepherding<span class="pt-venue">IEEE Access</span></button>
@@ -184,7 +184,10 @@
       <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-eeg-gating" id="tab-paper-eeg-gating">Spatially informed gating<span class="pt-venue">Sensors</span></button>
       <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-stylometry" id="tab-paper-stylometry">Translator stylometry<span class="pt-venue">ACM TALLIP</span></button>
     </div>
-    <div class="results-grid" id="papers">
+    <div class="paper-carousel" id="papers-carousel">
+      <button class="car-arrow prev" type="button" aria-label="Previous paper">&#8592;</button>
+      <button class="car-arrow next" type="button" aria-label="Next paper">&#8594;</button>
+      <div class="car-track" id="papers">
       <article class="result-card" id="paper-wglae" role="tabpanel" aria-labelledby="tab-paper-wglae"><div class="result-fig"><svg viewBox="0 0 520 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Reconstruction error against number of missing channels. The gated model stays low; a standard autoencoder rises sharply.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">RECONSTRUCTION ERROR</text>
   <line x1="60" y1="40" x2="60" y2="248" stroke="#5C6F84" stroke-width="1.4"/><line x1="60" y1="248" x2="492" y2="248" stroke="#5C6F84" stroke-width="1.4"/>
@@ -286,6 +289,7 @@
   <text x="370" y="483" font-family="IBM Plex Mono, monospace" font-size="11" fill="#1C7E8F" text-anchor="middle">p&#8321; &#8594; C&#8321;</text><text x="370" y="498" font-family="IBM Plex Mono, monospace" font-size="11" fill="#1C7E8F" text-anchor="middle">p&#8322; &#8594; C&#8322;</text>
   <defs><marker id="mm" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
 </svg></div><div class="result-body"><span class="tag">Pattern recognition</span><h3>Identifying translators from parallel translations</h3><p>Two translators produce different translations of one source, so the data is paired and the informative signal is the change between the paired feature values. We framed this as a Pairwise Comparative Classification Problem and modified the C4.5 decision tree into PWC4.5, which splits on a relationship over a pair's values rather than treating instances alone. On translator identification, standard C4.5 reached 52.12% while PWC4.5 reached 80.23%.</p><p class="fig-cite"><span class="venue">ACM TALLIP</span>, 2016. <a href="https://doi.org/10.1145/2898997">doi:10.1145/2898997</a><br><span class="venue">PLOS ONE</span>, 2019. <a href="https://doi.org/10.1371/journal.pone.0211809">doi:10.1371/journal.pone.0211809</a></p></div></article>
+      </div>
     </div>
   </div>
 </section>
@@ -318,6 +322,6 @@
   </div>
   <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
 </footer>
-<script src="assets/main.js"></script>
+<script src="assets/main.js?v=3"></script>
 </body>
 </html>
