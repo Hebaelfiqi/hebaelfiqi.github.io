@@ -94,12 +94,18 @@ img{max-width:100%;display:block}
 .venue{font-family:"IBM Plex Mono",monospace;font-size:.79rem;color:var(--teal-deep)}
 .doi{font-family:"IBM Plex Mono",monospace;font-size:.79rem;margin-left:6px}
 .note{margin-top:18px;color:var(--muted)}
+.pub-output{margin:6px 0 0;color:#3A4D61;font-size:.9rem;padding-left:15px;
+  border-left:2px solid var(--teal)}
+.pub-output .lead{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--teal-deep);margin-right:6px}
+.role-tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--teal-deep)}
 .pub-meta em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:.7rem;
   letter-spacing:.08em;text-transform:uppercase;color:#9A6A14;background:#FBF0DC;
   border:1px solid #EDD9B0;border-radius:999px;padding:2px 9px}
 .chip{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.08em;
   text-transform:uppercase;border-radius:999px;padding:2px 9px;margin-left:6px;vertical-align:1px}
 .chip.q1{color:var(--teal-deep);background:#E3F1F4;border:1px solid #C4E2E8}
+.chip.year{color:var(--muted);background:var(--paper-2);border:1px solid var(--line)}
 .soft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .soft-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
 .soft-card h2{font-size:1.25rem}
