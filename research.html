@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research | Dr Heba El-Fiqi</title>
+<meta name="description" content="Swarm guidance and gated learning architectures for distributed autonomous systems.">
+<meta property="og:title" content="Research | Dr Heba El-Fiqi">
+<meta property="og:description" content="Swarm guidance and gated learning architectures for distributed autonomous systems.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span> Dr Heba El-Fiqi</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="research.html" aria-current="page">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="software.html">Software</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="service.html">Service</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="container"><p class="eyebrow">Research</p><h1>Distributed and collaborative intelligence</h1><p class="lede">A collective is only as capable as what each agent can recover from what it sees. My work develops both the coordination across agents and the learning inside each one.</p></div></section>
+<section class="section">
+  <div class="container prose">
+    <p class="eyebrow">Pillar 1</p>
+    <h2>Coordination and collective behaviour</h2>
+    <p>I develop guidance methods for multi-agent systems, centred on swarm shepherding, where a small number of control agents guide the emergent behaviour of a much larger group. This line of work identified the limits of reactive shepherding (IEEE Access), introduced distributed and consensus-based shepherding, and reframed adversarial patrolling as a shepherding problem (IEEE SMC). To keep the work reproducible, I built and released open-source infrastructure, including a Shepherding Library and a swarm simulation environment that others now reuse and benchmark against.</p>
+
+    <p class="eyebrow">Pillar 2</p>
+    <h2>The learning each agent needs</h2>
+    <p>Real-world data is partial, noisy, and high-dimensional. I design learning architectures for exactly this, in a sustained line of work on gated autoencoders: from Gate-Layer Autoencoders for incomplete EEG signal recovery (IJCNN), to the Weighted Gate Layer Autoencoder, a learnable gating mechanism that models inter-variable dependencies and reconstructs missing signals (IEEE Transactions on Cybernetics), to gate-control mechanisms that make this selection more precise (Sensors).</p>
+
+    <p class="eyebrow">Where it meets</p>
+    <h2>Toward learning across agents that differ</h2>
+    <p>I am extending these foundations toward collaborative learning across agents that differ, and on-board perception under tight compute budgets, so that distributed perception and decision-making hold up on resource-constrained platforms.</p>
+
+    <p class="eyebrow">Applied autonomy</p>
+    <h2>From method to readiness</h2>
+    <p>These methods are tested and translated through funded projects with industry and research partners, moving results from concept toward real-world readiness.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div>
+      <div class="foot-name">Dr Heba El-Fiqi</div>
+      <p class="foot-line">Distributed and collaborative intelligence for autonomous systems. School of Systems and Computing, UNSW Canberra.</p>
+    </div>
+    <nav class="foot-links" aria-label="Profiles">
+      <!-- TODO: replace # with your real profile URLs -->
+      <a href="https://scholar.google.com/citations?user=6ySMBdQAAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8146-0110">ORCID</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+    </nav>
+  </div>
+  <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
+</footer>
+<script src="assets/main.js"></script>
+
+</body>
+</html>
