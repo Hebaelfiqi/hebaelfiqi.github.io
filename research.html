@@ -180,6 +180,7 @@
       <button class="paper-tab" role="tab" aria-selected="true" aria-controls="paper-wglae" id="tab-paper-wglae">Missing-channel recovery<span class="pt-venue">IEEE T-Cybernetics</span></button>
       <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-limits" id="tab-paper-limits">Limits of shepherding<span class="pt-venue">IEEE Access</span></button>
       <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-patrolling" id="tab-paper-patrolling">Guarding as shepherding<span class="pt-venue">IEEE SMC</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-atc" id="tab-paper-atc">Air traffic as shepherding<span class="pt-venue">Springer</span></button>
       <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-eeg-gating" id="tab-paper-eeg-gating">Spatially informed gating<span class="pt-venue">Sensors</span></button>
       <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-stylometry" id="tab-paper-stylometry">Translator stylometry<span class="pt-venue">ACM TALLIP</span></button>
     </div>
@@ -234,6 +235,36 @@
   <text x="300" y="226" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5C6F84" text-anchor="middle">look-ahead selects: drive / collect / intercept / patrol</text>
   <defs><marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
 </svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>Guarding an area, reframed as shepherding</h3><p>Adversarial patrolling recast in the continuous domain: attackers are a swarm drawn to a protected area, and a single defender repels them using force-based behaviours. A one-step look-ahead picks among driving, collecting, intercepting, and patrolling to hold the swarm at a safe distance.</p><p class="fig-cite"><span class="venue">IEEE SMC</span>, 2024. <a href="https://doi.org/10.1109/SMC54092.2024.10832074">doi:10.1109/SMC54092.2024.10832074</a></p></div></article>
+      <article class="result-card" id="paper-atc" role="tabpanel" aria-labelledby="tab-paper-atc"><div class="result-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="One air traffic controller moves a logical shepherd whose influence propagates from aircraft to aircraft, rotating each UAV's intended flight plan away from the shepherd.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">AIR TRAFFIC CONTROL AS SHEPHERDING</text>
+  <defs>
+    <marker id="atcT" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1C7E8F"/></marker>
+    <marker id="atcG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker>
+    <marker id="atcA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
+  </defs>
+  <line x1="10" y1="42" x2="34" y2="42" stroke="#1C7E8F" stroke-width="2.4"/><text x="40" y="46" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">updated flight plan</text>
+  <line x1="10" y1="60" x2="34" y2="60" stroke="#D8E2EB" stroke-width="2" stroke-dasharray="5 4"/><text x="40" y="64" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">previous flight plan</text>
+  <text x="480" y="30" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#0A1B2E" text-anchor="middle" font-weight="600">UAV fleet</text>
+  <path d="M212,192 C262,195 312,196 356,196" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M212,188 C260,178 312,168 356,160" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M292,132 C342,135 392,137 436,138" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M292,128 C340,116 392,106 436,100" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M372,74 C420,77 468,79 504,80" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M372,70 C418,60 468,52 504,46" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M340,192 A26,26 0 0 1 336,168" fill="none" stroke="#5C6F84" stroke-width="1.3" marker-end="url(#atcG)"/>
+  <text x="344" y="214" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84">flight plan rotates</text>
+  <line x1="106" y1="226" x2="186" y2="198" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="212" y1="178" x2="266" y2="140" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="292" y1="120" x2="346" y2="82" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <text x="250" y="240" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5C6F84" text-anchor="middle">influence propagates aircraft to aircraft</text>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(200,190) rotate(78)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(280,130) rotate(78)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(360,72) rotate(78)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(95,238) rotate(62) scale(1.5)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="95" y="268" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1C7E8F" text-anchor="middle" font-weight="600">Logical shepherd</text>
+  <text x="95" y="282" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">moved by one controller</text>
+  <text x="280" y="296" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">forces sheep need but UAVs don&#8217;t are absorbed by the autopilot, flight plan, and CD&amp;R</text>
+</svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>One controller, a whole UAV fleet</h3><p>Air traffic control recast as shepherding: the controller moves a single logical shepherd in the digital airspace, and its force rotates each aircraft&rsquo;s intended flight plan rather than steering positions directly. The influence propagates from aircraft to aircraft, so one controller redirects a whole fleet without per-aircraft commands. Forces sheep need but aircraft don&rsquo;t are absorbed by the autopilot, flight plan, and onboard collision detection. Demonstrated through a new ATC interface in the ATOMS air-traffic simulator.</p><p class="fig-cite"><span class="venue">Springer, Shepherding UxVs for Human-Swarm Teaming</span>, 2021. <a href="https://doi.org/10.1007/978-3-030-60898-9_11">doi:10.1007/978-3-030-60898-9_11</a></p></div></article>
       <article class="result-card" id="paper-eeg-gating" role="tabpanel" aria-labelledby="tab-paper-eeg-gating"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="An EEG electrode layout sets the order in which channels are gated during reconstruction.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">SPATIALLY INFORMED GATING</text>
   <path d="M150,44 L160,58 L140,58 Z" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/><circle cx="150" cy="132" r="78" fill="#fff" stroke="#D8E2EB" stroke-width="1.6"/><circle cx="72" cy="132" r="8" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/><circle cx="228" cy="132" r="8" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/>
