@@ -35,10 +35,20 @@
 </header>
 <main id="main">
 <section class="page-head"><div class="container"><p class="eyebrow">Research</p><h1>Distributed and collaborative intelligence</h1><p class="lede">A collective is only as capable as what each agent can recover from what it sees. My work develops both the coordination across agents and the learning inside each one.</p></div></section>
-<section class="section">
+<nav class="subnav" aria-label="On this page">
+  <div class="container">
+    <a href="#pillar-coordination">Pillar 1 &#183; Coordination</a>
+    <a href="#pillar-learning">Pillar 2 &#183; Gated learning</a>
+    <a href="#directions">Directions</a>
+    <a href="#selected-results">Paper gallery</a>
+    <a href="#funding">Funding &amp; group</a>
+  </div>
+</nav>
+<section class="section" id="pillar-coordination">
   <div class="container prose">
     <p class="eyebrow">Pillar 1</p>
-    <h2>Coordination and collective behaviour</h2>
+    <h2 class="sec-title">Coordination and collective behaviour</h2>
+    <hr class="sec-rule">
     <p>I develop guidance methods for multi-agent systems, centred on swarm shepherding, where a small number of control agents guide the emergent behaviour of a much larger group. This line of work identified the limits of reactive shepherding (IEEE Access), introduced distributed and consensus-based shepherding, and reframed adversarial patrolling as a shepherding problem (IEEE SMC). To keep the work reproducible, I built and released open-source infrastructure, including a Shepherding Library and a swarm simulation environment that others now reuse and benchmark against.</p>
 <div class="pillar-fig"><svg viewBox="0 0 560 264" role="img" xmlns="http://www.w3.org/2000/svg"
   aria-label="Shepherding positions and vectors. The driving position sits behind the flock centre of mass with a vector through it to the goal; the collecting position sits behind a stray with a vector pointing toward the centre of mass.">
@@ -100,9 +110,14 @@
   <circle cx="304" cy="302" r="6" fill="none" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="1.5 3"/><text x="316" y="306" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D">flee from the sheepdog</text>
   <defs><marker id="rf" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2A9DB0"/></marker></defs>
 </svg><p class="fig-note">The circles set the driving and collecting positions. A sheep does not switch behaviour: it always moves on the weighted sum of all its forces, but each force is regulated by distance, so an out-of-range influence, such as a sheepdog beyond the threat radius, contributes zero and drops out of the sum.</p></div>
+  </div>
+</section>
 
+<section class="section alt" id="pillar-learning">
+  <div class="container prose">
     <p class="eyebrow">Pillar 2</p>
-    <h2>The learning each agent needs</h2>
+    <h2 class="sec-title">The learning each agent needs</h2>
+    <hr class="sec-rule">
     <p>Real-world data is partial, noisy, and high-dimensional. I design learning architectures for exactly this, in a sustained line of work on gated autoencoders: from Gate-Layer Autoencoders for incomplete EEG signal recovery (IJCNN), to the Weighted Gate Layer Autoencoder, a learnable gating mechanism that models inter-variable dependencies and reconstructs missing signals (IEEE Transactions on Cybernetics), to gate-control mechanisms that make this selection more precise (Sensors).</p>
 <div class="pillar-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg"
   aria-label="Weighted Gate Layer Autoencoder. The gate controller sits above the input gate; it switches some variables off; the autoencoder reconstructs them; the error weight generator weights the reconstruction error.">
@@ -139,9 +154,14 @@
     <marker id="gb" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
   </defs>
 </svg><p class="fig-note">A gate layer chooses which variables carry the reconstruction, recovering what is missing.</p></div>
+  </div>
+</section>
 
+<section class="section" id="directions">
+  <div class="container prose">
     <p class="eyebrow">Where it meets</p>
-    <h2>Toward learning across agents that differ</h2>
+    <h2 class="sec-title">Toward learning across agents that differ</h2>
+    <hr class="sec-rule">
     <p>I am extending these foundations toward collaborative learning across agents that differ, and on-board perception under tight compute budgets, so that distributed perception and decision-making hold up on resource-constrained platforms.</p>
 
     <p class="eyebrow">Applied autonomy</p>
@@ -151,13 +171,21 @@
 </section>
 
 
-<section class="section" id="selected-results">
+<section class="section alt" id="selected-results">
   <div class="container">
     <p class="eyebrow">Selected results</p>
-    <h2 style="font-family:'IBM Plex Serif',serif;font-size:1.55rem;margin:.1em 0 .3em">In plain language</h2>
-    <p class="prose" style="margin:0 0 4px">One panel per idea, redrawn in the site style. Each captures the core method and headline result.</p>
-    <div class="results-grid">
-      <article class="result-card"><div class="result-fig"><svg viewBox="0 0 520 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Reconstruction error against number of missing channels. The gated model stays low; a standard autoencoder rises sharply.">
+    <h2 class="sec-title">Paper gallery, in plain language</h2>
+    <hr class="sec-rule">
+    <p class="prose" style="margin:0 0 4px">One panel per idea, redrawn in the site style. Each captures the core method and headline result. Use the tabs to switch between papers.</p>
+    <div class="paper-tabs" role="tablist" aria-label="Switch between papers">
+      <button class="paper-tab" role="tab" aria-selected="true" aria-controls="paper-wglae" id="tab-paper-wglae">Missing-channel recovery<span class="pt-venue">IEEE T-Cybernetics</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-limits" id="tab-paper-limits">Limits of shepherding<span class="pt-venue">IEEE Access</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-patrolling" id="tab-paper-patrolling">Guarding as shepherding<span class="pt-venue">IEEE SMC</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-eeg-gating" id="tab-paper-eeg-gating">Spatially informed gating<span class="pt-venue">Sensors</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-stylometry" id="tab-paper-stylometry">Translator stylometry<span class="pt-venue">ACM TALLIP</span></button>
+    </div>
+    <div class="results-grid" id="papers">
+      <article class="result-card" id="paper-wglae" role="tabpanel" aria-labelledby="tab-paper-wglae"><div class="result-fig"><svg viewBox="0 0 520 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Reconstruction error against number of missing channels. The gated model stays low; a standard autoencoder rises sharply.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">RECONSTRUCTION ERROR</text>
   <line x1="60" y1="40" x2="60" y2="248" stroke="#5C6F84" stroke-width="1.4"/><line x1="60" y1="248" x2="492" y2="248" stroke="#5C6F84" stroke-width="1.4"/>
   <text x="-150" y="24" transform="rotate(-90)" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#5C6F84" text-anchor="middle">reconstruction error</text>
@@ -170,7 +198,7 @@
   <line x1="96" y1="70" x2="120" y2="70" stroke="#1C7E8F" stroke-width="3"/><text x="128" y="74" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#182A3D">Weighted Gate Layer AE</text>
   <line x1="96" y1="90" x2="120" y2="90" stroke="#E0992F" stroke-width="3"/><text x="128" y="94" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#182A3D">standard autoencoder</text>
 </svg></div><div class="result-body"><span class="tag">Gated learning</span><h3>Recovering signals with missing channels</h3><p>A learnable gate layer switches input variables on and off during training, so the model learns which variables depend on which. When channels drop out, reconstruction error stays low even with up to ten channels missing at once, where a standard autoencoder degrades sharply.</p><p class="fig-cite"><span class="venue">IEEE Transactions on Cybernetics</span>, 2021. <a href="https://doi.org/10.1109/TCYB.2021.3049583">doi:10.1109/TCYB.2021.3049583</a></p></div></article>
-      <article class="result-card"><div class="result-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Phase diagram from the paper's obstacle-density thresholds, with a legend explaining the regions and curves and the experiment setup.">
+      <article class="result-card" id="paper-limits" role="tabpanel" aria-labelledby="tab-paper-limits"><div class="result-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Phase diagram from the paper's obstacle-density thresholds, with a legend explaining the regions and curves and the experiment setup.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">PHASE DIAGRAM &#183; OBSTACLE-DENSITY THRESHOLDS</text>
   <rect x="70" y="48" width="310" height="202" fill="#FBF0DC" opacity=".5"/>
   <polygon points="70,250 70.0,246.0 104.4,233.8 138.9,229.8 173.3,221.7 207.8,193.4 242.2,177.3 276.7,161.1 311.1,149.0 345.6,136.9 380.0,149.0 380,250" fill="#E3F1F4"/><polygon points="70.0,185.4 104.4,149.0 138.9,100.5 173.3,84.4 207.8,60.1 242.2,48.0 276.7,48.0 311.1,48.0 345.6,48.0 380.0,48.0 380,48 70,48" fill="#EDF2F6"/>
@@ -192,7 +220,7 @@
   <text x="398" y="242" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#1C7E8F">100 sheep &#183; 50&#215;50 field</text>
   <text x="398" y="254" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#1C7E8F">1 to 10 control agents</text>
 </svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>Where reactive shepherding breaks down</h3><p>A systematic study of what makes swarm guidance hard, run with 100 sheep and 1 to 10 control agents in a 50x50 field. Using the paper's obstacle-density thresholds, it maps a reliable-herding region and a collapse region, with the transition shifting from roughly 0.2% density for one control agent to about 5% for ten.</p><p class="fig-cite"><span class="venue">IEEE Access</span>, 2020. <a href="https://doi.org/10.1109/ACCESS.2020.3037325">doi:10.1109/ACCESS.2020.3037325</a></p></div></article>
-      <article class="result-card"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A defender interposes between an attacking swarm and a protected area of interest.">
+      <article class="result-card" id="paper-patrolling" role="tabpanel" aria-labelledby="tab-paper-patrolling"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A defender interposes between an attacking swarm and a protected area of interest.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">GUARDING AS SHEPHERDING</text>
   <circle cx="150" cy="150" r="30" fill="none" stroke="#E0992F" stroke-width="2"/><circle cx="150" cy="150" r="18" fill="none" stroke="#E0992F" stroke-width="2"/><circle cx="150" cy="150" r="6" fill="#E0992F"/>
   <text x="150" y="204" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#5C6F84" text-anchor="middle">Area of interest</text>
@@ -204,7 +232,7 @@
   <text x="300" y="226" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5C6F84" text-anchor="middle">look-ahead selects: drive / collect / intercept / patrol</text>
   <defs><marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
 </svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>Guarding an area, reframed as shepherding</h3><p>Adversarial patrolling recast in the continuous domain: attackers are a swarm drawn to a protected area, and a single defender repels them using force-based behaviours. A one-step look-ahead picks among driving, collecting, intercepting, and patrolling to hold the swarm at a safe distance.</p><p class="fig-cite"><span class="venue">IEEE SMC</span>, 2024. <a href="https://doi.org/10.1109/SMC54092.2024.10832074">doi:10.1109/SMC54092.2024.10832074</a></p></div></article>
-      <article class="result-card"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="An EEG electrode layout sets the order in which channels are gated during reconstruction.">
+      <article class="result-card" id="paper-eeg-gating" role="tabpanel" aria-labelledby="tab-paper-eeg-gating"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="An EEG electrode layout sets the order in which channels are gated during reconstruction.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">SPATIALLY INFORMED GATING</text>
   <path d="M150,44 L160,58 L140,58 Z" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/><circle cx="150" cy="132" r="78" fill="#fff" stroke="#D8E2EB" stroke-width="1.6"/><circle cx="72" cy="132" r="8" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/><circle cx="228" cy="132" r="8" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/>
   <g fill="#0A1B2E"><circle cx="128" cy="80" r="5"/><circle cx="172" cy="80" r="5"/><circle cx="110" cy="110" r="5"/><circle cx="150" cy="104" r="5"/><circle cx="190" cy="110" r="5"/><circle cx="96" cy="140" r="5"/><circle cx="150" cy="140" r="5"/><circle cx="204" cy="140" r="5"/><circle cx="110" cy="172" r="5"/><circle cx="150" cy="178" r="5"/><circle cx="190" cy="172" r="5"/><circle cx="128" cy="200" r="5"/><circle cx="172" cy="200" r="5"/></g>
@@ -216,7 +244,7 @@
   <text x="398" y="214" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5C6F84" text-anchor="middle">sets which channels are recovered, and when</text>
   <defs><marker id="ae" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
 </svg></div><div class="result-body"><span class="tag">Gated learning</span><h3>Using brain layout to guide recovery</h3><p>For EEG, the order in which channels are gated matters. Embedding the electrode layout into the gating scheme, by anatomical order, by lobe, or by hemispheric symmetry, improves reconstruction over random gating and keeps accuracy high even when many channels are blocked.</p><p class="fig-cite"><span class="venue">Sensors</span>, 2025. <a href="https://doi.org/10.3390/s25113389">doi:10.3390/s25113389</a></p></div></article>
-      <article class="result-card"><div class="result-fig"><svg viewBox="0 0 520 512" role="img" xmlns="http://www.w3.org/2000/svg"
+      <article class="result-card" id="paper-stylometry" role="tabpanel" aria-labelledby="tab-paper-stylometry"><div class="result-fig"><svg viewBox="0 0 520 512" role="img" xmlns="http://www.w3.org/2000/svg"
   aria-label="Translator stylometry. Stage one extracts motif frequencies from two translations of one source. Stage two frames it as a Pairwise Comparative Classification Problem on paired data. Stage three is PWC4.5, a modified C4.5 decision tree that splits on a relationship over the paired values, reaching higher accuracy than C4.5.">
   <text x="8" y="18" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">TRANSLATOR STYLOMETRY WITH PWC4.5</text>
   <!-- STAGE 1 -->
@@ -262,10 +290,11 @@
   </div>
 </section>
 
-<section class="section alt">
+<section class="section" id="funding">
   <div class="container prose">
     <p class="eyebrow">Funded research</p>
-    <h2>Backed by competitive funding</h2>
+    <h2 class="sec-title">Backed by competitive funding</h2>
+    <hr class="sec-rule">
     <p>I am a lead and co-investigator on competitive grants totalling over AUD 1.2M, spanning applied autonomy with industry and research partners, an industry-supported HDR scholarship, and shared research infrastructure for swarm and distributed-intelligence experimentation.</p>
     <p class="eyebrow">The group</p>
     <h2>People behind the work</h2>
