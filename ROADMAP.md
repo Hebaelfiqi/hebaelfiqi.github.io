@@ -72,6 +72,14 @@ hosting cannot serve. Current setup costs $0 and self-heals.
 
 ---
 
+## Publishing automation (agreed)
+- Claude pushes finished work to the public repo branch
+  claude/push-local-repo-github-qd88t7.
+- The private repo runs sync.yml (cron, every 15 min): merges that branch
+  into main and dispatches Deploy site. No manual merge needed.
+- Optional direct path: grant the Claude GitHub App access to
+  Hebaelfiqi/website-source so future sessions can merge+push directly.
+
 ## Done so far (context for future sessions)
 - Two-repo privacy split: private `website-source` (full history) → Action
   deploys single "Deploy site" commit to public repo
