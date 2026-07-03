@@ -58,7 +58,13 @@ People page instead.
 - [x] "Join the group / prospective students" section (people.html#join)
       with contact-page pointer. MAINTENANCE RULE: scholarship deadline
       (currently 14 Aug 2026) and stipend rates must be refreshed each
-      term; verify against unsw.edu.au before each update.
+      term; verify against unsw.edu.au before each update. The 2027
+      round schedule was unpublished as of Jul 2026; add the following
+      round's date once UNSW publishes it.
+- [ ] ON HOLD pending School approval: "campus screening" note for the
+      Join section (process-based wording drafted in session; Heba is
+      checking with the School before anything is published). A reply
+      template for affected applicants was also drafted for her use.
 - [ ] Teaching page: course cards for ZEIT4150 / ZEIT4151 / ZEIT8601 with
       built-from-scratch narrative + satisfaction numbers (95.8–100%)
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
