@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guarding a place from a swarm, in plain language | Dr Heba El-Fiqi</title>
+<meta name="description" content="A plain-language story of our IEEE SMC 2024 paper: adversarial patrolling recast as shepherding, where one defender holds an attacking swarm away from a protected area.">
+<meta property="og:title" content="Guarding a place from a swarm, in plain language | Dr Heba El-Fiqi">
+<meta property="og:description" content="Adversarial patrolling recast as shepherding: one defender, four behaviours, and a swarm that never gets through.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://hebaelfiqi.com/papers/adversarial-patrolling.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=8">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span> Dr Heba El-Fiqi</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../research.html">Research</a>
+        <a href="../publications.html">Publications</a>
+        <a href="../software.html">Software</a>
+        <a href="../people.html">People</a>
+        <a href="../teaching.html">Teaching</a>
+        <a href="../service.html">Service</a>
+        <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="container">
+  <a class="backlink" href="../research.html#paper-patrolling">&larr; Back to the paper gallery</a>
+  <p class="eyebrow light">Paper story</p>
+  <h1>Guarding a place from a swarm</h1>
+  <p class="lede">Adversarial patrolling usually assumes one clever intruder. We asked a different question: what if the attackers are a swarm, and the guard is a shepherd? This is the story of a fourth-year project that became an IEEE conference paper, without the mathematics.</p>
+</div></section>
+
+<section class="section"><div class="container prose">
+  <dl class="hdr-meta" style="margin:0 0 2.6em">
+    <div><dt>Paper</dt><dd>Adversarial Patrolling Using a Shepherding Approach</dd></div>
+    <div><dt>Venue</dt><dd>IEEE SMC 2024</dd></div>
+    <div><dt>Student lead</dt><dd>Jonathan Zhou (fourth-year project)</dd></div>
+    <div><dt>DOI</dt><dd><a href="https://doi.org/10.1109/SMC54092.2024.10832074">10.1109/SMC54092.2024.10832074</a></dd></div>
+  </dl>
+
+  <p class="eyebrow">The problem</p>
+  <h2>Many intruders, one guard</h2>
+  <p>Adversarial patrolling is a classic security question: how should a guard move so that an intruder never finds an opening? The classic version is a game of wits against a single clever adversary, usually played on a grid or a graph. But some modern threats do not look like one clever intruder. They look like a swarm: many simple agents, all drawn toward the thing you are protecting, none of them individually smart, all of them persistent.</p>
+  <p>Against a swarm, the classic playbook has little to say. The attackers do not plan, so out-thinking them is beside the point. The real question becomes physical: can one mobile defender exert enough steady influence to keep a whole crowd out?</p>
+  <div class="story-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A defender interposes between an attacking swarm and a protected area of interest.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">GUARDING AS SHEPHERDING</text>
+  <circle cx="150" cy="150" r="30" fill="none" stroke="#E0992F" stroke-width="2"/><circle cx="150" cy="150" r="18" fill="none" stroke="#E0992F" stroke-width="2"/><circle cx="150" cy="150" r="6" fill="#E0992F"/>
+  <text x="150" y="204" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#5C6F84" text-anchor="middle">Area of interest</text>
+  <g fill="#0A1B2E"><circle cx="430" cy="56" r="4.5"/><circle cx="448" cy="70" r="4.5"/><circle cx="414" cy="72" r="4.5"/><circle cx="436" cy="84" r="4.5"/><circle cx="458" cy="52" r="4.5"/><circle cx="418" cy="52" r="4.5"/></g>
+  <text x="436" y="34" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#0A1B2E" text-anchor="middle" font-weight="600">Attacking swarm</text>
+  <line x1="414" y1="78" x2="300" y2="120" stroke="#D8E2EB" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#aa)"/><line x1="434" y1="90" x2="320" y2="140" stroke="#D8E2EB" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#aa)"/>
+  <rect x="262.0" y="120.0" width="16" height="16" rx="3.5" fill="#1C7E8F"/><text x="270" y="108" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1C7E8F" text-anchor="middle" font-weight="600">Defender</text>
+  <path d="M244,150 A34 34 0 0 1 244,106" fill="none" stroke="#2A9DB0" stroke-width="2.4"/>
+  <text x="300" y="226" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5C6F84" text-anchor="middle">look-ahead selects: drive / collect / intercept / patrol</text>
+  <defs><marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
+</svg></div>
+  <p class="fig-note">The scene: an attacking swarm is drawn toward a protected area of interest, and a single defender interposes to hold it back.</p>
+
+  <p class="eyebrow">The idea</p>
+  <h2>The guard is a sheepdog in reverse</h2>
+  <p>This is shepherding turned inside out. A sheepdog uses repulsion to move a flock <em>toward</em> a goal; our defender uses the same force language to keep a flock <em>away</em> from one. The attackers behave exactly like sheep: they flock together, avoid collisions, and flee from the defender when it comes close. The defender exploits those reflexes with four behaviours, and a one-step look-ahead chooses whichever behaviour best keeps the swarm out at each moment.</p>
+  <div class="story-fig"><svg viewBox="0 0 560 316" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Four defender behaviours: drive pushes the swarm away from the area, collect gathers a stray back to the cluster, intercept cuts the swarm's path to the area, and patrol orbits the area.">
+<text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">THE DEFENDER&#8217;S FOUR BEHAVIOURS</text>
+<defs>
+<marker id="ap1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
+<marker id="ap2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker>
+<marker id="ap3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1C7E8F"/></marker>
+</defs>
+<rect x="10" y="40" width="260" height="124" rx="8" fill="#fff" stroke="#D8E2EB"/>
+<text x="140" y="58" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#1C7E8F" text-anchor="middle">drive &#183; push the swarm away</text>
+<circle cx="62" cy="106" r="18.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="62" cy="106" r="9.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="62" cy="106" r="3.0" fill="#E0992F"/><circle cx="160" cy="98" r="4.2" fill="#0A1B2E"/><circle cx="174" cy="106" r="4.2" fill="#0A1B2E"/><circle cx="160" cy="114" r="4.2" fill="#0A1B2E"/><circle cx="172" cy="120" r="4.2" fill="#0A1B2E"/>
+<rect x="118" y="100" width="12" height="12" rx="3" fill="#1C7E8F"/>
+<line x1="134" y1="106" x2="150" y2="106" stroke="#E0992F" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ap1)"/>
+<line x1="186" y1="106" x2="216" y2="106" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#ap2)"/>
+<text x="216" y="94" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">away</text>
+<rect x="290" y="40" width="260" height="124" rx="8" fill="#fff" stroke="#D8E2EB"/>
+<text x="420" y="58" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#1C7E8F" text-anchor="middle">collect &#183; regroup a stray</text>
+<circle cx="342" cy="106" r="18.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="342" cy="106" r="9.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="342" cy="106" r="3.0" fill="#E0992F"/><circle cx="432" cy="88" r="4.2" fill="#0A1B2E"/><circle cx="446" cy="96" r="4.2" fill="#0A1B2E"/><circle cx="432" cy="104" r="4.2" fill="#0A1B2E"/>
+<circle cx="488" cy="128" r="4.2" fill="#0A1B2E"/><text x="488" y="146" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">stray</text>
+<rect x="500" y="132" width="12" height="12" rx="3" fill="#1C7E8F"/>
+<line x1="482" y1="122" x2="454" y2="104" stroke="#E0992F" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ap1)"/>
+<rect x="10" y="180" width="260" height="124" rx="8" fill="#fff" stroke="#D8E2EB"/>
+<text x="140" y="198" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#1C7E8F" text-anchor="middle">intercept &#183; block the approach</text>
+<circle cx="62" cy="246" r="18.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="62" cy="246" r="9.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="62" cy="246" r="3.0" fill="#E0992F"/><circle cx="220" cy="214" r="4.2" fill="#0A1B2E"/><circle cx="232" cy="222" r="4.2" fill="#0A1B2E"/><circle cx="220" cy="230" r="4.2" fill="#0A1B2E"/>
+<line x1="208" y1="224" x2="94" y2="242" stroke="#5C6F84" stroke-width="1.6" stroke-dasharray="4 4" marker-end="url(#ap2)"/>
+<rect x="138" y="270" width="12" height="12" rx="3" fill="#1C7E8F"/>
+<line x1="146" y1="268" x2="150" y2="240" stroke="#1C7E8F" stroke-width="2" marker-end="url(#ap3)"/>
+<text x="196" y="278" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">cut the path</text>
+<rect x="290" y="180" width="260" height="124" rx="8" fill="#fff" stroke="#D8E2EB"/>
+<text x="420" y="198" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#1C7E8F" text-anchor="middle">patrol &#183; hold an orbit</text>
+<circle cx="342" cy="246" r="18.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="342" cy="246" r="9.0" fill="none" stroke="#E0992F" stroke-width="1.8"/><circle cx="342" cy="246" r="3.0" fill="#E0992F"/><circle cx="496" cy="220" r="4.2" fill="#0A1B2E"/><circle cx="508" cy="228" r="4.2" fill="#0A1B2E"/><circle cx="496" cy="236" r="4.2" fill="#0A1B2E"/>
+<path d="M 342,208 A 38,38 0 1 1 306,258" fill="none" stroke="#1C7E8F" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ap3)"/>
+<rect x="336" y="202" width="12" height="12" rx="3" fill="#1C7E8F"/>
+</svg></div>
+  <p class="fig-note">Drive pushes the cluster away from the area; collect regroups a stray before it slips around the flank; intercept places the defender on the swarm&rsquo;s approach path; patrol holds an orbit when no threat is pressing.</p>
+
+  <p class="eyebrow">What we found</p>
+  <h2>Reflexes are enough to hold the line</h2>
+  <p>In simulation, the look-ahead defender holds the attacking swarm at a safe distance from the protected area, switching fluidly between pushing the crowd back, chasing down strays, and cutting off approaches. The deeper point mirrors our earlier work on <a href="shepherding-limits.html">the limits of reactive shepherding</a>: simple force-based control goes remarkably far, provided you understand the geometry of when and where to apply it.</p>
+
+  <p class="eyebrow">The story behind the paper</p>
+  <h2>A fourth-year project, done properly</h2>
+  <p>This paper grew out of Jonathan Zhou&rsquo;s fourth-year engineering project at UNSW Canberra, which I supervised as principal supervisor with my colleague Aya Hussein. Jonathan carried the idea from a project brief to a peer-reviewed IEEE conference paper presented in Kuching, Malaysia. It is a good example of what undergraduate research can be: a real question, a defensible method, and a result the community can build on.</p>
+
+  <p class="eyebrow">Cite &amp; explore</p>
+  <h2>The formal version</h2>
+  <p class="note" style="max-width:70ch">J. Zhou, H. El-Fiqi and A. Hussein, &ldquo;Adversarial Patrolling Using a Shepherding Approach,&rdquo; <em style="all:unset;font-style:italic">2024 IEEE International Conference on Systems, Man, and Cybernetics (SMC)</em>, Kuching, Malaysia, pp. 839&ndash;844, 2024. <a class="doi" href="https://doi.org/10.1109/SMC54092.2024.10832074">doi:10.1109/SMC54092.2024.10832074</a></p>
+  <p><a class="more" href="shepherding-limits.html">Where reactive shepherding breaks: the companion story &rarr;</a><br>
+     <a class="more" href="../research.html#paper-patrolling">Back to the paper gallery &rarr;</a></p>
+
+  <div class="colophon">
+    <p><strong>How this page was written.</strong> The research, the results, and the ideas here are mine and my co-authors&rsquo;. To retell them in plain language, I worked with an AI writing assistant that helped draft the text and render the diagrams in this site&rsquo;s style. I reviewed and edited everything, and the technical responsibility rests with me. If the prose reads a little differently from my papers, that is why.</p>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div>
+      <div class="foot-name">Dr Heba El-Fiqi</div>
+      <p class="foot-line">Distributed and collaborative intelligence for autonomous systems. School of Systems and Computing, UNSW Canberra.</p>
+    </div>
+    <nav class="foot-links" aria-label="Profiles">
+      <a href="https://scholar.google.com/citations?user=6ySMBdQAAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8146-0110">ORCID</a>
+      <a href="https://www.linkedin.com/in/heba-el-fiqi-23503274/">LinkedIn</a>
+      <a href="https://github.com/Hebaelfiqi/">GitHub</a>
+    </nav>
+  </div>
+  <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
+</footer>
+<script src="../assets/main.js?v=3"></script>
+</body>
+</html>

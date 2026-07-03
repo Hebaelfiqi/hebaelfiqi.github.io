@@ -33,6 +33,8 @@ Steps:
 - [x] Pilot 2: Limits of reactive shepherding (papers/shepherding-limits.html)
 - [x] Pilot 3 (software): PWC4.5 (software/pwc45.html)
 - [x] Add "Learn more" links under the corresponding gallery panels (wglae, limits, stylometry)
+- [x] Story 4: adversarial patrolling (papers/adversarial-patrolling.html),
+  Jonathan Zhou credited as student lead
 - [ ] Review pilots with Heba, then scale to remaining panels/software
 - Template rule: every story page ends with the "How this page was written"
   colophon (AI-assisted drafting acknowledged; Heba reviews and owns the
