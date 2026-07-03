@@ -65,8 +65,12 @@ People page instead.
       Join section (process-based wording drafted in session; Heba is
       checking with the School before anything is published). A reply
       template for affected applicants was also drafted for her use.
-- [ ] Teaching page: course cards for ZEIT4150 / ZEIT4151 / ZEIT8601 with
-      built-from-scratch narrative + satisfaction numbers (95.8–100%)
+- [x] Teaching page v1: score chips, numbers strip, teaching awards,
+      leadership (BCCS deliberately omitted; dual-stream past tense;
+      ZEIT4150 corrected to S1-only)
+- [ ] Teaching page v2 pending Heba's uploads: course outlines (aims and
+      learning outcomes per card), MyExperience reports (anonymous
+      student quotes), and her decision on naming Exercise Enigma
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
 - [ ] Home: optional small news strip (only if it will be kept fresh)
 
