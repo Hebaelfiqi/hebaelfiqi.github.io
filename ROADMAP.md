@@ -34,6 +34,9 @@ Steps:
 - [ ] Pilot 3 (software): PWC4.5 (software/pwc45.html)
 - [ ] Add "Learn more" links under the corresponding gallery panels
 - [ ] Review pilots with Heba, then scale to remaining panels/software
+- Template rule: every story page ends with the "How this page was written"
+  colophon (AI-assisted drafting acknowledged; Heba reviews and owns the
+  technical content)
 
 ## WS3 — More paper highlights (cap ~8 panels) — `todo`
 - [ ] TIFS 2019 — EEG person identification ("brain connectivity as fingerprint")

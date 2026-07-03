@@ -253,3 +253,5 @@ main section[id]{scroll-margin-top:122px}
 .story-fig svg{display:block;width:100%;height:auto}
 .fig-note{color:var(--muted);font-size:.9rem;margin:12px 0 0;max-width:70ch}
 .panel-more{margin:14px 0 0}
+.colophon{border-top:1px solid var(--line);margin-top:3.2em;padding-top:1.3em}
+.colophon p{color:var(--muted);font-size:.92rem;max-width:70ch;margin:0}
