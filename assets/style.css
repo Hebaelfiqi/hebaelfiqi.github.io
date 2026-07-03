@@ -255,3 +255,6 @@ main section[id]{scroll-margin-top:122px}
 .panel-more{margin:14px 0 0}
 .colophon{border-top:1px solid var(--line);margin-top:3.2em;padding-top:1.3em}
 .colophon p{color:var(--muted);font-size:.92rem;max-width:70ch;margin:0}
+.codebox{background:var(--ink);color:#CFE0EC;border-radius:10px;padding:16px 20px;
+  font-family:"IBM Plex Mono",monospace;font-size:.84rem;overflow-x:auto;margin:14px 0 6px}
+.codebox .prompt{color:#7FD3DF;user-select:none}
