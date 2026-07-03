@@ -21,15 +21,15 @@ Steps:
 - [ ] If client-side: integrate under /demos/, link from Research + Software pages
 - [ ] If server-needed: evaluate Hugging Face Spaces or client-side rewrite
 
-## WS2 — Story-page template + pilots (papers & software) — `todo`
+## WS2 — Story-page template + pilots (papers & software) — `in-progress`
 One shared "story page" template serving both paper and software deep-dives.
 Plain-language narrative: problem → idea → walkthrough figure(s) → findings →
 who should care → cite & links. Gallery panels get a single "Learn more →"
 link; no external links on the main page.
 
 Steps:
-- [ ] Design story-page template (layout, nav, typography) consistent with site
-- [ ] Pilot 1: WGLAE / gated autoencoders (papers/wglae.html)
+- [x] Design story-page template (layout, nav, typography) consistent with site
+- [x] Pilot 1: WGLAE / gated autoencoders (papers/wglae.html)
 - [ ] Pilot 2: Limits of reactive shepherding (papers/shepherding-limits.html)
 - [ ] Pilot 3 (software): PWC4.5 (software/pwc45.html)
 - [ ] Add "Learn more" links under the corresponding gallery panels
@@ -48,17 +48,19 @@ Steps:
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
 - [ ] Home: optional small news strip (only if it will be kept fresh)
 
-## WS5 — Custom domain (middle path) — `todo`
-Stay on GitHub Pages (free); buy a custom domain (~US$15/yr) and point it at
-Pages. Portability + professional URL without hosting costs.
+## WS5 — Custom domain (middle path) — `in-progress`
+Decision: buy el-fiqi.com; site lives at the subdomain heba.el-fiqi.com.
+Heba is running the purchase via Cowork (Cloudflare first, Porkbun fallback).
 
 Steps:
-- [ ] Heba: choose and purchase domain (via Cowork prompt or manually)
-- [ ] DNS: 4 × A records @ → 185.199.108.153 / .109. / .110. / .111.153;
-      CNAME www → hebaelfiqi.github.io
-- [ ] GitHub public repo → Settings → Pages → Custom domain → save → Enforce HTTPS
+- [ ] Heba: purchase el-fiqi.com via Cowork
+- [ ] DNS: CNAME heba → hebaelfiqi.github.io (subdomain needs only this,
+      not apex A records). Cloudflare: record must be DNS-only (grey cloud).
+- [ ] Optional: redirect apex el-fiqi.com and www → https://heba.el-fiqi.com
+- [ ] GitHub public repo → Settings → Pages → Custom domain:
+      heba.el-fiqi.com → save → Enforce HTTPS
 - [ ] Account-level verified domain (TXT record) to prevent takeover
-- [ ] Add CNAME file to private repo root so deploys preserve the domain
+- [ ] Claude: add CNAME file (heba.el-fiqi.com) to private repo root
 - [ ] Update og:/meta URLs if any become absolute
 
 ## WS6 — Full independent hosting — `parked`
@@ -81,6 +83,6 @@ hosting cannot serve. Current setup costs $0 and self-heals.
 - 2026-07: Stay on GitHub Pages free tier; custom domain preferred over paid
   hosting or GitHub Pro. Migration parked (WS6).
 - 2026-07: Gallery capped ~8 panels; deep content goes to story pages (WS2).
-- 2026-07: Domain = hebaelfiqi.com only. el-fiqi.com deliberately not
-  claimed (common family name). No .au. Registrar: Cloudflare, Porkbun
-  fallback.
+- 2026-07: Domain decision (final): buy el-fiqi.com, serve the site at
+  heba.el-fiqi.com. No .au. Registrar: Cloudflare, Porkbun fallback.
+  (Earlier hebaelfiqi.com-only decision reversed.)

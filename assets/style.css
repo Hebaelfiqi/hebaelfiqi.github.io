@@ -245,3 +245,11 @@ main section[id]{scroll-margin-top:122px}
   .subnav{top:64px}
   .paper-tab{font-size:.8rem;padding:8px 13px}
 }
+.backlink{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.8rem;
+  color:#7FD3DF;margin:0 0 14px}
+.backlink:hover{color:#fff;text-decoration:none}
+.story-fig{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:24px;margin:14px 0 6px}
+.story-fig svg{display:block;width:100%;height:auto}
+.fig-note{color:var(--muted);font-size:.9rem;margin:12px 0 0;max-width:70ch}
+.panel-more{margin:14px 0 0}

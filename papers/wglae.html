@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The gated autoencoder, in plain language | Dr Heba El-Fiqi</title>
+<meta name="description" content="A plain-language story of the Weighted Gate Layer Autoencoder: how deliberately hiding inputs during training teaches a network to recover missing signals.">
+<meta property="og:title" content="The gated autoencoder, in plain language | Dr Heba El-Fiqi">
+<meta property="og:description" content="How deliberately hiding inputs during training teaches a network to recover missing signals.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=6">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span> Dr Heba El-Fiqi</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../research.html">Research</a>
+        <a href="../publications.html">Publications</a>
+        <a href="../software.html">Software</a>
+        <a href="../people.html">People</a>
+        <a href="../teaching.html">Teaching</a>
+        <a href="../service.html">Service</a>
+        <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="container">
+  <a class="backlink" href="../research.html#paper-wglae">&larr; Back to the paper gallery</a>
+  <p class="eyebrow light">Paper story</p>
+  <h1>Teaching a network to fill in missing signals</h1>
+  <p class="lede">The Weighted Gate Layer Autoencoder, explained without the mathematics: why we deliberately blindfold a neural network during training, and how that lets it redraw sensor channels that die mid-recording.</p>
+</div></section>
+
+<section class="section"><div class="container prose">
+  <dl class="hdr-meta" style="margin:0 0 2.6em">
+    <div><dt>Paper</dt><dd>Weighted Gate Layer Autoencoders</dd></div>
+    <div><dt>Venue</dt><dd>IEEE Transactions on Cybernetics</dd></div>
+    <div><dt>Year</dt><dd>2021</dd></div>
+    <div><dt>DOI</dt><dd><a href="https://doi.org/10.1109/TCYB.2021.3049583">10.1109/TCYB.2021.3049583</a></dd></div>
+    <div><dt>Code &amp; data</dt><dd><a href="https://codeocean.com/capsule/4751126/tree">IEEE Code Ocean capsule</a></dd></div>
+  </dl>
+
+  <p class="eyebrow">The problem</p>
+  <h2>Sensors fail at the worst possible time</h2>
+  <p>Many measurements worth taking are taken many channels at once. An EEG headset records dozens of electrodes; an aircraft, a factory line, or a robot fuses readings from banks of sensors. And in every one of these settings the same small disaster is routine: mid-recording, a channel dies. An electrode loses contact, a wire is knocked, a sensor drifts out of range.</p>
+  <p>The standard responses are painful. Throw the whole recording away, and hours of experiment time go with it. Interpolate the missing channel from its neighbours with a fixed formula, and you get a guess that ignores everything the data could have told you about how that specific channel actually behaves.</p>
+
+  <p class="eyebrow">The idea</p>
+  <h2>Practise losing, so losing doesn't hurt</h2>
+  <p>An autoencoder is a neural network trained to reproduce its own input: it squeezes the data through a narrow middle and expands it back, and in doing so it is forced to learn the structure that makes the data compressible. Our addition is a <strong>gate layer</strong> in front of it. During training, gates close at random, switching individual input channels off &mdash; but the network is still asked to reconstruct <em>all</em> channels at the output, including the ones it never saw.</p>
+  <div class="story-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Five inputs pass through a gate layer into an encoder, latent code, and decoder; one gate is closed, yet the corresponding output is still reconstructed.">
+<text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">THE GATE LAYER</text>
+<text x="104" y="52" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">inputs &#183; gate layer</text>
+<circle cx="70" cy="80" r="9" fill="#0A1B2E"/><text x="50" y="84" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">x1</text><rect x="96" y="72" width="16" height="16" rx="3" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/><path d="M100,80 L103,84 L109,76" stroke="#1C7E8F" stroke-width="1.8" fill="none"/><line x1="79" y1="80" x2="96" y2="80" stroke="#5C6F84" stroke-width="1.6"/><line x1="112" y1="80" x2="150" y2="80" stroke="#5C6F84" stroke-width="1.6"/><circle cx="70" cy="120" r="9" fill="#0A1B2E"/><text x="50" y="124" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">x2</text><rect x="96" y="112" width="16" height="16" rx="3" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/><path d="M100,120 L103,124 L109,116" stroke="#1C7E8F" stroke-width="1.8" fill="none"/><line x1="79" y1="120" x2="96" y2="120" stroke="#5C6F84" stroke-width="1.6"/><line x1="112" y1="120" x2="150" y2="120" stroke="#5C6F84" stroke-width="1.6"/><circle cx="70" cy="160" r="9" fill="#0A1B2E"/><text x="50" y="164" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">x3</text><rect x="96" y="152" width="16" height="16" rx="3" fill="#FBF0DC" stroke="#E0992F" stroke-width="1.8"/><path d="M100,156 L108,164 M108,156 L100,164" stroke="#E0992F" stroke-width="1.8"/><line x1="79" y1="160" x2="96" y2="160" stroke="#D8E2EB" stroke-width="1.6" stroke-dasharray="3 3"/><line x1="112" y1="160" x2="150" y2="160" stroke="#D8E2EB" stroke-width="1.6"/><circle cx="70" cy="200" r="9" fill="#0A1B2E"/><text x="50" y="204" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">x4</text><rect x="96" y="192" width="16" height="16" rx="3" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/><path d="M100,200 L103,204 L109,196" stroke="#1C7E8F" stroke-width="1.8" fill="none"/><line x1="79" y1="200" x2="96" y2="200" stroke="#5C6F84" stroke-width="1.6"/><line x1="112" y1="200" x2="150" y2="200" stroke="#5C6F84" stroke-width="1.6"/><circle cx="70" cy="240" r="9" fill="#0A1B2E"/><text x="50" y="244" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">x5</text><rect x="96" y="232" width="16" height="16" rx="3" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/><path d="M100,240 L103,244 L109,236" stroke="#1C7E8F" stroke-width="1.8" fill="none"/><line x1="79" y1="240" x2="96" y2="240" stroke="#5C6F84" stroke-width="1.6"/><line x1="112" y1="240" x2="150" y2="240" stroke="#5C6F84" stroke-width="1.6"/>
+<polygon points="150,64 226,110 226,210 150,256" fill="#EDF2F6" stroke="#D8E2EB"/>
+<text x="188" y="164" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">encoder</text>
+<circle cx="246" cy="134" r="7" fill="#1C7E8F"/><circle cx="246" cy="160" r="7" fill="#1C7E8F"/><circle cx="246" cy="186" r="7" fill="#1C7E8F"/>
+<polygon points="266,110 342,64 342,256 266,210" fill="#EDF2F6" stroke="#D8E2EB"/>
+<text x="304" y="164" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">decoder</text>
+<text x="400" y="52" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">outputs</text>
+<line x1="358" y1="80" x2="392" y2="80" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="80" r="9" fill="#0A1B2E"/><line x1="358" y1="120" x2="392" y2="120" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="120" r="9" fill="#0A1B2E"/><line x1="358" y1="160" x2="392" y2="160" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="160" r="9" fill="#0A1B2E"/><circle cx="400" cy="160" r="14" fill="none" stroke="#E0992F" stroke-width="2.2"/><text x="424" y="152" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#9A6A14">x3 reconstructed</text><text x="424" y="164" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#9A6A14">without being seen</text><line x1="358" y1="200" x2="392" y2="200" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="200" r="9" fill="#0A1B2E"/><line x1="358" y1="240" x2="392" y2="240" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="240" r="9" fill="#0A1B2E"/>
+<text x="280" y="284" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">gates close at random in training &#8594; the network must infer the hidden input from the rest</text>
+</svg></div>
+  <p class="fig-note">One gate closed: the network receives four of the five inputs, yet must still produce all five outputs. The only way to succeed is to learn how the channels depend on one another.</p>
+  <p>A weighting mechanism sharpens the lesson: the reconstruction error on the switched-off channels counts for more, so training concentrates on exactly the skill that matters &mdash; recovering what is missing, not merely copying what is present. The result is a model that has spent its entire training life practising sensor failure, long before it meets a real one.</p>
+
+  <p class="eyebrow">What we found</p>
+  <h2>Graceful degradation instead of collapse</h2>
+  <p>At test time, the difference shows up exactly where it should. When a channel drops out, the gated model redraws it from the surviving channels &mdash; not as a smoothed average, but as a signal that tracks the true one. And as more channels are removed, its reconstruction error stays nearly flat where a standard autoencoder&rsquo;s error climbs steeply: with ten channels missing at once, the standard model has effectively given up while the gated one is still working.</p>
+  <div class="story-fig"><svg viewBox="0 0 560 340" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A channel drops out mid-recording and the gated autoencoder redraws it from the other channels; an inset chart shows reconstruction error staying nearly flat for the gated model while a standard autoencoder degrades as more channels are lost.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">FILLING IN A LOST CHANNEL</text>
+  <text x="120" y="46" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">recorded channels</text>
+  <path d="M30,70.1 L34,66.7 L38,64.5 L42,64.0 L46,65.2 L50,68.0 L54,71.7 L58,75.9 L62,79.7 L66,82.6 L70,83.9 L74,83.6 L78,81.6 L82,78.2 L86,74.2 L90,70.1 L94,66.7 L98,64.5 L102,64.0 L106,65.2 L110,68.0 L114,71.7 L118,75.9 L122,79.7 L126,82.6 L130,83.9 L134,83.6 L138,81.6 L142,78.2 L146,74.2 L150,70.1 L154,66.7 L158,64.5 L162,64.0 L166,65.2 L170,68.0 L174,71.7 L178,75.9 L182,79.7 L186,82.6 L190,83.9 L194,83.6 L198,81.6 L202,78.2 L206,74.2 L210,70.1" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M30,116.0 L34,118.9 L38,122.9 L42,126.6 L46,128.8 L50,128.6 L54,126.3 L58,122.5 L62,118.6 L66,115.8 L70,115.0 L74,116.6 L78,120.0 L82,124.1 L86,127.4 L90,129.0 L94,128.2 L98,125.3 L102,121.4 L106,117.6 L110,115.3 L114,115.3 L118,117.5 L122,121.2 L126,125.1 L130,128.1 L134,129.0 L138,127.6 L142,124.3 L146,120.2 L150,116.8 L154,115.1 L158,115.7 L162,118.4 L166,122.3 L170,126.1 L174,128.6 L178,128.8 L182,126.8 L186,123.1 L190,119.1 L194,116.1 L198,115.0 L202,116.3 L206,119.5 L210,123.5" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M30,158.8 L34,162.4 L38,176.5 L42,181.6 L46,170.7 L50,158.8 L54,162.4 L58,176.5 L62,181.6 L66,170.7 L70,158.8 L74,162.4 L78,176.5 L82,181.6" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><line x1="88" y1="170" x2="210" y2="170" stroke="#D8E2EB" stroke-width="1.6" stroke-dasharray="4 4"/><rect x="90" y="163" width="14" height="14" rx="3" fill="#fff" stroke="#E0992F" stroke-width="1.8"/><path d="M93,166 L101,174 M101,166 L93,174" stroke="#E0992F" stroke-width="1.8"/><path d="M30,225.9 L34,225.4 L38,223.0 L42,219.4 L46,215.4 L50,212.1 L54,210.2 L58,210.3 L62,212.2 L66,215.6 L70,219.6 L74,223.2 L78,225.5 L82,225.9 L86,224.4 L90,221.3 L94,217.4 L98,213.6 L102,210.9 L106,210.0 L110,211.0 L114,213.8 L118,217.6 L122,221.5 L126,224.5 L130,225.9 L134,225.4 L138,223.0 L142,219.4 L146,215.4 L150,212.1 L154,210.2 L158,210.3 L162,212.2 L166,215.6 L170,219.6 L174,223.2 L178,225.5 L182,225.9 L186,224.4 L190,221.3 L194,217.4 L198,213.6 L202,210.9 L206,210.0 L210,211.0" fill="none" stroke="#0A1B2E" stroke-width="1.6"/>
+  <text x="120" y="248" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#9A6A14" text-anchor="middle">channel 3 drops out mid-recording</text>
+  <rect x="228" y="126" width="104" height="40" rx="9" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.4"/>
+  <text x="280" y="143" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1C7E8F" text-anchor="middle">gated</text>
+  <text x="280" y="156" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1C7E8F" text-anchor="middle">autoencoder</text>
+  <line x1="214" y1="146" x2="226" y2="146" stroke="#5C6F84" stroke-width="1.6"/>
+  <line x1="334" y1="146" x2="346" y2="146" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#wg1)"/>
+  <text x="440" y="46" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">reconstructed</text>
+  <path d="M350,70.1 L354,66.7 L358,64.5 L362,64.0 L366,65.2 L370,68.0 L374,71.7 L378,75.9 L382,79.7 L386,82.6 L390,83.9 L394,83.6 L398,81.6 L402,78.2 L406,74.2 L410,70.1 L414,66.7 L418,64.5 L422,64.0 L426,65.2 L430,68.0 L434,71.7 L438,75.9 L442,79.7 L446,82.6 L450,83.9 L454,83.6 L458,81.6 L462,78.2 L466,74.2 L470,70.1 L474,66.7 L478,64.5 L482,64.0 L486,65.2 L490,68.0 L494,71.7 L498,75.9 L502,79.7 L506,82.6 L510,83.9 L514,83.6 L518,81.6 L522,78.2 L526,74.2 L530,70.1" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M350,116.0 L354,118.9 L358,122.9 L362,126.6 L366,128.8 L370,128.6 L374,126.3 L378,122.5 L382,118.6 L386,115.8 L390,115.0 L394,116.6 L398,120.0 L402,124.1 L406,127.4 L410,129.0 L414,128.2 L418,125.3 L422,121.4 L426,117.6 L430,115.3 L434,115.3 L438,117.5 L442,121.2 L446,125.1 L450,128.1 L454,129.0 L458,127.6 L462,124.3 L466,120.2 L470,116.8 L474,115.1 L478,115.7 L482,118.4 L486,122.3 L490,126.1 L494,128.6 L498,128.8 L502,126.8 L506,123.1 L510,119.1 L514,116.1 L518,115.0 L522,116.3 L526,119.5 L530,123.5" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M350,158.8 L354,162.4 L358,176.5 L362,181.6 L366,170.7 L370,158.8 L374,162.4 L378,176.5 L382,181.6 L386,170.7 L390,158.8 L394,162.4 L398,176.5 L402,181.6" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M402,174.3 L406,168.2 L410,162.7 L414,159.0 L418,158.1 L422,160.2 L426,164.9 L430,170.8 L434,176.6 L438,180.6 L442,182.0 L446,180.3 L450,176.0 L454,170.1 L458,164.2 L462,159.8 L466,158.0 L470,159.3 L474,163.2 L478,168.9 L482,174.9 L486,179.6 L490,181.9 L494,181.1 L498,177.5 L502,172.0 L506,166.0 L510,161.0 L514,158.3 L518,158.5 L522,161.8 L526,167.1 L530,173.1" fill="none" stroke="#D8E2EB" stroke-width="3.4"/><path d="M402,174.3 L406,168.2 L410,162.7 L414,159.0 L418,158.1 L422,160.2 L426,164.9 L430,170.8 L434,176.6 L438,180.6 L442,182.0 L446,180.3 L450,176.0 L454,170.1 L458,164.2 L462,159.8 L466,158.0 L470,159.3 L474,163.2 L478,168.9 L482,174.9 L486,179.6 L490,181.9 L494,181.1 L498,177.5 L502,172.0 L506,166.0 L510,161.0 L514,158.3 L518,158.5 L522,161.8 L526,167.1 L530,173.1" fill="none" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="5 3"/><path d="M350,225.9 L354,225.4 L358,223.0 L362,219.4 L366,215.4 L370,212.1 L374,210.2 L378,210.3 L382,212.2 L386,215.6 L390,219.6 L394,223.2 L398,225.5 L402,225.9 L406,224.4 L410,221.3 L414,217.4 L418,213.6 L422,210.9 L426,210.0 L430,211.0 L434,213.8 L438,217.6 L442,221.5 L446,224.5 L450,225.9 L454,225.4 L458,223.0 L462,219.4 L466,215.4 L470,212.1 L474,210.2 L478,210.3 L482,212.2 L486,215.6 L490,219.6 L494,223.2 L498,225.5 L502,225.9 L506,224.4 L510,221.3 L514,217.4 L518,213.6 L522,210.9 L526,210.0 L530,211.0" fill="none" stroke="#0A1B2E" stroke-width="1.6"/>
+  <text x="440" y="248" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#1C7E8F" text-anchor="middle">redrawn from the other channels alone</text>
+  <line x1="30" y1="270" x2="54" y2="270" stroke="#D8E2EB" stroke-width="3.4"/><line x1="30" y1="270" x2="54" y2="270" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <text x="60" y="274" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#182A3D">reconstruction vs true signal</text>
+  <text x="30" y="294" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">trained with gates randomly closed,</text>
+  <text x="30" y="306" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">the model learns cross-channel structure</text>
+  <rect x="300" y="258" width="240" height="70" rx="8" fill="#F7F9FB" stroke="#D8E2EB"/>
+  <text x="312" y="272" font-family="IBM Plex Mono, monospace" font-size="7.5" letter-spacing="1" fill="#1C7E8F">ERROR VS CHANNELS LOST</text>
+  <polyline fill="none" stroke="#E0992F" stroke-width="2" points="312,312 340,308 368,301 396,291 424,281 452,272"/>
+  <polyline fill="none" stroke="#1C7E8F" stroke-width="2" points="312,314 340,313 368,312 396,311 424,310 452,308"/>
+  <circle cx="452" cy="272" r="2.5" fill="#E0992F"/><circle cx="452" cy="308" r="2.5" fill="#1C7E8F"/>
+  <text x="458" y="275" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#9A6A14">standard AE</text>
+  <text x="458" y="311" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#1C7E8F">gated AE</text>
+  <text x="312" y="322" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5C6F84">1</text>
+  <text x="452" y="322" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5C6F84" text-anchor="end">10 missing</text>
+  <defs><marker id="wg1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
+</svg></div>
+  <p class="fig-note">Left: a channel dies mid-recording. Right: the gated autoencoder redraws it from the other channels alone; the inset shows error staying nearly flat as up to ten channels are removed.</p>
+
+  <p class="eyebrow">Who should care</p>
+  <h2>Anywhere data arrives on many channels</h2>
+  <p>We developed this with EEG in mind &mdash; brain-computer interfaces are notorious for electrodes dropping out mid-session &mdash; but the mechanism is domain-agnostic. Wearables, industrial monitoring, autonomous platforms: any system that fuses multiple sensors inherits the same failure mode, and the same fix applies. The gate layer also has a second life as an analysis tool: because the model learns which channels can stand in for which, it exposes the dependency structure of the data itself.</p>
+  <p>This paper seeded a line of work: the original gate-layer idea appeared at <a href="https://doi.org/10.1109/IJCNN.2019.8852101">IJCNN 2019</a>, and the follow-up in <a href="https://doi.org/10.3390/s25113389">Sensors (2025)</a>, led by my student Kangjing Li, asks how the <em>order</em> in which channels are gated should follow the brain&rsquo;s own layout.</p>
+
+  <p class="eyebrow">Cite &amp; explore</p>
+  <h2>The formal version</h2>
+  <p class="note" style="max-width:70ch">H. El-Fiqi, M. Wang, K. Kasmarik, A. Bezerianos, K. C. Tan and H. A. Abbass, &ldquo;Weighted Gate Layer Autoencoders,&rdquo; <em style="all:unset;font-style:italic">IEEE Transactions on Cybernetics</em>, vol. 52, no. 8, pp. 7242&ndash;7253, 2022. <a class="doi" href="https://doi.org/10.1109/TCYB.2021.3049583">doi:10.1109/TCYB.2021.3049583</a></p>
+  <p><a class="more" href="https://codeocean.com/capsule/4751126/tree">Run the code and data on Code Ocean &rarr;</a><br>
+     <a class="more" href="../research.html#paper-wglae">Back to the paper gallery &rarr;</a></p>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div>
+      <div class="foot-name">Dr Heba El-Fiqi</div>
+      <p class="foot-line">Distributed and collaborative intelligence for autonomous systems. School of Systems and Computing, UNSW Canberra.</p>
+    </div>
+    <nav class="foot-links" aria-label="Profiles">
+      <a href="https://scholar.google.com/citations?user=6ySMBdQAAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8146-0110">ORCID</a>
+      <a href="https://www.linkedin.com/in/heba-el-fiqi-23503274/">LinkedIn</a>
+      <a href="https://github.com/Hebaelfiqi/">GitHub</a>
+    </nav>
+  </div>
+  <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
+</footer>
+<script src="../assets/main.js?v=3"></script>
+</body>
+</html>
