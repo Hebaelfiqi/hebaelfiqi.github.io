@@ -51,20 +51,19 @@ Steps:
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
 - [ ] Home: optional small news strip (only if it will be kept fresh)
 
-## WS5 — Custom domain (middle path) — `in-progress`
-Decision: buy el-fiqi.com; site lives at the subdomain heba.el-fiqi.com.
-Heba is running the purchase via Cowork (Cloudflare first, Porkbun fallback).
+## WS5 — Custom domain — `in-progress` (nearly done)
+FINAL: purchased hebaelfiqi.com via Cowork; DNS + Pages binding + SEO done
+by Cowork directly on the public repo; now made permanent in source.
 
 Steps:
-- [ ] Heba: purchase el-fiqi.com via Cowork
-- [ ] DNS: CNAME heba → hebaelfiqi.github.io (subdomain needs only this,
-      not apex A records). Cloudflare: record must be DNS-only (grey cloud).
-- [ ] Optional: redirect apex el-fiqi.com and www → https://heba.el-fiqi.com
-- [ ] GitHub public repo → Settings → Pages → Custom domain:
-      heba.el-fiqi.com → save → Enforce HTTPS
-- [ ] Account-level verified domain (TXT record) to prevent takeover
-- [ ] Claude: add CNAME file (heba.el-fiqi.com) to private repo root
-- [ ] Update og:/meta URLs if any become absolute
+- [x] Heba: purchase domain (hebaelfiqi.com) and bind via Cowork
+- [x] Claude: CNAME file (hebaelfiqi.com) in source root
+- [x] Claude: SEO handoff — google-site-verification, canonical + og:url +
+      og:image + Twitter cards + Person JSON-LD on index; self-canonicals
+      on all pages incl. story pages; sitemap.xml; robots.txt
+- [ ] Deploy and verify per handoff item 7 (homepage loads, tags in source,
+      sitemap/robots return 200, per-page canonicals)
+- Rule: keep sitemap.xml in sync when adding/removing pages
 
 ## WS6 — Full independent hosting — `parked`
 Revisit only if a concrete dynamic/server-side need appears that static
@@ -94,6 +93,5 @@ hosting cannot serve. Current setup costs $0 and self-heals.
 - 2026-07: Stay on GitHub Pages free tier; custom domain preferred over paid
   hosting or GitHub Pro. Migration parked (WS6).
 - 2026-07: Gallery capped ~8 panels; deep content goes to story pages (WS2).
-- 2026-07: Domain decision (final): buy el-fiqi.com, serve the site at
-  heba.el-fiqi.com. No .au. Registrar: Cloudflare, Porkbun fallback.
-  (Earlier hebaelfiqi.com-only decision reversed.)
+- 2026-07: Domain (as purchased): hebaelfiqi.com, bound to GitHub Pages via
+  Cowork. (The interim heba.el-fiqi.com plan was superseded at purchase.)
