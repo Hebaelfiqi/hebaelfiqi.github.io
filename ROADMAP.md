@@ -38,10 +38,16 @@ Steps:
   colophon (AI-assisted drafting acknowledged; Heba reviews and owns the
   technical content)
 
-## WS3 — More paper highlights (cap ~8 panels) — `todo`
-- [ ] TIFS 2019 — EEG person identification ("brain connectivity as fingerprint")
-- [ ] Drones 2025 — cognitive load of UAS operators (ties to current grant + Qianchu)
-- [ ] Review gallery order after additions; keep it curated, not exhaustive
+## WS3 — More paper highlights (cap ~8 panels) — `on-hold`
+DECISION 2026-07: TIFS 2019 and Drones 2025 will NOT be gallery panels.
+TIFS is part of another researcher's PhD; Drones sits under another lead
+supervisor's separate fund. Gallery panels are for work that is genuinely
+Heba's to headline; supervised outputs are correctly credited on the
+People page instead.
+- Candidate if a 7th panel is ever wanted: SMC 2018 SSVEP person
+  identification (Heba first author)
+- Otherwise hold at the current six panels and revisit when outputs from
+  Heba-led grants (e.g. the DIN maritime UAS project) are published
 
 ## WS4 — Page enrichment — `todo`
 - [ ] "Join the group / prospective students" section (Contact or People):
