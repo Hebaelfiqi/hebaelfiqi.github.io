@@ -54,9 +54,11 @@ People page instead.
 - Otherwise hold at the current six panels and revisit when outputs from
   Heba-led grants (e.g. the DIN maritime UAS project) are published
 
-## WS4 — Page enrichment — `todo`
-- [ ] "Join the group / prospective students" section (Contact or People):
-      recruiting topics, expectations, how to approach
+## WS4 — Page enrichment — `in-progress`
+- [x] "Join the group / prospective students" section (people.html#join)
+      with contact-page pointer. MAINTENANCE RULE: scholarship deadline
+      (currently 14 Aug 2026) and stipend rates must be refreshed each
+      term; verify against unsw.edu.au before each update.
 - [ ] Teaching page: course cards for ZEIT4150 / ZEIT4151 / ZEIT8601 with
       built-from-scratch narrative + satisfaction numbers (95.8–100%)
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
