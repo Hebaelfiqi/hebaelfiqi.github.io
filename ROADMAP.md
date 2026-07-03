@@ -71,7 +71,8 @@ People page instead.
 - [x] Teaching page v2: course descriptions from published 2026 outlines,
       updated score chips from 2025 myExperience reports (4151: 5.57,
       8601: 5.25), three anonymous student quotes with attribution lines
-- [ ] Still pending: Heba's decision on naming Exercise Enigma publicly
+- [x] DECIDED 2026-07: Exercise Enigma stays OFF the site for now.
+      Do not add it unless Heba explicitly reopens this.
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
 - [ ] Home: optional small news strip (only if it will be kept fresh)
 
