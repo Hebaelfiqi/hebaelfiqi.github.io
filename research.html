@@ -235,72 +235,107 @@
   <text x="300" y="226" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5C6F84" text-anchor="middle">look-ahead selects: drive / collect / intercept / patrol</text>
   <defs><marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
 </svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>Guarding an area, reframed as shepherding</h3><p>Adversarial patrolling recast in the continuous domain: attackers are a swarm drawn to a protected area, and a single defender repels them using force-based behaviours. A one-step look-ahead picks among driving, collecting, intercepting, and patrolling to hold the swarm at a safe distance.</p><p class="fig-cite"><span class="venue">IEEE SMC</span>, 2024. <a href="https://doi.org/10.1109/SMC54092.2024.10832074">doi:10.1109/SMC54092.2024.10832074</a></p></div></article>
-      <article class="result-card" id="paper-atc" role="tabpanel" aria-labelledby="tab-paper-atc"><div class="result-fig"><svg viewBox="0 0 560 540" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Stage one translates the five shepherding forces on a sheep to an aircraft: repulsion from the shepherd is kept, while attraction, heading, and collision avoidance are handled by the flight plan, autopilot, and CD&amp;R, and jittering is removed. Stage two shows one controller moving a logical shepherd whose influence propagates aircraft to aircraft, rotating each intended flight plan.">
+      <article class="result-card" id="paper-atc" role="tabpanel" aria-labelledby="tab-paper-atc"><div class="result-fig"><svg viewBox="0 0 560 600" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Stage one shows the full shepherding scene translated to air traffic control: a focal sheep among a flock with a sheepdog, under five forces, beside the same scene with aircraft and a logical shepherd, where repulsion from the shepherd is kept and the other forces are handled by the flight plan, autopilot, and CD&amp;R. Stage two shows one controller moving the logical shepherd, whose influence propagates aircraft to aircraft and rotates each intended flight plan.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">AIR TRAFFIC CONTROL AS SHEPHERDING</text>
   <defs>
     <marker id="atcT" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1C7E8F"/></marker>
     <marker id="atcG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker>
     <marker id="atcA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
   </defs>
-  <!-- STAGE 1: force translation -->
+  <!-- STAGE 1: force translation, full scene -->
   <text x="280" y="44" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">1 &#183; the same forces, translated</text>
-  <rect x="20" y="56" width="250" height="196" rx="10" fill="#fff" stroke="#D8E2EB"/>
+  <rect x="20" y="56" width="250" height="250" rx="10" fill="#fff" stroke="#D8E2EB"/>
   <text x="145" y="72" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84" text-anchor="middle">classic shepherding</text>
-  <text x="145" y="92" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">repulsion from shepherd</text>
-  <line x1="145" y1="134" x2="145" y2="100" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#atcG)"/>
-  <text x="208" y="112" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">previous heading</text>
-  <line x1="164" y1="142" x2="200" y2="122" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#atcG)"/>
-  <text x="76" y="130" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">collision avoidance</text>
-  <line x1="120" y1="150" x2="80" y2="140" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#atcG)"/>
-  <line x1="170" y1="158" x2="208" y2="163" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#atcG)"/>
-  <rect x="216" y="156" width="12" height="12" rx="2" fill="#5C6F84"/><text x="234" y="166" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5C6F84">LCM</text>
-  <text x="196" y="190" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">attraction to LCM</text>
-  <line x1="128" y1="170" x2="98" y2="198" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#atcG)"/>
-  <text x="92" y="214" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">jittering</text>
-  <g fill="#0A1B2E" transform="translate(145,155)">
+  <!-- focal sheep forces -->
+  <text x="115" y="104" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">repulsion from the shepherd</text>
+  <line x1="115" y1="150" x2="115" y2="112" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="178" y="124" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">previous heading</text>
+  <line x1="132" y1="156" x2="160" y2="134" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="62" y="144" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">collision avoidance</text>
+  <line x1="92" y1="166" x2="58" y2="154" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <line x1="138" y1="176" x2="168" y2="181" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <rect x="173" y="175" width="10" height="10" rx="2" fill="#5C6F84"/><text x="188" y="184" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5C6F84">LCM</text>
+  <text x="150" y="202" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">attraction to LCM</text>
+  <line x1="100" y1="184" x2="76" y2="208" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="68" y="222" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">jittering</text>
+  <!-- focal sheep -->
+  <g fill="#0A1B2E" transform="translate(115,170) scale(0.8)">
     <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
     <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
     <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
   </g>
-  <text x="280" y="160" font-family="IBM Plex Sans, sans-serif" font-size="16" fill="#5C6F84" text-anchor="middle">&#8594;</text>
-  <rect x="290" y="56" width="250" height="196" rx="10" fill="#fff" stroke="#D8E2EB"/>
+  <!-- flock -->
+  <g fill="#0A1B2E" transform="translate(228,104) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <g fill="#0A1B2E" transform="translate(226,170) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <g fill="#0A1B2E" transform="translate(206,244) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <!-- sheepdog -->
+  <g fill="#0A1B2E" transform="translate(64,258)">
+    <ellipse cx="0" cy="0" rx="14" ry="7"/>
+    <circle cx="16" cy="-6" r="5"/><path d="M20,-8 L27,-5 L20,-3 Z"/><path d="M13,-10 L16,-16 L19,-9 Z"/>
+    <path d="M-13,-3 L-22,-11 L-17,-1 Z"/>
+    <rect x="-11" y="5" width="2.6" height="10" rx="1.3"/><rect x="-5" y="6" width="2.6" height="9" rx="1.3"/><rect x="3" y="6" width="2.6" height="9" rx="1.3"/><rect x="9" y="5" width="2.6" height="10" rx="1.3"/>
+  </g>
+  <text x="64" y="286" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">sheepdog</text>
+  <text x="280" y="180" font-family="IBM Plex Sans, sans-serif" font-size="16" fill="#5C6F84" text-anchor="middle">&#8594;</text>
+  <rect x="290" y="56" width="250" height="250" rx="10" fill="#fff" stroke="#D8E2EB"/>
   <text x="415" y="72" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84" text-anchor="middle">air traffic control</text>
-  <text x="415" y="92" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#182A3D" text-anchor="middle">repulsion from shepherd</text>
-  <line x1="413" y1="130" x2="413" y2="100" stroke="#1C7E8F" stroke-width="2" marker-end="url(#atcT)"/>
-  <text x="474" y="112" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">heading (autopilot)</text>
-  <line x1="434" y1="142" x2="466" y2="124" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
-  <text x="354" y="128" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">collision (CD&amp;R)</text>
-  <line x1="390" y1="150" x2="350" y2="140" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
-  <line x1="440" y1="158" x2="478" y2="163" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
-  <rect x="486" y="156" width="12" height="12" rx="2" fill="#5C6F84"/><text x="504" y="166" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5C6F84">LCM</text>
-  <text x="462" y="190" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">attraction (flight plan)</text>
-  <line x1="398" y1="170" x2="368" y2="198" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
-  <text x="366" y="214" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#5C6F84" text-anchor="middle">no jittering</text>
-  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(415,155) rotate(35) scale(1.8)" fill="#0A1B2E"/>
-  <line x1="120" y1="266" x2="142" y2="266" stroke="#1C7E8F" stroke-width="2.2"/><text x="148" y="270" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">kept</text>
-  <line x1="190" y1="266" x2="212" y2="266" stroke="#5C6F84" stroke-width="1.6" stroke-dasharray="4 4"/><text x="218" y="270" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">handled by the aircraft: autopilot &#183; flight plan &#183; CD&amp;R</text>
+  <!-- focal aircraft forces -->
+  <text x="385" y="104" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#182A3D" text-anchor="middle">repulsion from the shepherd</text>
+  <line x1="385" y1="150" x2="385" y2="112" stroke="#1C7E8F" stroke-width="2" marker-end="url(#atcT)"/>
+  <text x="450" y="124" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">heading (autopilot)</text>
+  <line x1="402" y1="156" x2="432" y2="134" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <text x="332" y="144" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">collision (CD&amp;R)</text>
+  <line x1="362" y1="166" x2="328" y2="154" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <line x1="408" y1="176" x2="438" y2="181" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <rect x="443" y="175" width="10" height="10" rx="2" fill="#5C6F84"/><text x="458" y="184" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5C6F84">LCM</text>
+  <text x="424" y="202" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">attraction (flight plan)</text>
+  <line x1="370" y1="184" x2="346" y2="208" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <text x="338" y="222" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">no jittering</text>
+  <!-- focal aircraft -->
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(385,170) rotate(35) scale(1.5)" fill="#0A1B2E"/>
+  <!-- other aircraft -->
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(498,102) rotate(40)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(496,168) rotate(55)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(478,244) rotate(25)" fill="#0A1B2E"/>
+  <!-- logical shepherd -->
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(334,258) rotate(45) scale(1.2)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="334" y="286" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#1C7E8F" text-anchor="middle" font-weight="600">logical shepherd</text>
+  <line x1="120" y1="322" x2="142" y2="322" stroke="#1C7E8F" stroke-width="2.2"/><text x="148" y="326" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">kept</text>
+  <line x1="190" y1="322" x2="212" y2="322" stroke="#5C6F84" stroke-width="1.6" stroke-dasharray="4 4"/><text x="218" y="326" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">handled by the aircraft: autopilot &#183; flight plan &#183; CD&amp;R</text>
   <!-- STAGE 2: one controller steers the fleet -->
-  <text x="280" y="294" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">2 &#183; one controller steers the whole fleet</text>
-  <line x1="10" y1="316" x2="34" y2="316" stroke="#1C7E8F" stroke-width="2.4"/><text x="40" y="320" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">updated flight plan</text>
-  <line x1="10" y1="334" x2="34" y2="334" stroke="#D8E2EB" stroke-width="2" stroke-dasharray="5 4"/><text x="40" y="338" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">previous flight plan</text>
-  <path d="M212,440 C262,443 312,444 356,444" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
-  <path d="M212,436 C260,426 312,416 356,408" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
-  <path d="M292,386 C342,389 392,391 436,392" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
-  <path d="M292,382 C340,370 392,360 436,354" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
-  <path d="M372,332 C420,335 468,337 504,338" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
-  <path d="M372,328 C418,318 468,310 504,304" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
-  <path d="M340,440 A26,26 0 0 1 336,416" fill="none" stroke="#5C6F84" stroke-width="1.3" marker-end="url(#atcG)"/>
-  <text x="344" y="462" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84">flight plan rotates</text>
-  <line x1="106" y1="468" x2="186" y2="446" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
-  <line x1="212" y1="426" x2="266" y2="394" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
-  <line x1="292" y1="372" x2="346" y2="340" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
-  <text x="250" y="488" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5C6F84" text-anchor="middle">influence propagates aircraft to aircraft</text>
-  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(200,438) rotate(78)" fill="#0A1B2E"/>
-  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(280,384) rotate(78)" fill="#0A1B2E"/>
-  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(360,330) rotate(78)" fill="#0A1B2E"/>
-  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(95,480) rotate(62) scale(1.5)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
-  <text x="95" y="510" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1C7E8F" text-anchor="middle" font-weight="600">Logical shepherd</text>
-  <text x="95" y="524" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">moved by one controller</text>
+  <text x="280" y="350" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">2 &#183; one controller steers the whole fleet</text>
+  <line x1="10" y1="372" x2="34" y2="372" stroke="#1C7E8F" stroke-width="2.4"/><text x="40" y="376" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">updated flight plan</text>
+  <line x1="10" y1="390" x2="34" y2="390" stroke="#D8E2EB" stroke-width="2" stroke-dasharray="5 4"/><text x="40" y="394" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">previous flight plan</text>
+  <path d="M212,496 C262,499 312,500 356,500" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M212,492 C260,482 312,472 356,464" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M292,442 C342,445 392,447 436,448" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M292,438 C340,426 392,416 436,410" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M372,388 C420,391 468,393 504,394" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M372,384 C418,374 468,366 504,360" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M340,496 A26,26 0 0 1 336,472" fill="none" stroke="#5C6F84" stroke-width="1.3" marker-end="url(#atcG)"/>
+  <text x="344" y="518" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84">flight plan rotates</text>
+  <line x1="106" y1="524" x2="186" y2="502" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="212" y1="482" x2="266" y2="450" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="292" y1="428" x2="346" y2="396" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <text x="250" y="544" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5C6F84" text-anchor="middle">influence propagates aircraft to aircraft</text>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(200,494) rotate(78)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(280,440) rotate(78)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(360,386) rotate(78)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(95,536) rotate(62) scale(1.5)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="95" y="566" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1C7E8F" text-anchor="middle" font-weight="600">Logical shepherd</text>
+  <text x="95" y="580" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">moved by one controller</text>
 </svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>One controller, a whole UAV fleet</h3><p>Air traffic control recast as shepherding: the controller moves a single logical shepherd in the digital airspace, and its force rotates each aircraft&rsquo;s intended flight plan rather than steering positions directly. The influence propagates from aircraft to aircraft, so one controller redirects a whole fleet without per-aircraft commands. Forces sheep need but aircraft don&rsquo;t are absorbed by the autopilot, flight plan, and onboard collision detection. Demonstrated through a new ATC interface in the ATOMS air-traffic simulator.</p><p class="fig-cite"><span class="venue">Springer, Shepherding UxVs for Human-Swarm Teaming</span>, 2021. <a href="https://doi.org/10.1007/978-3-030-60898-9_11">doi:10.1007/978-3-030-60898-9_11</a></p></div></article>
       <article class="result-card" id="paper-eeg-gating" role="tabpanel" aria-labelledby="tab-paper-eeg-gating"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="An EEG electrode layout sets the order in which channels are gated during reconstruction.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">SPATIALLY INFORMED GATING</text>
