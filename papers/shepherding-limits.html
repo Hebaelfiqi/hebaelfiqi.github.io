@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where reactive shepherding breaks, in plain language | Dr Heba El-Fiqi</title>
+<meta name="description" content="A plain-language story of our IEEE Access study: stress-testing sheepdog-style swarm guidance until it fails, and mapping exactly where the failure begins.">
+<meta property="og:title" content="Where reactive shepherding breaks, in plain language | Dr Heba El-Fiqi">
+<meta property="og:description" content="Stress-testing sheepdog-style swarm guidance until it fails, and mapping exactly where the failure begins.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=7">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span> Dr Heba El-Fiqi</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../research.html">Research</a>
+        <a href="../publications.html">Publications</a>
+        <a href="../software.html">Software</a>
+        <a href="../people.html">People</a>
+        <a href="../teaching.html">Teaching</a>
+        <a href="../service.html">Service</a>
+        <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="container">
+  <a class="backlink" href="../research.html#paper-limits">&larr; Back to the paper gallery</a>
+  <p class="eyebrow light">Paper story</p>
+  <h1>Pushing the sheepdog until it fails</h1>
+  <p class="lede">Simple, reactive shepherding can guide a hundred agents with a single controller. We stress-tested it until it broke, and mapped exactly where the breaking point sits. This is the story of our IEEE Access study, without the mathematics.</p>
+</div></section>
+
+<section class="section"><div class="container prose">
+  <dl class="hdr-meta" style="margin:0 0 2.6em">
+    <div><dt>Paper</dt><dd>The Limits of Reactive Shepherding Approaches for Swarm Guidance</dd></div>
+    <div><dt>Venue</dt><dd>IEEE Access</dd></div>
+    <div><dt>Year</dt><dd>2020</dd></div>
+    <div><dt>DOI</dt><dd><a href="https://doi.org/10.1109/ACCESS.2020.3037325">10.1109/ACCESS.2020.3037325</a></dd></div>
+    <div><dt>Companion</dt><dd><a href="https://doi.org/10.1145/3377929.3390067">GECCO 2020 study</a></dd></div>
+  </dl>
+
+  <p class="eyebrow">The problem</p>
+  <h2>One dog, a hundred sheep</h2>
+  <p>A sheepdog is a marvel of control engineering. It carries no map, sends no messages, and issues no commands, yet it moves a flock a hundred strong across a paddock by doing one thing well: positioning itself so that the sheep&rsquo;s own instincts do the work. Robotics borrowed the trick under the name <strong>shepherding</strong>: one controller guiding a swarm of simple agents by repulsion alone. It is cheap, elegant, and it scales.</p>
+  <div class="story-fig"><svg viewBox="0 0 560 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A sheepdog positioned behind a flock pushes it by repulsion alone; the flock drifts toward a goal, weaving between obstacles.">
+<text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">REACTIVE SHEPHERDING IN ONE PICTURE</text>
+<circle cx="482" cy="84" r="26" fill="none" stroke="#1C7E8F" stroke-width="2"/><circle cx="482" cy="84" r="15" fill="none" stroke="#1C7E8F" stroke-width="2"/><circle cx="482" cy="84" r="5" fill="#1C7E8F"/>
+<text x="482" y="132" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84" text-anchor="middle">goal</text>
+<rect x="342" y="150" width="16" height="16" rx="3" fill="#D8E2EB"/>
+<rect x="392" y="108" width="16" height="16" rx="3" fill="#D8E2EB"/>
+<rect x="368" y="196" width="16" height="16" rx="3" fill="#D8E2EB"/>
+<text x="376" y="232" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">obstacles</text>
+<g fill="#0A1B2E" transform="translate(236,112) scale(0.55)">
+<circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+<circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+<rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+</g>
+<g fill="#0A1B2E" transform="translate(272,132) scale(0.55)">
+<circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+<circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+<rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+</g>
+<g fill="#0A1B2E" transform="translate(232,156) scale(0.55)">
+<circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+<circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+<rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+</g>
+<g fill="#0A1B2E" transform="translate(268,172) scale(0.55)">
+<circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+<circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+<rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+</g>
+<g fill="#0A1B2E" transform="translate(118,196)">
+<ellipse cx="0" cy="0" rx="14" ry="7"/>
+<circle cx="16" cy="-6" r="5"/><path d="M20,-8 L27,-5 L20,-3 Z"/><path d="M13,-10 L16,-16 L19,-9 Z"/>
+<path d="M-13,-3 L-22,-11 L-17,-1 Z"/>
+<rect x="-11" y="5" width="2.6" height="10" rx="1.3"/><rect x="-5" y="6" width="2.6" height="9" rx="1.3"/><rect x="3" y="6" width="2.6" height="9" rx="1.3"/><rect x="9" y="5" width="2.6" height="10" rx="1.3"/>
+</g>
+<text x="118" y="230" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84" text-anchor="middle">sheepdog</text>
+<line x1="140" y1="184" x2="204" y2="158" stroke="#E0992F" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#sl1)"/>
+<text x="130" y="152" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#9A6A14">repulsion</text>
+<path d="M300,120 C356,100 400,92 446,86" fill="none" stroke="#1C7E8F" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#sl2)"/>
+<text x="345" y="62" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#1C7E8F" text-anchor="middle">the flock drifts toward the goal</text>
+<text x="280" y="252" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">no plans, no messages: the dog steers with position alone, and the sheep react by instinct</text>
+<defs>
+<marker id="sl1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
+<marker id="sl2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1C7E8F"/></marker>
+</defs>
+</svg></div>
+  <p class="fig-note">Reactive shepherding: the dog repels, the flock drifts, the goal draws nearer. Every force is a reflex; nothing is planned.</p>
+  <p>The awkward question is how far the trick stretches. Real environments are not empty paddocks: they have obstacles, clutter, and dead ends. Reactive control has no memory and no foresight, so intuition says it must fail somewhere. But <em>where</em>? Before this study, the community had demonstrations of shepherding working and anecdotes of it failing, and very little in between.</p>
+
+  <p class="eyebrow">The idea</p>
+  <h2>Stress-test it until it breaks</h2>
+  <p>We treated the question the way an engineer treats a new material: load it until it snaps, and record the load. In simulation, a flock of one hundred sheep crossed a 50&times;50 field while we turned two dials: the <strong>density of obstacles</strong> scattered across the field, and the <strong>number of control agents</strong> doing the herding, from a single dog up to ten. Hundreds of runs per setting, success defined by the flock actually reaching the goal.</p>
+  <div class="story-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Phase diagram from the paper's obstacle-density thresholds, with a legend explaining the regions and curves and the experiment setup.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">PHASE DIAGRAM &#183; OBSTACLE-DENSITY THRESHOLDS</text>
+  <rect x="70" y="48" width="310" height="202" fill="#FBF0DC" opacity=".5"/>
+  <polygon points="70,250 70.0,246.0 104.4,233.8 138.9,229.8 173.3,221.7 207.8,193.4 242.2,177.3 276.7,161.1 311.1,149.0 345.6,136.9 380.0,149.0 380,250" fill="#E3F1F4"/><polygon points="70.0,185.4 104.4,149.0 138.9,100.5 173.3,84.4 207.8,60.1 242.2,48.0 276.7,48.0 311.1,48.0 345.6,48.0 380.0,48.0 380,48 70,48" fill="#EDF2F6"/>
+  <polyline points="70.0,246.0 104.4,233.8 138.9,229.8 173.3,221.7 207.8,193.4 242.2,177.3 276.7,161.1 311.1,149.0 345.6,136.9 380.0,149.0" fill="none" stroke="#1C7E8F" stroke-width="2.4"/><polyline points="70.0,185.4 104.4,149.0 138.9,100.5 173.3,84.4 207.8,60.1 242.2,48.0 276.7,48.0 311.1,48.0 345.6,48.0 380.0,48.0" fill="none" stroke="#5C6F84" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="70.0" cy="246.0" r="2.4" fill="#1C7E8F"/><circle cx="104.4" cy="233.8" r="2.4" fill="#1C7E8F"/><circle cx="138.9" cy="229.8" r="2.4" fill="#1C7E8F"/><circle cx="173.3" cy="221.7" r="2.4" fill="#1C7E8F"/><circle cx="207.8" cy="193.4" r="2.4" fill="#1C7E8F"/><circle cx="242.2" cy="177.3" r="2.4" fill="#1C7E8F"/><circle cx="276.7" cy="161.1" r="2.4" fill="#1C7E8F"/><circle cx="311.1" cy="149.0" r="2.4" fill="#1C7E8F"/><circle cx="345.6" cy="136.9" r="2.4" fill="#1C7E8F"/><circle cx="380.0" cy="149.0" r="2.4" fill="#1C7E8F"/>
+  <line x1="70" y1="48" x2="70" y2="250" stroke="#5C6F84" stroke-width="1.4"/><line x1="70" y1="250" x2="380" y2="250" stroke="#5C6F84" stroke-width="1.4"/>
+  <text x="-149" y="26" transform="rotate(-90)" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84" text-anchor="middle">obstacle density (%)</text>
+  <text x="225" y="284" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84" text-anchor="middle">number of control agents</text>
+  <text x="70.0" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">1</text><text x="104.4" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">2</text><text x="138.9" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">3</text><text x="173.3" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">4</text><text x="207.8" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">5</text><text x="242.2" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">6</text><text x="276.7" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">7</text><text x="311.1" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">8</text><text x="345.6" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">9</text><text x="380.0" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">10</text><text x="64" y="253.0" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">0</text><text x="64" y="212.6" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">2</text><text x="64" y="172.2" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">4</text><text x="64" y="131.8" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">6</text><text x="64" y="91.4" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">8</text><text x="64" y="51.0" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">10</text>
+  <text x="398" y="58" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84">REGIONS</text>
+  <rect x="398" y="66" width="14" height="10" rx="2" fill="#E3F1F4" stroke="#1C7E8F"/><text x="418" y="75" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">reliable</text><text x="418" y="87" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">&#8805;90% of runs succeed</text>
+  <rect x="398" y="95" width="14" height="10" rx="2" fill="#FBF0DC" stroke="#E0992F"/><text x="418" y="104" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">phase transition</text>
+  <rect x="398" y="116" width="14" height="10" rx="2" fill="#EDF2F6" stroke="#D8E2EB"/><text x="418" y="125" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">collapse</text><text x="418" y="137" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">no run succeeds</text>
+  <text x="398" y="160" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84">BOUNDARIES</text>
+  <line x1="398" y1="171" x2="416" y2="171" stroke="#1C7E8F" stroke-width="2.4"/><text x="422" y="175" font-family="IBM Plex Sans, sans-serif" font-size="10.5" fill="#182A3D">&#8805;90% threshold</text>
+  <line x1="398" y1="188" x2="416" y2="188" stroke="#5C6F84" stroke-width="2" stroke-dasharray="5 4"/><text x="422" y="192" font-family="IBM Plex Sans, sans-serif" font-size="10.5" fill="#182A3D">0% threshold</text>
+  <line x1="398" y1="212" x2="548" y2="212" stroke="#D8E2EB" stroke-width="1"/>
+  <text x="398" y="228" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84">SETUP</text>
+  <text x="398" y="242" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#1C7E8F">100 sheep &#183; 50&#215;50 field</text>
+  <text x="398" y="254" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#1C7E8F">1 to 10 control agents</text>
+</svg></div>
+  <p class="fig-note">The result is a phase diagram. Below the teal boundary, herding succeeds in at least 90% of runs; above the dashed boundary, no run succeeds; between them sits an abrupt transition.</p>
+
+  <p class="eyebrow">What we found</p>
+  <h2>A cliff, not a slope</h2>
+  <p>Reactive shepherding does not degrade politely. As obstacle density rises, performance holds, holds, holds, and then collapses over a narrow band, the way a traffic system flips from flowing to gridlocked. A single dog manages only the barest clutter, with the transition beginning around 0.2% obstacle density. Adding dogs pushes the cliff edge outward, to roughly 5% with ten of them, but it cannot remove the cliff. More muscle buys margin; it does not buy a different failure mode.</p>
+  <p>That shape matters as much as the numbers. A designer who knows a system fails gradually can monitor it; a designer whose system fails at a cliff needs to know precisely where the cliff is, and stay well back from it.</p>
+
+  <p class="eyebrow">Who should care</p>
+  <h2>The boundary is the design guide</h2>
+  <p>For anyone building swarm systems &mdash; drone fleets, warehouse robots, crowd guidance &mdash; this study marks the territory where cheap reactive control is enough, and the territory where something smarter must take over: memory, planning, or a human in the loop. Much of my later work lives on the far side of that boundary, from <a href="../research.html#paper-atc">recasting air traffic control as shepherding</a> to <a href="../research.html#paper-patrolling">guarding areas against adversarial swarms</a>. Knowing where reflexes stop working is what tells you where intelligence has to begin.</p>
+
+  <p class="eyebrow">Cite &amp; explore</p>
+  <h2>The formal version</h2>
+  <p class="note" style="max-width:70ch">H. El-Fiqi, B. Campbell, S. Elsayed, A. Perry, H. K. Singh, R. Hunjet and H. A. Abbass, &ldquo;The Limits of Reactive Shepherding Approaches for Swarm Guidance,&rdquo; <em style="all:unset;font-style:italic">IEEE Access</em>, vol. 8, pp. 214658&ndash;214671, 2020. <a class="doi" href="https://doi.org/10.1109/ACCESS.2020.3037325">doi:10.1109/ACCESS.2020.3037325</a></p>
+  <p><a class="more" href="https://github.com/husseinaabbass/Shepherding">Explore the Shepherding Library &rarr;</a><br>
+     <a class="more" href="../research.html#paper-limits">Back to the paper gallery &rarr;</a></p>
+
+  <div class="colophon">
+    <p><strong>How this page was written.</strong> The research, the results, and the ideas here are mine and my co-authors&rsquo;. To retell them in plain language, I worked with an AI writing assistant that helped draft the text and render the diagrams in this site&rsquo;s style. I reviewed and edited everything, and the technical responsibility rests with me. If the prose reads a little differently from my papers, that is why.</p>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div>
+      <div class="foot-name">Dr Heba El-Fiqi</div>
+      <p class="foot-line">Distributed and collaborative intelligence for autonomous systems. School of Systems and Computing, UNSW Canberra.</p>
+    </div>
+    <nav class="foot-links" aria-label="Profiles">
+      <a href="https://scholar.google.com/citations?user=6ySMBdQAAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8146-0110">ORCID</a>
+      <a href="https://www.linkedin.com/in/heba-el-fiqi-23503274/">LinkedIn</a>
+      <a href="https://github.com/Hebaelfiqi/">GitHub</a>
+    </nav>
+  </div>
+  <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
+</footer>
+<script src="../assets/main.js?v=3"></script>
+</body>
+</html>
