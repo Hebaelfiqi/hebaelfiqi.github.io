@@ -81,3 +81,6 @@ hosting cannot serve. Current setup costs $0 and self-heals.
 - 2026-07: Stay on GitHub Pages free tier; custom domain preferred over paid
   hosting or GitHub Pro. Migration parked (WS6).
 - 2026-07: Gallery capped ~8 panels; deep content goes to story pages (WS2).
+- 2026-07: Domain = hebaelfiqi.com only. el-fiqi.com deliberately not
+  claimed (common family name). No .au. Registrar: Cloudflare, Porkbun
+  fallback.
