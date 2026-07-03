@@ -35,7 +35,10 @@ Steps:
 - [x] Add "Learn more" links under the corresponding gallery panels (wglae, limits, stylometry)
 - [x] Story 4: adversarial patrolling (papers/adversarial-patrolling.html),
   Jonathan Zhou credited as student lead
-- [ ] Review pilots with Heba, then scale to remaining panels/software
+- [x] Story 5: ATC as shepherding (papers/atc-shepherding.html)
+- [ ] Remaining candidates: spatially informed gating (Sensors 2025),
+      translator stylometry (partly covered by the PWC4.5 page)
+- [ ] Review pilots with Heba, then scale/stop as she decides
 - Template rule: every story page ends with the "How this page was written"
   colophon (AI-assisted drafting acknowledged; Heba reviews and owns the
   technical content)
