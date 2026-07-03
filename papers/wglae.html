@@ -58,7 +58,7 @@
 
   <p class="eyebrow">The idea</p>
   <h2>Practise losing, so losing doesn't hurt</h2>
-  <p>An autoencoder is a neural network trained to reproduce its own input: it squeezes the data through a narrow middle and expands it back, and in doing so it is forced to learn the structure that makes the data compressible. Our addition is a <strong>gate layer</strong> in front of it. During training, gates close at random, switching individual input channels off &mdash; but the network is still asked to reconstruct <em>all</em> channels at the output, including the ones it never saw.</p>
+  <p>An autoencoder is a neural network trained to reproduce its own input: it squeezes the data through a narrow middle and expands it back, and in doing so it is forced to learn the structure that makes the data compressible. Our addition is a <strong>gate layer</strong> in front of it. During training, gates close at random, switching individual input channels off, but the network is still asked to reconstruct <em>all</em> channels at the output, including the ones it never saw.</p>
   <div class="story-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Five inputs pass through a gate layer into an encoder, latent code, and decoder; one gate is closed, yet the corresponding output is still reconstructed.">
 <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">THE GATE LAYER</text>
 <text x="104" y="52" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">inputs &#183; gate layer</text>
@@ -73,11 +73,11 @@
 <text x="280" y="284" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">gates close at random in training &#8594; the network must infer the hidden input from the rest</text>
 </svg></div>
   <p class="fig-note">One gate closed: the network receives four of the five inputs, yet must still produce all five outputs. The only way to succeed is to learn how the channels depend on one another.</p>
-  <p>A weighting mechanism sharpens the lesson: the reconstruction error on the switched-off channels counts for more, so training concentrates on exactly the skill that matters &mdash; recovering what is missing, not merely copying what is present. The result is a model that has spent its entire training life practising sensor failure, long before it meets a real one.</p>
+  <p>A weighting mechanism sharpens the lesson: the reconstruction error on the switched-off channels counts for more, so training concentrates on exactly the skill that matters: recovering what is missing, not merely copying what is present. The result is a model that has spent its entire training life practising sensor failure, long before it meets a real one.</p>
 
   <p class="eyebrow">What we found</p>
   <h2>Graceful degradation instead of collapse</h2>
-  <p>At test time, the difference shows up exactly where it should. When a channel drops out, the gated model redraws it from the surviving channels &mdash; not as a smoothed average, but as a signal that tracks the true one. And as more channels are removed, its reconstruction error stays nearly flat where a standard autoencoder&rsquo;s error climbs steeply: with ten channels missing at once, the standard model has effectively given up while the gated one is still working.</p>
+  <p>At test time, the difference shows up exactly where it should. When a channel drops out, the gated model redraws it from the surviving channels, not as a smoothed average but as a signal that tracks the true one. And as more channels are removed, its reconstruction error stays nearly flat where a standard autoencoder&rsquo;s error climbs steeply: with ten channels missing at once, the standard model has effectively given up while the gated one is still working.</p>
   <div class="story-fig"><svg viewBox="0 0 560 340" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A channel drops out mid-recording and the gated autoencoder redraws it from the other channels; an inset chart shows reconstruction error staying nearly flat for the gated model while a standard autoencoder degrades as more channels are lost.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">FILLING IN A LOST CHANNEL</text>
   <text x="120" y="46" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">recorded channels</text>
@@ -110,7 +110,7 @@
 
   <p class="eyebrow">Who should care</p>
   <h2>Anywhere data arrives on many channels</h2>
-  <p>We developed this with EEG in mind &mdash; brain-computer interfaces are notorious for electrodes dropping out mid-session &mdash; but the mechanism is domain-agnostic. Wearables, industrial monitoring, autonomous platforms: any system that fuses multiple sensors inherits the same failure mode, and the same fix applies. The gate layer also has a second life as an analysis tool: because the model learns which channels can stand in for which, it exposes the dependency structure of the data itself.</p>
+  <p>We developed this with EEG in mind (brain-computer interfaces are notorious for electrodes dropping out mid-session), but the mechanism is domain-agnostic. Wearables, industrial monitoring, autonomous platforms: any system that fuses multiple sensors inherits the same failure mode, and the same fix applies. The gate layer also has a second life as an analysis tool: because the model learns which channels can stand in for which, it exposes the dependency structure of the data itself.</p>
   <p>This paper seeded a line of work: the original gate-layer idea appeared at <a href="https://doi.org/10.1109/IJCNN.2019.8852101">IJCNN 2019</a>, and the follow-up in <a href="https://doi.org/10.3390/s25113389">Sensors (2025)</a>, led by Kangjing Li, a postdoctoral researcher who worked on my project under my supervision, asks how the <em>order</em> in which channels are gated should follow the brain&rsquo;s own layout.</p>
 
   <p class="eyebrow">Cite &amp; explore</p>
