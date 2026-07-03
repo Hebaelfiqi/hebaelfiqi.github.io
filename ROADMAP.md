@@ -51,7 +51,7 @@ Steps:
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
 - [ ] Home: optional small news strip (only if it will be kept fresh)
 
-## WS5 — Custom domain — `in-progress` (nearly done)
+## WS5 — Custom domain — `done`
 FINAL: purchased hebaelfiqi.com via Cowork; DNS + Pages binding + SEO done
 by Cowork directly on the public repo; now made permanent in source.
 
@@ -61,8 +61,8 @@ Steps:
 - [x] Claude: SEO handoff — google-site-verification, canonical + og:url +
       og:image + Twitter cards + Person JSON-LD on index; self-canonicals
       on all pages incl. story pages; sitemap.xml; robots.txt
-- [ ] Deploy and verify per handoff item 7 (homepage loads, tags in source,
-      sitemap/robots return 200, per-page canonicals)
+- [x] Deploy and verify per handoff item 7 (all markers verified on deployed
+      main; Heba eyeballed the live domain)
 - Rule: keep sitemap.xml in sync when adding/removing pages
 
 ## WS6 — Full independent hosting — `parked`
@@ -75,7 +75,9 @@ hosting cannot serve. Current setup costs $0 and self-heals.
 - Claude pushes finished work to the public repo branch
   claude/push-local-repo-github-qd88t7.
 - The private repo runs sync.yml (cron, every 15 min): merges that branch
-  into main and dispatches Deploy site. No manual merge needed.
+  into main and dispatches Deploy site. No manual merge needed. VERIFIED
+  working end-to-end 2026-07-03. Note: GitHub cron often lags 30-90 min;
+  for instant publishing, Run workflow manually in website-source Actions.
 - Optional direct path: grant the Claude GitHub App access to
   Hebaelfiqi/website-source so future sessions can merge+push directly.
 
