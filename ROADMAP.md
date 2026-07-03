@@ -68,9 +68,10 @@ People page instead.
 - [x] Teaching page v1: score chips, numbers strip, teaching awards,
       leadership (BCCS deliberately omitted; dual-stream past tense;
       ZEIT4150 corrected to S1-only)
-- [ ] Teaching page v2 pending Heba's uploads: course outlines (aims and
-      learning outcomes per card), MyExperience reports (anonymous
-      student quotes), and her decision on naming Exercise Enigma
+- [x] Teaching page v2: course descriptions from published 2026 outlines,
+      updated score chips from 2025 myExperience reports (4151: 5.57,
+      8601: 5.25), three anonymous student quotes with attribution lines
+- [ ] Still pending: Heba's decision on naming Exercise Enigma publicly
 - [ ] Service page: add IJCNN/WCCI mentoring photos (already in assets/img)
 - [ ] Home: optional small news strip (only if it will be kept fresh)
 
