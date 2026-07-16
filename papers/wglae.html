@@ -39,7 +39,7 @@
   <a class="backlink" href="../research.html#paper-wglae">&larr; Back to the paper gallery</a>
   <p class="eyebrow light">Paper story</p>
   <h1>Teaching a network to fill in missing signals</h1>
-  <p class="lede">The Weighted Gate Layer Autoencoder, explained without the mathematics: why we deliberately blindfold a neural network during training, and how that lets it redraw sensor channels that die mid-recording.</p>
+  <p class="lede">The Weighted Gate Layer Autoencoder, explained without the mathematics: why we hide inputs from a neural network during training, and how that lets it reconstruct sensor channels that fail partway through a recording.</p>
 </div></section>
 
 <section class="section"><div class="container prose">
@@ -52,13 +52,13 @@
   </dl>
 
   <p class="eyebrow">The problem</p>
-  <h2>Sensors fail at the worst possible time</h2>
-  <p>Many measurements worth taking are taken many channels at once. An EEG headset records dozens of electrodes; an aircraft, a factory line, or a robot fuses readings from banks of sensors. And in every one of these settings the same small disaster is routine: mid-recording, a channel dies. An electrode loses contact, a wire is knocked, a sensor drifts out of range.</p>
-  <p>The standard responses are painful. Throw the whole recording away, and hours of experiment time go with it. Interpolate the missing channel from its neighbours with a fixed formula, and you get a guess that ignores everything the data could have told you about how that specific channel actually behaves.</p>
+  <h2>When a channel fails mid-recording</h2>
+  <p>Many important measurements are recorded across many channels at once. An EEG headset records dozens of electrodes; an aircraft, a production line, or a robot combines readings from banks of sensors. In all of these settings, a common problem occurs: partway through a recording, a channel stops working. An electrode loses contact, a cable is knocked, or a sensor drifts out of range.</p>
+  <p>When this happens, the usual options are unsatisfying. Discarding the whole recording wastes hours of collected data. Filling in the missing channel with a fixed interpolation formula ignores what the data itself could tell us about how that particular channel behaves.</p>
 
   <p class="eyebrow">The idea</p>
-  <h2>Practise losing, so losing doesn't hurt</h2>
-  <p>An autoencoder is a neural network trained to reproduce its own input: it squeezes the data through a narrow middle and expands it back, and in doing so it is forced to learn the structure that makes the data compressible. Our addition is a <strong>gate layer</strong> in front of it. During training, gates close at random, switching individual input channels off, but the network is still asked to reconstruct <em>all</em> channels at the output, including the ones it never saw.</p>
+  <h2>Training the network to expect missing inputs</h2>
+  <p>An autoencoder is a neural network that learns to reproduce its own input. It passes the data through a narrow internal layer and reconstructs it, which forces it to learn the structure that makes the data predictable. We add a <strong>gate layer</strong> in front of this network. During training, the gates close at random and switch off individual input channels, but the network is still required to reconstruct <em>every</em> channel at the output, including the ones it did not receive.</p>
   <div class="story-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Five inputs pass through a gate layer into an encoder, latent code, and decoder; one gate is closed, yet the corresponding output is still reconstructed.">
 <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">THE GATE LAYER</text>
 <text x="104" y="52" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">inputs &#183; gate layer</text>
@@ -72,12 +72,12 @@
 <line x1="358" y1="80" x2="392" y2="80" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="80" r="9" fill="#0A1B2E"/><line x1="358" y1="120" x2="392" y2="120" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="120" r="9" fill="#0A1B2E"/><line x1="358" y1="160" x2="392" y2="160" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="160" r="9" fill="#0A1B2E"/><circle cx="400" cy="160" r="14" fill="none" stroke="#E0992F" stroke-width="2.2"/><text x="424" y="152" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#9A6A14">x3 reconstructed</text><text x="424" y="164" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#9A6A14">without being seen</text><line x1="358" y1="200" x2="392" y2="200" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="200" r="9" fill="#0A1B2E"/><line x1="358" y1="240" x2="392" y2="240" stroke="#5C6F84" stroke-width="1.6"/><circle cx="400" cy="240" r="9" fill="#0A1B2E"/>
 <text x="280" y="284" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">gates close at random in training &#8594; the network must infer the hidden input from the rest</text>
 </svg></div>
-  <p class="fig-note">One gate closed: the network receives four of the five inputs, yet must still produce all five outputs. The only way to succeed is to learn how the channels depend on one another.</p>
-  <p>A weighting mechanism sharpens the lesson: the reconstruction error on the switched-off channels counts for more, so training concentrates on exactly the skill that matters: recovering what is missing, not merely copying what is present. The result is a model that has spent its entire training life practising sensor failure, long before it meets a real one.</p>
+  <p class="fig-note">One gate is closed: the network receives four of the five inputs but must still produce all five outputs. To do this, it has to learn how the channels relate to one another.</p>
+  <p>A weighting mechanism makes this harder in a useful way: errors on the switched-off channels count for more, so the model focuses on recovering the missing values rather than copying the ones it can already see. By the time training finishes, the model has practised working with missing channels many times over.</p>
 
   <p class="eyebrow">What we found</p>
-  <h2>Graceful degradation instead of collapse</h2>
-  <p>At test time, the difference shows up exactly where it should. When a channel drops out, the gated model redraws it from the surviving channels, not as a smoothed average but as a signal that tracks the true one. And as more channels are removed, its reconstruction error stays nearly flat where a standard autoencoder&rsquo;s error climbs steeply: with ten channels missing at once, the standard model has effectively given up while the gated one is still working.</p>
+  <h2>Degrading gradually instead of failing</h2>
+  <p>The benefit appears at test time. When a channel drops out, the gated model reconstructs it from the remaining channels, and the reconstruction follows the shape of the true signal rather than a smoothed average. As more channels are removed, the gated model&rsquo;s reconstruction error rises only slightly, while a standard autoencoder&rsquo;s error rises steeply. With ten channels missing at once, the standard model has largely stopped working, while the gated model still produces useful output.</p>
   <div class="story-fig"><svg viewBox="0 0 560 340" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A channel drops out mid-recording and the gated autoencoder redraws it from the other channels; an inset chart shows reconstruction error staying nearly flat for the gated model while a standard autoencoder degrades as more channels are lost.">
   <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">FILLING IN A LOST CHANNEL</text>
   <text x="120" y="46" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">recorded channels</text>
@@ -106,12 +106,12 @@
   <text x="452" y="322" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5C6F84" text-anchor="end">10 missing</text>
   <defs><marker id="wg1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
 </svg></div>
-  <p class="fig-note">Left: a channel dies mid-recording. Right: the gated autoencoder redraws it from the other channels alone; the inset shows error staying nearly flat as up to ten channels are removed.</p>
+  <p class="fig-note">Left: a channel fails partway through a recording. Right: the gated autoencoder reconstructs it from the other channels; the inset shows the error rising only slightly as up to ten channels are removed.</p>
 
   <p class="eyebrow">Who should care</p>
-  <h2>Anywhere data arrives on many channels</h2>
-  <p>We developed this with EEG in mind (brain-computer interfaces are notorious for electrodes dropping out mid-session), but the mechanism is domain-agnostic. Wearables, industrial monitoring, autonomous platforms: any system that fuses multiple sensors inherits the same failure mode, and the same fix applies. The gate layer also has a second life as an analysis tool: because the model learns which channels can stand in for which, it exposes the dependency structure of the data itself.</p>
-  <p>This paper seeded a line of work: the original gate-layer idea appeared at <a href="https://doi.org/10.1109/IJCNN.2019.8852101">IJCNN 2019</a>, and the follow-up in <a href="https://doi.org/10.3390/s25113389">Sensors (2025)</a>, led by Kangjing Li, a postdoctoral researcher who worked on my project under my supervision, asks how the <em>order</em> in which channels are gated should follow the brain&rsquo;s own layout.</p>
+  <h2>Where this is useful</h2>
+  <p>We developed this method with EEG in mind, because brain-computer interfaces often lose electrodes during a session, but the idea is not specific to EEG. Wearable devices, industrial monitoring, and autonomous systems all combine multiple sensors and face the same failure, and the same approach applies. The gate layer is also useful for analysis: because the model learns which channels can substitute for which, it shows the dependency structure within the data.</p>
+  <p>This work is part of a longer line of research. The original gate-layer idea was published at <a href="https://doi.org/10.1109/IJCNN.2019.8852101">IJCNN in 2019</a>. A later paper in <a href="https://doi.org/10.3390/s25113389">Sensors (2025)</a>, led by Kangjing Li, a postdoctoral researcher who worked on my project under my supervision, studies how the <em>order</em> in which channels are gated can follow the brain&rsquo;s electrode layout.</p>
 
   <p class="eyebrow">Cite &amp; explore</p>
   <h2>The formal version</h2>
