@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Software | Dr Heba El-Fiqi</title>
+<meta name="description" content="Open-source research software: the Shepherding Library for swarm guidance, the Weighted Gate Layer Autoencoder, and PWC4.5 for pairwise comparative classification.">
+<meta property="og:title" content="Software | Dr Heba El-Fiqi">
+<meta property="og:description" content="Open-source research software: the Shepherding Library for swarm guidance, the Weighted Gate Layer Autoencoder, and PWC4.5 for pairwise comparative classification.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://hebaelfiqi.com/software.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=9">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span> Dr Heba El-Fiqi</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="software.html" aria-current="page">Software</a>
+        <a href="people.html">People</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="service.html">Service</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="container"><p class="eyebrow">Software</p><h1>Open-source libraries and infrastructure</h1><p class="lede">Software is a first-class output here: it makes the research reproducible and gives others a benchmark to build on.</p></div></section>
+<section class="section">
+  <div class="container soft-grid">
+    <article class="soft-card">
+      <h2>Shepherding Library</h2>
+      <p>The C++ framework behind the shepherding line of work: force-based sheep and sheepdog agents with driving, collecting, and regulated-force behaviours, six spatial initialisation patterns, and seeded, exactly repeatable runs. The same unchanged sources build three ways: a Visual Studio and SDL2 visualisation, a headless command-line build for batch experiments, and a WebAssembly build, so the live demo is the research code itself running in the browser, not a reimplementation. This is the library behind the IEEE Access study that located the cliff where reactive shepherding collapses, and the testbed the adversarial patrolling work (IEEE SMC 2024) now extends.</p>
+      <a class="more" href="papers/shepherding-limits.html">The full story, in plain language &rarr;</a><br>
+      <a class="more" href="https://hebaelfiqi.com/Shepherding/simulator/">Live demo: run it in your browser &rarr;</a><br>
+      <a class="more" href="https://github.com/husseinaabbass/Shepherding">Repository &rarr;</a>
+    </article>
+    <article class="soft-card">
+      <h2>Weighted Gate Layer Autoencoder (WGLAE)</h2>
+      <p>An autoencoder that recovers missing or corrupted channels by learning how a dataset's variables depend on one another, using a controller-driven curriculum of gating and a weight layer that focuses learning on the channels that matter. The paper's Experiment 1 now runs on current TensorFlow (a faithful TF 2.15 port and a Keras 3 rewrite), validated against the original results, alongside the original Code Ocean capsule.</p>
+      <a class="more" href="software/wglae.html">The full story, in plain language &rarr;</a><br>
+      <a class="more" href="https://github.com/Hebaelfiqi/wglae">Repository &rarr;</a><br>
+      <a class="more" href="https://codeocean.com/capsule/4751126/tree">Original capsule (Code Ocean) &rarr;</a>
+    </article>
+    <article class="soft-card">
+      <h2>PWC4.5</h2>
+      <p>A decision-tree algorithm for pairwise comparative classification, extending C4.5 to problems where the signal lives in the relationship between paired instances rather than their individual values. Ships as a runnable JAR with the synthetic benchmarks, the translator-stylometry datasets (CC BY 4.0), and scripts reproducing every experiment from the ACM TALLIP paper, where PWC4.5 lifted translator identification from 52.12% to 80.23%.</p>
+      <a class="more" href="software/pwc45.html">The full story, in plain language &rarr;</a><br>
+      <a class="more" href="https://github.com/Hebaelfiqi/PWC4.5">Repository &rarr;</a>
+    </article>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container prose">
+    <p class="eyebrow">Open science</p>
+    <h2>Reproducibility as a default</h2>
+    <p>Releasing the infrastructure behind the papers is a deliberate part of how I work: it lets others verify, reuse, and extend the methods, reduces onboarding time for new researchers and students, and turns each publication into something the community can build on rather than only read.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div>
+      <div class="foot-name">Dr Heba El-Fiqi</div>
+      <p class="foot-line">Distributed and collaborative intelligence for autonomous systems. School of Systems and Computing, UNSW Canberra.</p>
+    </div>
+    <nav class="foot-links" aria-label="Profiles">
+      <a href="https://scholar.google.com/citations?user=6ySMBdQAAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8146-0110">ORCID</a>
+      <a href="https://www.linkedin.com/in/heba-el-fiqi-23503274/">LinkedIn</a>
+      <a href="https://github.com/Hebaelfiqi/">GitHub</a>
+    </nav>
+  </div>
+  <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
+</footer>
+<script src="assets/main.js?v=3"></script>
+</body>
+</html>

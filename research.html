@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research | Dr Heba El-Fiqi</title>
+<meta name="description" content="Two research pillars: coordination and collective behaviour for multi-agent systems, and gated learning architectures for partial, noisy signals.">
+<meta property="og:title" content="Research | Dr Heba El-Fiqi">
+<meta property="og:description" content="Two research pillars: coordination and collective behaviour for multi-agent systems, and gated learning architectures for partial, noisy signals.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://hebaelfiqi.com/research.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=9">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span> Dr Heba El-Fiqi</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="research.html" aria-current="page">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="software.html">Software</a>
+        <a href="people.html">People</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="service.html">Service</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="container"><p class="eyebrow">Research</p><h1>Distributed and collaborative intelligence</h1><p class="lede">A collective is only as capable as what each agent can recover from what it sees. My work develops both the coordination across agents and the learning inside each one.</p></div></section>
+<nav class="subnav" aria-label="On this page">
+  <div class="container">
+    <a href="#pillar-coordination">Pillar 1 &#183; Coordination</a>
+    <a href="#pillar-learning">Pillar 2 &#183; Gated learning</a>
+    <a href="#directions">Directions</a>
+    <a href="#selected-results">Paper gallery</a>
+    <a href="#funding">Funding &amp; group</a>
+  </div>
+</nav>
+<section class="section" id="pillar-coordination">
+  <div class="container prose">
+    <p class="eyebrow">Pillar 1</p>
+    <h2 class="sec-title">Coordination and collective behaviour</h2>
+    <hr class="sec-rule">
+    <p>I develop guidance methods for multi-agent systems, centred on swarm shepherding, where a small number of control agents guide the emergent behaviour of a much larger group. This line of work identified the limits of reactive shepherding (IEEE Access), introduced distributed and consensus-based shepherding, and reframed adversarial patrolling as a shepherding problem (IEEE SMC). To keep the work reproducible, I built and released open-source infrastructure, including a Shepherding Library and a swarm simulation environment that others now reuse and benchmark against.</p>
+    <p><a class="more" href="https://hebaelfiqi.com/Shepherding/simulator/">Try the interactive simulator: the library running live in your browser &rarr;</a></p>
+<div class="pillar-fig"><svg viewBox="0 0 560 264" role="img" xmlns="http://www.w3.org/2000/svg"
+  aria-label="Shepherding positions and vectors. The driving position sits behind the flock centre of mass with a vector through it to the goal; the collecting position sits behind a stray with a vector pointing toward the centre of mass.">
+  <text x="8" y="22" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="#1C7E8F">SHEPHERDING: POSITIONS AND VECTORS</text>
+  <rect x="56" y="192" width="26" height="26" rx="4" fill="#E0992F"/>
+  <text x="69" y="232" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#5C6F84" text-anchor="middle">Goal</text>
+  <line x1="369" y1="90" x2="93" y2="196" stroke="#1C7E8F" stroke-width="2.6" marker-end="url(#v1)"/>
+  <line x1="451" y1="220" x2="309.1" y2="136.2" stroke="#2A9DB0" stroke-width="2.4" marker-end="url(#v2)"/>
+  <circle cx="285" cy="122" r="4.6" fill="#0A1B2E"/><circle cx="268" cy="110" r="4.6" fill="#0A1B2E"/><circle cx="302" cy="110" r="4.6" fill="#0A1B2E"/><circle cx="272" cy="136" r="4.6" fill="#0A1B2E"/><circle cx="300" cy="136" r="4.6" fill="#0A1B2E"/><circle cx="258" cy="124" r="4.6" fill="#0A1B2E"/><circle cx="312" cy="124" r="4.6" fill="#0A1B2E"/><circle cx="285" cy="100" r="4.6" fill="#0A1B2E"/>
+  <circle cx="285" cy="122" r="2.6" fill="#E0992F"/>
+  <line x1="285" y1="144" x2="285" y2="154" stroke="#D8E2EB" stroke-width="1"/><text x="285" y="164" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84" text-anchor="middle">centre of mass</text>
+  <circle cx="410" cy="196" r="4.6" fill="#0A1B2E"/><text x="426" y="199" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84">stray</text>
+  <circle cx="369" cy="90" r="9" fill="none" stroke="#1C7E8F" stroke-width="2"/>
+  <text x="369" y="74" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#1C7E8F" text-anchor="middle" font-weight="600">driving position</text>
+  <circle cx="451" cy="220" r="9" fill="none" stroke="#1C7E8F" stroke-width="2"/><rect x="445.0" y="214.0" width="12" height="12" rx="3.5" fill="#1C7E8F"/>
+  <text x="451" y="246" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#1C7E8F" text-anchor="middle" font-weight="600">collecting position</text>
+  <rect x="34.0" y="248.0" width="12" height="12" rx="3.5" fill="#1C7E8F"/><text x="56" y="258" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84">sheepdog</text>
+  <circle cx="158" cy="254" r="6" fill="none" stroke="#1C7E8F" stroke-width="2"/><text x="170" y="258" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84">target position</text>
+  <circle cx="292" cy="254" r="4.4" fill="#0A1B2E"/><text x="303" y="258" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84">sheep</text>
+  <defs>
+    <marker id="v1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#1C7E8F"/></marker>
+    <marker id="v2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#2A9DB0"/></marker>
+  </defs>
+</svg><p class="fig-note">To drive, the sheepdog positions itself behind the flock centre of mass, on the far side from the goal, so fleeing sheep move toward it. To collect, it positions behind a stray. One sheepdog collects strays first and drives only when none remain.</p></div><div class="pillar-fig"><svg viewBox="0 0 560 316" role="img" xmlns="http://www.w3.org/2000/svg"
+  aria-label="Radius-based design. Left: the sheepdog operating circles R1, R1+R2 and R1+R2+R3 place the driving position on R1+R2 behind the flock and the collecting position behind a stray. Right: concentric radii around a sheep switch its behaviour between collision avoidance, cohesion and fleeing the sheepdog.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">RADIUS-BASED DESIGN</text>
+  <line x1="290" y1="40" x2="290" y2="304" stroke="#D8E2EB" stroke-width="1" stroke-dasharray="3 5"/>
+
+  <text x="150" y="42" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#182A3D" text-anchor="middle" font-weight="600">sheepdog operating circles</text>
+  <circle cx="150" cy="150" r="78" fill="none" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="1.5 4"/>
+  <circle cx="150" cy="150" r="38" fill="none" stroke="#1C7E8F" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <circle cx="150" cy="150" r="22" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.5"/>
+  <circle cx="150" cy="150" r="3.6" fill="#0A1B2E"/><circle cx="139" cy="142" r="3.6" fill="#0A1B2E"/><circle cx="161" cy="142" r="3.6" fill="#0A1B2E"/><circle cx="142" cy="160" r="3.6" fill="#0A1B2E"/><circle cx="158" cy="160" r="3.6" fill="#0A1B2E"/>
+  <circle cx="150" cy="150" r="2" fill="#E0992F"/>
+  <rect x="32" y="142" width="16" height="16" rx="3" fill="#E0992F"/>
+  <text x="40" y="174" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">goal</text>
+  <line x1="48" y1="150" x2="70" y2="150" stroke="#D8E2EB" stroke-width="1.3" stroke-dasharray="3 4"/>
+  <circle cx="188.0" cy="150.0" r="6" fill="none" stroke="#1C7E8F" stroke-width="2"/><text x="197.0" y="144.0" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#1C7E8F" font-weight="600">drive</text>
+  <circle cx="177.5" cy="197.63" r="4" fill="#0A1B2E"/><circle cx="185.5001760058082" cy="211.4863048420598" r="6" fill="none" stroke="#1C7E8F" stroke-width="2"/><text x="194.5001760058082" y="215.4863048420598" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#1C7E8F" font-weight="600">collect</text>
+  <circle cx="24" cy="262" r="6" fill="none" stroke="#1C7E8F" stroke-width="1.8" /><text x="36" y="266" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D">R1 &#183; cluster boundary</text>
+  <circle cx="24" cy="282" r="6" fill="none" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="5 3"/><text x="36" y="286" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D">R1+R2 &#183; min separation (positions)</text>
+  <circle cx="24" cy="302" r="6" fill="none" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="1.5 3"/><text x="36" y="306" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D">R1+R2+R3 &#183; no influence</text>
+
+  <text x="418" y="42" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#182A3D" text-anchor="middle" font-weight="600">sheep: forces by radius</text>
+  <circle cx="320" cy="55" r="3.6" fill="#E0992F"/><text x="328" y="58" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#9A6A14">focal sheep</text><circle cx="392" cy="55" r="3.6" fill="#0A1B2E"/><text x="400" y="58" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#1C7E8F">neighbours</text>
+  <circle cx="460" cy="55" r="3.6" fill="#AEC0CE"/><text x="468" y="58" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84">not neighbours</text>
+  <circle cx="418" cy="150" r="78" fill="none" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="1.5 4"/>
+  <circle cx="418" cy="150" r="46" fill="none" stroke="#1C7E8F" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <circle cx="418" cy="150" r="22" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.5"/>
+  <circle cx="462" cy="184" r="4" fill="#AEC0CE"/><circle cx="366" cy="176" r="4" fill="#AEC0CE"/><circle cx="438" cy="94" r="4" fill="#AEC0CE"/>
+  <circle cx="388" cy="134" r="4" fill="#0A1B2E"/><circle cx="446" cy="130" r="4" fill="#0A1B2E"/><circle cx="412" cy="186" r="4" fill="#0A1B2E"/>
+  <circle cx="418" cy="150" r="5" fill="#E0992F"/>
+  <rect x="506.5" y="102.5" width="11" height="11" rx="3.5" fill="#1C7E8F"/><text x="512" y="96" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#1C7E8F" text-anchor="middle">sheepdog</text>
+  <text x="534" y="150" font-family="IBM Plex Mono, monospace" font-size="8.3" fill="#5C6F84" text-anchor="end">beyond range:</text>
+  <text x="534" y="161" font-family="IBM Plex Mono, monospace" font-size="8.3" fill="#5C6F84" text-anchor="end">flee force = 0</text>
+  <text x="500" y="238" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5C6F84" text-anchor="end">radii not to scale</text>
+  <circle cx="304" cy="262" r="6" fill="none" stroke="#1C7E8F" stroke-width="1.8" /><text x="316" y="266" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D">collision avoidance</text>
+  <circle cx="304" cy="282" r="6" fill="none" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="5 3"/><text x="316" y="286" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D">cohesion with neighbours</text>
+  <circle cx="304" cy="302" r="6" fill="none" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="1.5 3"/><text x="316" y="306" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D">flee from the sheepdog</text>
+  <defs><marker id="rf" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2A9DB0"/></marker></defs>
+</svg><p class="fig-note">The circles set the driving and collecting positions. A sheep does not switch behaviour: it always moves on the weighted sum of all its forces, but each force is regulated by distance, so an out-of-range influence, such as a sheepdog beyond the threat radius, contributes zero and drops out of the sum.</p></div>
+  </div>
+</section>
+
+<section class="section alt" id="pillar-learning">
+  <div class="container prose">
+    <p class="eyebrow">Pillar 2</p>
+    <h2 class="sec-title">The learning each agent needs</h2>
+    <hr class="sec-rule">
+    <p>Real-world data is partial, noisy, and high-dimensional. I design learning architectures for exactly this, in a sustained line of work on gated autoencoders: from Gate-Layer Autoencoders for incomplete EEG signal recovery (IJCNN), to the Weighted Gate Layer Autoencoder, a learnable gating mechanism that models inter-variable dependencies and reconstructs missing signals (IEEE Transactions on Cybernetics), to gate-control mechanisms that make this selection more precise (Sensors).</p>
+<div class="pillar-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg"
+  aria-label="Weighted Gate Layer Autoencoder. The gate controller sits above the input gate; it switches some variables off; the autoencoder reconstructs them; the error weight generator weights the reconstruction error.">
+  <text x="8" y="18" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="#1C7E8F">WEIGHTED GATE LAYER AUTOENCODER</text>
+  <rect x="24" y="28" width="140" height="22" rx="6" fill="#E3F1F4" stroke="#1C7E8F"/>
+  <text x="94" y="43" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#1C7E8F" text-anchor="middle">gate controller &#8594; &#952;</text>
+  <line x1="94" y1="50" x2="94" y2="68" stroke="#1C7E8F" stroke-width="1.8" marker-end="url(#gg)"/>
+  <text x="44" y="66" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#5C6F84" text-anchor="middle">input x</text>
+  <text x="366" y="66" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#5C6F84" text-anchor="middle">x&#770;</text>
+  <rect x="36" y="72" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="36" y="96" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="36" y="120" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="36" y="144" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="36" y="168" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="36" y="192" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="86" y="72" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="86" y="96" width="16" height="16" rx="3" fill="#fff" stroke="#5C6F84" stroke-dasharray="2 2"/><rect x="86" y="120" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="86" y="144" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="86" y="168" width="16" height="16" rx="3" fill="#fff" stroke="#5C6F84" stroke-dasharray="2 2"/><rect x="86" y="192" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="358" y="72" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="358" y="96" width="16" height="16" rx="3" fill="#2A9DB0"/><rect x="358" y="120" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="358" y="144" width="16" height="16" rx="3" fill="#0A1B2E"/><rect x="358" y="168" width="16" height="16" rx="3" fill="#2A9DB0"/><rect x="358" y="192" width="16" height="16" rx="3" fill="#0A1B2E"/>
+  <line x1="56" y1="140" x2="80" y2="140" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#g2)"/>
+  <text x="68" y="130" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5C6F84" text-anchor="middle">&#8857;&#952;</text>
+  <line x1="104" y1="140" x2="146" y2="140" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#g2)"/>
+  <polygon points="150,74 236,118 236,166 150,210" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.3"/>
+  <polygon points="322,74 236,118 236,166 322,210" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.3"/>
+  <line x1="236" y1="118" x2="236" y2="166" stroke="#1C7E8F" stroke-width="2"/>
+  <text x="236" y="228" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#5C6F84" text-anchor="middle">encoder / decoder</text>
+  <line x1="324" y1="140" x2="352" y2="140" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#g2)"/>
+  <line x1="376" y1="140" x2="414" y2="150" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#go)"/>
+  <rect x="410" y="98" width="140" height="22" rx="6" fill="#FBF0DC" stroke="#E0992F"/>
+  <text x="480" y="113" font-family="IBM Plex Mono, monospace" font-size="10" fill="#9A6A14" text-anchor="middle">error weight gen &#8594; &#969;</text>
+  <line x1="470" y1="120" x2="442" y2="146" stroke="#E0992F" stroke-width="1.4" marker-end="url(#go)"/>
+  <circle cx="430" cy="154" r="13" fill="#fff" stroke="#E0992F"/><text x="430" y="158" font-family="IBM Plex Mono, monospace" font-size="11" fill="#9A6A14" text-anchor="middle">&#8857;</text>
+  <text x="478" y="180" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#9A6A14" text-anchor="middle">weighted error</text>
+  <path d="M430,168 L430,272 L176,272 L176,212" fill="none" stroke="#E0992F" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#gb)"/>
+  <text x="94" y="242" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0A1B2E" text-anchor="middle">ON = known (IDV)</text>
+  <text x="94" y="256" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">OFF = learn (DV)</text>
+  <text x="366" y="248" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1C7E8F" text-anchor="middle">recovered</text>
+  <text x="300" y="290" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#9A6A14" text-anchor="middle">backpropagate to learn the switched-off variables</text>
+  <defs>
+    <marker id="g2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker>
+    <marker id="gg" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1C7E8F"/></marker>
+    <marker id="go" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
+    <marker id="gb" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
+  </defs>
+</svg><p class="fig-note">A gate layer chooses which variables carry the reconstruction, recovering what is missing.</p></div>
+  </div>
+</section>
+
+<section class="section" id="directions">
+  <div class="container prose">
+    <p class="eyebrow">Where it meets</p>
+    <h2 class="sec-title">Toward learning across agents that differ</h2>
+    <hr class="sec-rule">
+    <p>I am extending these foundations toward collaborative learning across agents that differ, and on-board perception under tight compute budgets, so that distributed perception and decision-making hold up on resource-constrained platforms.</p>
+
+    <p class="eyebrow">Applied autonomy</p>
+    <h2>From method to readiness</h2>
+    <p>These methods are tested and translated through funded projects with industry and research partners, moving results from concept toward real-world readiness.</p>
+  </div>
+</section>
+
+
+<section class="section alt" id="selected-results">
+  <div class="container">
+    <p class="eyebrow">Selected results</p>
+    <h2 class="sec-title">Paper gallery, in plain language</h2>
+    <hr class="sec-rule">
+    <div class="paper-tabs" role="tablist" aria-label="Switch between papers">
+      <button class="paper-tab" role="tab" aria-selected="true" aria-controls="paper-wglae" id="tab-paper-wglae">Missing-channel recovery<span class="pt-venue">IEEE T-Cybernetics</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-limits" id="tab-paper-limits">Limits of shepherding<span class="pt-venue">IEEE Access</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-patrolling" id="tab-paper-patrolling">Guarding as shepherding<span class="pt-venue">IEEE SMC</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-atc" id="tab-paper-atc">Air traffic as shepherding<span class="pt-venue">Springer</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-eeg-gating" id="tab-paper-eeg-gating">Spatially informed gating<span class="pt-venue">Sensors</span></button>
+      <button class="paper-tab" role="tab" aria-selected="false" aria-controls="paper-stylometry" id="tab-paper-stylometry">Translator stylometry<span class="pt-venue">ACM TALLIP</span></button>
+    </div>
+    <div class="paper-carousel" id="papers-carousel">
+      <button class="car-arrow prev" type="button" aria-label="Previous paper">&#8592;</button>
+      <button class="car-arrow next" type="button" aria-label="Next paper">&#8594;</button>
+      <div class="car-track" id="papers">
+      <article class="result-card" id="paper-wglae" role="tabpanel" aria-labelledby="tab-paper-wglae"><div class="result-fig"><svg viewBox="0 0 560 340" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A channel drops out mid-recording and the gated autoencoder redraws it from the other channels; an inset chart shows reconstruction error staying nearly flat for the gated model while a standard autoencoder degrades as more channels are lost.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">FILLING IN A LOST CHANNEL</text>
+  <text x="120" y="46" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">recorded channels</text>
+  <path d="M30,70.1 L34,66.7 L38,64.5 L42,64.0 L46,65.2 L50,68.0 L54,71.7 L58,75.9 L62,79.7 L66,82.6 L70,83.9 L74,83.6 L78,81.6 L82,78.2 L86,74.2 L90,70.1 L94,66.7 L98,64.5 L102,64.0 L106,65.2 L110,68.0 L114,71.7 L118,75.9 L122,79.7 L126,82.6 L130,83.9 L134,83.6 L138,81.6 L142,78.2 L146,74.2 L150,70.1 L154,66.7 L158,64.5 L162,64.0 L166,65.2 L170,68.0 L174,71.7 L178,75.9 L182,79.7 L186,82.6 L190,83.9 L194,83.6 L198,81.6 L202,78.2 L206,74.2 L210,70.1" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M30,116.0 L34,118.9 L38,122.9 L42,126.6 L46,128.8 L50,128.6 L54,126.3 L58,122.5 L62,118.6 L66,115.8 L70,115.0 L74,116.6 L78,120.0 L82,124.1 L86,127.4 L90,129.0 L94,128.2 L98,125.3 L102,121.4 L106,117.6 L110,115.3 L114,115.3 L118,117.5 L122,121.2 L126,125.1 L130,128.1 L134,129.0 L138,127.6 L142,124.3 L146,120.2 L150,116.8 L154,115.1 L158,115.7 L162,118.4 L166,122.3 L170,126.1 L174,128.6 L178,128.8 L182,126.8 L186,123.1 L190,119.1 L194,116.1 L198,115.0 L202,116.3 L206,119.5 L210,123.5" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M30,158.8 L34,162.4 L38,176.5 L42,181.6 L46,170.7 L50,158.8 L54,162.4 L58,176.5 L62,181.6 L66,170.7 L70,158.8 L74,162.4 L78,176.5 L82,181.6" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><line x1="88" y1="170" x2="210" y2="170" stroke="#D8E2EB" stroke-width="1.6" stroke-dasharray="4 4"/><rect x="90" y="163" width="14" height="14" rx="3" fill="#fff" stroke="#E0992F" stroke-width="1.8"/><path d="M93,166 L101,174 M101,166 L93,174" stroke="#E0992F" stroke-width="1.8"/><path d="M30,225.9 L34,225.4 L38,223.0 L42,219.4 L46,215.4 L50,212.1 L54,210.2 L58,210.3 L62,212.2 L66,215.6 L70,219.6 L74,223.2 L78,225.5 L82,225.9 L86,224.4 L90,221.3 L94,217.4 L98,213.6 L102,210.9 L106,210.0 L110,211.0 L114,213.8 L118,217.6 L122,221.5 L126,224.5 L130,225.9 L134,225.4 L138,223.0 L142,219.4 L146,215.4 L150,212.1 L154,210.2 L158,210.3 L162,212.2 L166,215.6 L170,219.6 L174,223.2 L178,225.5 L182,225.9 L186,224.4 L190,221.3 L194,217.4 L198,213.6 L202,210.9 L206,210.0 L210,211.0" fill="none" stroke="#0A1B2E" stroke-width="1.6"/>
+  <text x="120" y="248" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#9A6A14" text-anchor="middle">channel 3 drops out mid-recording</text>
+  <rect x="228" y="126" width="104" height="40" rx="9" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.4"/>
+  <text x="280" y="143" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1C7E8F" text-anchor="middle">gated</text>
+  <text x="280" y="156" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1C7E8F" text-anchor="middle">autoencoder</text>
+  <line x1="214" y1="146" x2="226" y2="146" stroke="#5C6F84" stroke-width="1.6"/>
+  <line x1="334" y1="146" x2="346" y2="146" stroke="#5C6F84" stroke-width="1.6" marker-end="url(#wg1)"/>
+  <text x="440" y="46" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#5C6F84" text-anchor="middle">reconstructed</text>
+  <path d="M350,70.1 L354,66.7 L358,64.5 L362,64.0 L366,65.2 L370,68.0 L374,71.7 L378,75.9 L382,79.7 L386,82.6 L390,83.9 L394,83.6 L398,81.6 L402,78.2 L406,74.2 L410,70.1 L414,66.7 L418,64.5 L422,64.0 L426,65.2 L430,68.0 L434,71.7 L438,75.9 L442,79.7 L446,82.6 L450,83.9 L454,83.6 L458,81.6 L462,78.2 L466,74.2 L470,70.1 L474,66.7 L478,64.5 L482,64.0 L486,65.2 L490,68.0 L494,71.7 L498,75.9 L502,79.7 L506,82.6 L510,83.9 L514,83.6 L518,81.6 L522,78.2 L526,74.2 L530,70.1" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M350,116.0 L354,118.9 L358,122.9 L362,126.6 L366,128.8 L370,128.6 L374,126.3 L378,122.5 L382,118.6 L386,115.8 L390,115.0 L394,116.6 L398,120.0 L402,124.1 L406,127.4 L410,129.0 L414,128.2 L418,125.3 L422,121.4 L426,117.6 L430,115.3 L434,115.3 L438,117.5 L442,121.2 L446,125.1 L450,128.1 L454,129.0 L458,127.6 L462,124.3 L466,120.2 L470,116.8 L474,115.1 L478,115.7 L482,118.4 L486,122.3 L490,126.1 L494,128.6 L498,128.8 L502,126.8 L506,123.1 L510,119.1 L514,116.1 L518,115.0 L522,116.3 L526,119.5 L530,123.5" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M350,158.8 L354,162.4 L358,176.5 L362,181.6 L366,170.7 L370,158.8 L374,162.4 L378,176.5 L382,181.6 L386,170.7 L390,158.8 L394,162.4 L398,176.5 L402,181.6" fill="none" stroke="#0A1B2E" stroke-width="1.6"/><path d="M402,174.3 L406,168.2 L410,162.7 L414,159.0 L418,158.1 L422,160.2 L426,164.9 L430,170.8 L434,176.6 L438,180.6 L442,182.0 L446,180.3 L450,176.0 L454,170.1 L458,164.2 L462,159.8 L466,158.0 L470,159.3 L474,163.2 L478,168.9 L482,174.9 L486,179.6 L490,181.9 L494,181.1 L498,177.5 L502,172.0 L506,166.0 L510,161.0 L514,158.3 L518,158.5 L522,161.8 L526,167.1 L530,173.1" fill="none" stroke="#D8E2EB" stroke-width="3.4"/><path d="M402,174.3 L406,168.2 L410,162.7 L414,159.0 L418,158.1 L422,160.2 L426,164.9 L430,170.8 L434,176.6 L438,180.6 L442,182.0 L446,180.3 L450,176.0 L454,170.1 L458,164.2 L462,159.8 L466,158.0 L470,159.3 L474,163.2 L478,168.9 L482,174.9 L486,179.6 L490,181.9 L494,181.1 L498,177.5 L502,172.0 L506,166.0 L510,161.0 L514,158.3 L518,158.5 L522,161.8 L526,167.1 L530,173.1" fill="none" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="5 3"/><path d="M350,225.9 L354,225.4 L358,223.0 L362,219.4 L366,215.4 L370,212.1 L374,210.2 L378,210.3 L382,212.2 L386,215.6 L390,219.6 L394,223.2 L398,225.5 L402,225.9 L406,224.4 L410,221.3 L414,217.4 L418,213.6 L422,210.9 L426,210.0 L430,211.0 L434,213.8 L438,217.6 L442,221.5 L446,224.5 L450,225.9 L454,225.4 L458,223.0 L462,219.4 L466,215.4 L470,212.1 L474,210.2 L478,210.3 L482,212.2 L486,215.6 L490,219.6 L494,223.2 L498,225.5 L502,225.9 L506,224.4 L510,221.3 L514,217.4 L518,213.6 L522,210.9 L526,210.0 L530,211.0" fill="none" stroke="#0A1B2E" stroke-width="1.6"/>
+  <text x="440" y="248" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#1C7E8F" text-anchor="middle">redrawn from the other channels alone</text>
+  <line x1="30" y1="270" x2="54" y2="270" stroke="#D8E2EB" stroke-width="3.4"/><line x1="30" y1="270" x2="54" y2="270" stroke="#1C7E8F" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <text x="60" y="274" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#182A3D">reconstruction vs true signal</text>
+  <text x="30" y="294" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">trained with gates randomly closed,</text>
+  <text x="30" y="306" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">the model learns cross-channel structure</text>
+  <rect x="300" y="258" width="240" height="70" rx="8" fill="#F7F9FB" stroke="#D8E2EB"/>
+  <text x="312" y="272" font-family="IBM Plex Mono, monospace" font-size="7.5" letter-spacing="1" fill="#1C7E8F">ERROR VS CHANNELS LOST</text>
+  <polyline fill="none" stroke="#E0992F" stroke-width="2" points="312,312 340,308 368,301 396,291 424,281 452,272"/>
+  <polyline fill="none" stroke="#1C7E8F" stroke-width="2" points="312,314 340,313 368,312 396,311 424,310 452,308"/>
+  <circle cx="452" cy="272" r="2.5" fill="#E0992F"/><circle cx="452" cy="308" r="2.5" fill="#1C7E8F"/>
+  <text x="458" y="275" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#9A6A14">standard AE</text>
+  <text x="458" y="311" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#1C7E8F">gated AE</text>
+  <text x="312" y="322" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5C6F84">1</text>
+  <text x="452" y="322" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5C6F84" text-anchor="end">10 missing</text>
+  <defs><marker id="wg1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
+</svg></div><div class="result-body"><span class="tag">Gated learning</span><h3>Recovering signals with missing channels</h3><p>A learnable gate layer switches input variables on and off during training, so the model learns which variables depend on which. When channels drop out, reconstruction error stays low even with up to ten channels missing at once, where a standard autoencoder degrades sharply.</p><p class="fig-cite"><span class="venue">IEEE Transactions on Cybernetics</span>, 2021. <a href="https://doi.org/10.1109/TCYB.2021.3049583">doi:10.1109/TCYB.2021.3049583</a></p><p class="panel-more"><a class="more" href="papers/wglae.html">The full story, in plain language &rarr;</a></p></div></article>
+      <article class="result-card" id="paper-limits" role="tabpanel" aria-labelledby="tab-paper-limits"><div class="result-fig"><svg viewBox="0 0 560 300" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Phase diagram from the paper's obstacle-density thresholds, with a legend explaining the regions and curves and the experiment setup.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">PHASE DIAGRAM &#183; OBSTACLE-DENSITY THRESHOLDS</text>
+  <rect x="70" y="48" width="310" height="202" fill="#FBF0DC" opacity=".5"/>
+  <polygon points="70,250 70.0,246.0 104.4,233.8 138.9,229.8 173.3,221.7 207.8,193.4 242.2,177.3 276.7,161.1 311.1,149.0 345.6,136.9 380.0,149.0 380,250" fill="#E3F1F4"/><polygon points="70.0,185.4 104.4,149.0 138.9,100.5 173.3,84.4 207.8,60.1 242.2,48.0 276.7,48.0 311.1,48.0 345.6,48.0 380.0,48.0 380,48 70,48" fill="#EDF2F6"/>
+  <polyline points="70.0,246.0 104.4,233.8 138.9,229.8 173.3,221.7 207.8,193.4 242.2,177.3 276.7,161.1 311.1,149.0 345.6,136.9 380.0,149.0" fill="none" stroke="#1C7E8F" stroke-width="2.4"/><polyline points="70.0,185.4 104.4,149.0 138.9,100.5 173.3,84.4 207.8,60.1 242.2,48.0 276.7,48.0 311.1,48.0 345.6,48.0 380.0,48.0" fill="none" stroke="#5C6F84" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="70.0" cy="246.0" r="2.4" fill="#1C7E8F"/><circle cx="104.4" cy="233.8" r="2.4" fill="#1C7E8F"/><circle cx="138.9" cy="229.8" r="2.4" fill="#1C7E8F"/><circle cx="173.3" cy="221.7" r="2.4" fill="#1C7E8F"/><circle cx="207.8" cy="193.4" r="2.4" fill="#1C7E8F"/><circle cx="242.2" cy="177.3" r="2.4" fill="#1C7E8F"/><circle cx="276.7" cy="161.1" r="2.4" fill="#1C7E8F"/><circle cx="311.1" cy="149.0" r="2.4" fill="#1C7E8F"/><circle cx="345.6" cy="136.9" r="2.4" fill="#1C7E8F"/><circle cx="380.0" cy="149.0" r="2.4" fill="#1C7E8F"/>
+  <line x1="70" y1="48" x2="70" y2="250" stroke="#5C6F84" stroke-width="1.4"/><line x1="70" y1="250" x2="380" y2="250" stroke="#5C6F84" stroke-width="1.4"/>
+  <text x="-149" y="26" transform="rotate(-90)" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84" text-anchor="middle">obstacle density (%)</text>
+  <text x="225" y="284" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#5C6F84" text-anchor="middle">number of control agents</text>
+  <text x="70.0" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">1</text><text x="104.4" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">2</text><text x="138.9" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">3</text><text x="173.3" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">4</text><text x="207.8" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">5</text><text x="242.2" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">6</text><text x="276.7" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">7</text><text x="311.1" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">8</text><text x="345.6" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">9</text><text x="380.0" y="264" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="middle">10</text><text x="64" y="253.0" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">0</text><text x="64" y="212.6" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">2</text><text x="64" y="172.2" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">4</text><text x="64" y="131.8" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">6</text><text x="64" y="91.4" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">8</text><text x="64" y="51.0" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84" text-anchor="end">10</text>
+  <text x="398" y="58" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84">REGIONS</text>
+  <rect x="398" y="66" width="14" height="10" rx="2" fill="#E3F1F4" stroke="#1C7E8F"/><text x="418" y="75" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">reliable</text><text x="418" y="87" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">&#8805;90% of runs succeed</text>
+  <rect x="398" y="95" width="14" height="10" rx="2" fill="#FBF0DC" stroke="#E0992F"/><text x="418" y="104" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">phase transition</text>
+  <rect x="398" y="116" width="14" height="10" rx="2" fill="#EDF2F6" stroke="#D8E2EB"/><text x="418" y="125" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">collapse</text><text x="418" y="137" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#5C6F84">no run succeeds</text>
+  <text x="398" y="160" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84">BOUNDARIES</text>
+  <line x1="398" y1="171" x2="416" y2="171" stroke="#1C7E8F" stroke-width="2.4"/><text x="422" y="175" font-family="IBM Plex Sans, sans-serif" font-size="10.5" fill="#182A3D">&#8805;90% threshold</text>
+  <line x1="398" y1="188" x2="416" y2="188" stroke="#5C6F84" stroke-width="2" stroke-dasharray="5 4"/><text x="422" y="192" font-family="IBM Plex Sans, sans-serif" font-size="10.5" fill="#182A3D">0% threshold</text>
+  <line x1="398" y1="212" x2="548" y2="212" stroke="#D8E2EB" stroke-width="1"/>
+  <text x="398" y="228" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84">SETUP</text>
+  <text x="398" y="242" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#1C7E8F">100 sheep &#183; 50&#215;50 field</text>
+  <text x="398" y="254" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#1C7E8F">1 to 10 control agents</text>
+</svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>Where reactive shepherding breaks down</h3><p>A systematic study of what makes swarm guidance hard, run with 100 sheep and 1 to 10 control agents in a 50x50 field. Using the paper's obstacle-density thresholds, it maps a reliable-herding region and a collapse region, with the transition shifting from roughly 0.2% density for one control agent to about 5% for ten.</p><p class="fig-cite"><span class="venue">IEEE Access</span>, 2020. <a href="https://doi.org/10.1109/ACCESS.2020.3037325">doi:10.1109/ACCESS.2020.3037325</a></p><p class="panel-more"><a class="more" href="papers/shepherding-limits.html">The full story, in plain language &rarr;</a></p></div></article>
+      <article class="result-card" id="paper-patrolling" role="tabpanel" aria-labelledby="tab-paper-patrolling"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="A defender interposes between an attacking swarm and a protected area of interest.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">GUARDING AS SHEPHERDING</text>
+  <circle cx="150" cy="150" r="30" fill="none" stroke="#E0992F" stroke-width="2"/><circle cx="150" cy="150" r="18" fill="none" stroke="#E0992F" stroke-width="2"/><circle cx="150" cy="150" r="6" fill="#E0992F"/>
+  <text x="150" y="204" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#5C6F84" text-anchor="middle">Area of interest</text>
+  <g fill="#0A1B2E"><circle cx="430" cy="56" r="4.5"/><circle cx="448" cy="70" r="4.5"/><circle cx="414" cy="72" r="4.5"/><circle cx="436" cy="84" r="4.5"/><circle cx="458" cy="52" r="4.5"/><circle cx="418" cy="52" r="4.5"/></g>
+  <text x="436" y="34" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#0A1B2E" text-anchor="middle" font-weight="600">Attacking swarm</text>
+  <line x1="414" y1="78" x2="300" y2="120" stroke="#D8E2EB" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#aa)"/><line x1="434" y1="90" x2="320" y2="140" stroke="#D8E2EB" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#aa)"/>
+  <rect x="262.0" y="120.0" width="16" height="16" rx="3.5" fill="#1C7E8F"/><text x="270" y="108" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1C7E8F" text-anchor="middle" font-weight="600">Defender</text>
+  <path d="M244,150 A34 34 0 0 1 244,106" fill="none" stroke="#2A9DB0" stroke-width="2.4"/>
+  <text x="300" y="226" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5C6F84" text-anchor="middle">look-ahead selects: drive / collect / intercept / patrol</text>
+  <defs><marker id="aa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
+</svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>Guarding an area, reframed as shepherding</h3><p>Adversarial patrolling recast in the continuous domain: attackers are a swarm drawn to a protected area, and a single defender repels them using force-based behaviours. A one-step look-ahead picks among driving, collecting, intercepting, and patrolling to hold the swarm at a safe distance.</p><p class="fig-cite"><span class="venue">IEEE SMC</span>, 2024. <a href="https://doi.org/10.1109/SMC54092.2024.10832074">doi:10.1109/SMC54092.2024.10832074</a></p><p class="panel-more"><a class="more" href="papers/adversarial-patrolling.html">The full story, in plain language &rarr;</a></p></div></article>
+      <article class="result-card" id="paper-atc" role="tabpanel" aria-labelledby="tab-paper-atc"><div class="result-fig"><svg viewBox="0 0 560 600" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Stage one shows the full shepherding scene translated to air traffic control: a focal sheep among a flock with a sheepdog, under five forces, beside the same scene with aircraft and a logical shepherd, where repulsion from the shepherd is kept and the other forces are handled by the flight plan, autopilot, and CD&amp;R. Stage two shows one controller moving the logical shepherd, whose influence propagates aircraft to aircraft and rotates each intended flight plan.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">AIR TRAFFIC CONTROL AS SHEPHERDING</text>
+  <defs>
+    <marker id="atcT" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1C7E8F"/></marker>
+    <marker id="atcG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker>
+    <marker id="atcA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
+  </defs>
+  <!-- STAGE 1: force translation, full scene -->
+  <text x="280" y="44" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">1 &#183; the same forces, translated</text>
+  <rect x="20" y="56" width="250" height="250" rx="10" fill="#fff" stroke="#D8E2EB"/>
+  <text x="145" y="72" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84" text-anchor="middle">classic shepherding</text>
+  <!-- focal sheep forces -->
+  <text x="115" y="104" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">repulsion from the shepherd</text>
+  <line x1="115" y1="150" x2="115" y2="112" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="178" y="124" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">previous heading</text>
+  <line x1="132" y1="156" x2="160" y2="134" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="62" y="144" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">collision avoidance</text>
+  <line x1="92" y1="166" x2="58" y2="154" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <line x1="138" y1="176" x2="168" y2="181" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <rect x="173" y="175" width="10" height="10" rx="2" fill="#5C6F84"/><text x="188" y="184" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5C6F84">LCM</text>
+  <text x="150" y="202" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">attraction to LCM</text>
+  <line x1="100" y1="184" x2="76" y2="208" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="68" y="222" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">jittering</text>
+  <!-- focal sheep -->
+  <g fill="#0A1B2E" transform="translate(115,170) scale(0.8)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <!-- flock -->
+  <g fill="#0A1B2E" transform="translate(228,104) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <g fill="#0A1B2E" transform="translate(226,170) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <g fill="#0A1B2E" transform="translate(206,244) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <!-- sheepdog -->
+  <g fill="#0A1B2E" transform="translate(64,258)">
+    <ellipse cx="0" cy="0" rx="14" ry="7"/>
+    <circle cx="16" cy="-6" r="5"/><path d="M20,-8 L27,-5 L20,-3 Z"/><path d="M13,-10 L16,-16 L19,-9 Z"/>
+    <path d="M-13,-3 L-22,-11 L-17,-1 Z"/>
+    <rect x="-11" y="5" width="2.6" height="10" rx="1.3"/><rect x="-5" y="6" width="2.6" height="9" rx="1.3"/><rect x="3" y="6" width="2.6" height="9" rx="1.3"/><rect x="9" y="5" width="2.6" height="10" rx="1.3"/>
+  </g>
+  <text x="64" y="286" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">sheepdog</text>
+  <text x="280" y="180" font-family="IBM Plex Sans, sans-serif" font-size="16" fill="#5C6F84" text-anchor="middle">&#8594;</text>
+  <rect x="290" y="56" width="250" height="250" rx="10" fill="#fff" stroke="#D8E2EB"/>
+  <text x="415" y="72" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84" text-anchor="middle">air traffic control</text>
+  <!-- focal aircraft forces -->
+  <text x="385" y="104" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#182A3D" text-anchor="middle">repulsion from the shepherd</text>
+  <line x1="385" y1="150" x2="385" y2="112" stroke="#1C7E8F" stroke-width="2" marker-end="url(#atcT)"/>
+  <text x="450" y="124" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">heading (autopilot)</text>
+  <line x1="402" y1="156" x2="432" y2="134" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <text x="332" y="144" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">collision (CD&amp;R)</text>
+  <line x1="362" y1="166" x2="328" y2="154" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <line x1="408" y1="176" x2="438" y2="181" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <rect x="443" y="175" width="10" height="10" rx="2" fill="#5C6F84"/><text x="458" y="184" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5C6F84">LCM</text>
+  <text x="424" y="202" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">attraction (flight plan)</text>
+  <line x1="370" y1="184" x2="346" y2="208" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <text x="338" y="222" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">no jittering</text>
+  <!-- focal aircraft -->
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(385,170) rotate(35) scale(1.5) translate(-12,-12)" fill="#0A1B2E"/>
+  <!-- other aircraft -->
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(498,102) rotate(40) scale(1.05) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(496,168) rotate(55) scale(1.05) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(478,244) rotate(25) scale(1.05) translate(-12,-12)" fill="#0A1B2E"/>
+  <!-- logical shepherd -->
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(334,258) rotate(45) scale(1.2)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="334" y="286" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#1C7E8F" text-anchor="middle" font-weight="600">logical shepherd</text>
+  <line x1="120" y1="322" x2="142" y2="322" stroke="#1C7E8F" stroke-width="2.2"/><text x="148" y="326" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">kept</text>
+  <line x1="190" y1="322" x2="212" y2="322" stroke="#5C6F84" stroke-width="1.6" stroke-dasharray="4 4"/><text x="218" y="326" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">handled by the aircraft: autopilot &#183; flight plan &#183; CD&amp;R</text>
+  <!-- STAGE 2: one controller steers the fleet -->
+  <text x="280" y="350" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">2 &#183; one controller steers the whole fleet</text>
+  <line x1="10" y1="372" x2="34" y2="372" stroke="#1C7E8F" stroke-width="2.4"/><text x="40" y="376" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">updated flight plan</text>
+  <line x1="10" y1="390" x2="34" y2="390" stroke="#D8E2EB" stroke-width="2" stroke-dasharray="5 4"/><text x="40" y="394" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">previous flight plan</text>
+  <path d="M212,496 C262,499 312,500 356,500" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M212,492 C260,482 312,472 356,464" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M292,442 C342,445 392,447 436,448" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M292,438 C340,426 392,416 436,410" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M372,388 C420,391 468,393 504,394" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M372,384 C418,374 468,366 504,360" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M340,496 A26,26 0 0 1 336,472" fill="none" stroke="#5C6F84" stroke-width="1.3" marker-end="url(#atcG)"/>
+  <text x="344" y="518" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84">flight plan rotates</text>
+  <line x1="106" y1="524" x2="186" y2="502" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="212" y1="482" x2="266" y2="450" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="292" y1="428" x2="346" y2="396" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <text x="250" y="544" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5C6F84" text-anchor="middle">influence propagates aircraft to aircraft</text>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(200,494) rotate(78) scale(1.15) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(280,440) rotate(78) scale(1.15) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(360,386) rotate(78) scale(1.15) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(95,536) rotate(62) scale(1.5)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="95" y="566" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1C7E8F" text-anchor="middle" font-weight="600">Logical shepherd</text>
+  <text x="95" y="580" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">moved by one controller</text>
+</svg></div><div class="result-body"><span class="tag">Swarm guidance</span><h3>One controller, a whole UAV fleet</h3><p>Air traffic control recast as shepherding: the controller moves a single logical shepherd in the digital airspace, and its force rotates each aircraft&rsquo;s intended flight plan rather than steering positions directly. The influence propagates from aircraft to aircraft, so one controller redirects a whole fleet without per-aircraft commands. Forces sheep need but aircraft don&rsquo;t are absorbed by the autopilot, flight plan, and onboard collision detection. Demonstrated through a new ATC interface in the ATOMS air-traffic simulator.</p><p class="fig-cite"><span class="venue">Springer, Shepherding UxVs for Human-Swarm Teaming</span>, 2021. <a href="https://doi.org/10.1007/978-3-030-60898-9_11">doi:10.1007/978-3-030-60898-9_11</a></p><p class="panel-more"><a class="more" href="papers/atc-shepherding.html">The full story, in plain language &rarr;</a></p></div></article>
+      <article class="result-card" id="paper-eeg-gating" role="tabpanel" aria-labelledby="tab-paper-eeg-gating"><div class="result-fig"><svg viewBox="0 0 520 260" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="An EEG electrode layout sets the order in which channels are gated during reconstruction.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">SPATIALLY INFORMED GATING</text>
+  <path d="M150,44 L160,58 L140,58 Z" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/><circle cx="150" cy="132" r="78" fill="#fff" stroke="#D8E2EB" stroke-width="1.6"/><circle cx="72" cy="132" r="8" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/><circle cx="228" cy="132" r="8" fill="#fff" stroke="#D8E2EB" stroke-width="1.5"/>
+  <g fill="#0A1B2E"><circle cx="128" cy="80" r="5"/><circle cx="172" cy="80" r="5"/><circle cx="110" cy="110" r="5"/><circle cx="150" cy="104" r="5"/><circle cx="190" cy="110" r="5"/><circle cx="96" cy="140" r="5"/><circle cx="150" cy="140" r="5"/><circle cx="204" cy="140" r="5"/><circle cx="110" cy="172" r="5"/><circle cx="150" cy="178" r="5"/><circle cx="190" cy="172" r="5"/><circle cx="128" cy="200" r="5"/><circle cx="172" cy="200" r="5"/></g>
+  <g fill="#1C7E8F"><circle cx="128" cy="80" r="6.5"/><circle cx="110" cy="110" r="6.5"/><circle cx="96" cy="140" r="6.5"/></g>
+  <text x="128" y="80" font-family="IBM Plex Mono, monospace" font-size="8" fill="#fff" text-anchor="middle" dy="3">1</text><text x="110" y="110" font-family="IBM Plex Mono, monospace" font-size="8" fill="#fff" text-anchor="middle" dy="3">2</text><text x="96" y="140" font-family="IBM Plex Mono, monospace" font-size="8" fill="#fff" text-anchor="middle" dy="3">3</text>
+  <text x="150" y="234" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#5C6F84" text-anchor="middle">EEG electrode layout</text>
+  <line x1="238" y1="120" x2="286" y2="120" stroke="#5C6F84" stroke-width="1.8" marker-end="url(#ae)"/><text x="300" y="70" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#5C6F84">Gate order</text>
+  <g><rect x="300" y="84" width="196" height="30" rx="8" fill="#E3F1F4" stroke="#D8E2EB"/><text x="316" y="104" font-family="IBM Plex Mono, monospace" font-size="11" fill="#1C7E8F">order-based</text></g><g><rect x="300" y="122" width="196" height="30" rx="8" fill="#fff" stroke="#D8E2EB"/><text x="316" y="142" font-family="IBM Plex Mono, monospace" font-size="11" fill="#182A3D">partition (by lobe)</text></g><g><rect x="300" y="160" width="196" height="30" rx="8" fill="#fff" stroke="#D8E2EB"/><text x="316" y="180" font-family="IBM Plex Mono, monospace" font-size="11" fill="#182A3D">hemispheric symmetry</text></g>
+  <text x="398" y="214" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5C6F84" text-anchor="middle">sets which channels are recovered, and when</text>
+  <defs><marker id="ae" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
+</svg></div><div class="result-body"><span class="tag">Gated learning</span><h3>Using brain layout to guide recovery</h3><p>For EEG, the order in which channels are gated matters. Embedding the electrode layout into the gating scheme, by anatomical order, by lobe, or by hemispheric symmetry, improves reconstruction over random gating and keeps accuracy high even when many channels are blocked.</p><p class="fig-cite"><span class="venue">Sensors</span>, 2025. <a href="https://doi.org/10.3390/s25113389">doi:10.3390/s25113389</a></p></div></article>
+      <article class="result-card" id="paper-stylometry" role="tabpanel" aria-labelledby="tab-paper-stylometry"><div class="result-fig"><svg viewBox="0 0 520 512" role="img" xmlns="http://www.w3.org/2000/svg"
+  aria-label="Translator stylometry. Stage one extracts motif frequencies from two translations of one source. Stage two frames it as a Pairwise Comparative Classification Problem on paired data. Stage three is PWC4.5, a modified C4.5 decision tree that splits on a relationship over the paired values, reaching higher accuracy than C4.5.">
+  <text x="8" y="18" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">TRANSLATOR STYLOMETRY WITH PWC4.5</text>
+  <!-- STAGE 1 -->
+  <text x="260" y="38" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">1 &#183; extract motif patterns</text>
+  <rect x="208" y="48" width="104" height="34" rx="8" fill="#fff" stroke="#D8E2EB"/>
+  <line x1="222" y1="58" x2="286" y2="58" stroke="#5C6F84" stroke-width="2"/><line x1="222" y1="67" x2="298" y2="67" stroke="#5C6F84" stroke-width="2"/><line x1="222" y1="76" x2="286" y2="76" stroke="#5C6F84" stroke-width="2"/>
+  <text x="260" y="98" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#5C6F84" text-anchor="middle">Source text</text>
+  <line x1="230" y1="82" x2="128" y2="140" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#mm)"/><line x1="290" y1="82" x2="392" y2="140" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#mm)"/>
+  <text x="110" y="126" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#1C7E8F" text-anchor="middle" font-weight="600">Translator A</text><line x1="102" y1="147" x2="131" y2="156" stroke="#D8E2EB" stroke-width="1.3"/><line x1="131" y1="156" x2="134" y2="177" stroke="#D8E2EB" stroke-width="1.3"/><line x1="134" y1="177" x2="112" y2="190" stroke="#D8E2EB" stroke-width="1.3"/><line x1="112" y1="190" x2="86" y2="177" stroke="#D8E2EB" stroke-width="1.3"/><line x1="86" y1="177" x2="102" y2="147" stroke="#D8E2EB" stroke-width="1.3"/><line x1="102" y1="147" x2="134" y2="177" stroke="#D8E2EB" stroke-width="1.3"/><circle cx="102" cy="147" r="4.5" fill="#0A1B2E"/><circle cx="131" cy="156" r="4.5" fill="#0A1B2E"/><circle cx="134" cy="177" r="4.5" fill="#0A1B2E"/><circle cx="112" cy="190" r="4.5" fill="#0A1B2E"/><circle cx="86" cy="177" r="4.5" fill="#0A1B2E"/>
+  <text x="410" y="126" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#9A6A14" text-anchor="middle" font-weight="600">Translator B</text><line x1="402" y1="147" x2="431" y2="156" stroke="#D8E2EB" stroke-width="1.3"/><line x1="431" y1="156" x2="434" y2="177" stroke="#D8E2EB" stroke-width="1.3"/><line x1="434" y1="177" x2="386" y2="177" stroke="#D8E2EB" stroke-width="1.3"/><line x1="386" y1="177" x2="402" y2="147" stroke="#D8E2EB" stroke-width="1.3"/><line x1="431" y1="156" x2="412" y2="190" stroke="#D8E2EB" stroke-width="1.3"/><line x1="412" y1="190" x2="386" y2="177" stroke="#D8E2EB" stroke-width="1.3"/><circle cx="402" cy="147" r="4.5" fill="#0A1B2E"/><circle cx="431" cy="156" r="4.5" fill="#0A1B2E"/><circle cx="434" cy="177" r="4.5" fill="#0A1B2E"/><circle cx="412" cy="190" r="4.5" fill="#0A1B2E"/><circle cx="386" cy="177" r="4.5" fill="#0A1B2E"/>
+  <line x1="206" y1="150" x2="206" y2="200" stroke="#5C6F84" stroke-width="1"/><line x1="206" y1="200" x2="316" y2="200" stroke="#5C6F84" stroke-width="1"/>
+  <rect x="214" y="161" width="10" height="39" rx="2" fill="#1C7E8F"/><rect x="225" y="180" width="10" height="20" rx="2" fill="#E0992F"/><rect x="240" y="183" width="10" height="17" rx="2" fill="#1C7E8F"/><rect x="251" y="163" width="10" height="37" rx="2" fill="#E0992F"/><rect x="266" y="171" width="10" height="29" rx="2" fill="#1C7E8F"/><rect x="277" y="174" width="10" height="26" rx="2" fill="#E0992F"/><rect x="292" y="156" width="10" height="44" rx="2" fill="#1C7E8F"/><rect x="303" y="174" width="10" height="26" rx="2" fill="#E0992F"/>
+  <rect x="214" y="150" width="10" height="10" rx="2" fill="#1C7E8F"/><text x="230" y="159" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#182A3D">A</text>
+  <rect x="250" y="150" width="10" height="10" rx="2" fill="#E0992F"/><text x="266" y="159" font-family="IBM Plex Sans, sans-serif" font-size="10" fill="#182A3D">B</text>
+  <text x="261" y="214" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">same motifs, different frequencies</text>
+
+  <!-- STAGE 2 -->
+  <text x="260" y="240" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">2 &#183; a pairwise comparative classification problem</text>
+  <rect x="150" y="250" width="220" height="86" rx="8" fill="#fff" stroke="#D8E2EB"/>
+  <line x1="150" y1="268" x2="370" y2="268" stroke="#D8E2EB"/><line x1="220" y1="250" x2="220" y2="336" stroke="#D8E2EB"/><line x1="312" y1="250" x2="312" y2="336" stroke="#D8E2EB"/>
+  <text x="176" y="263" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">subject</text><text x="268" y="263" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">feature</text><text x="340" y="263" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84" text-anchor="middle">class</text>
+  <line x1="150" y1="302" x2="370" y2="302" stroke="#1C7E8F" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="176" y="283" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">p&#8321;</text><text x="268" y="283" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">v&#8321;</text><text x="340" y="283" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">C&#8321;</text><rect x="248" y="272" width="40" height="16" rx="2" fill="none" stroke="#1C7E8F" stroke-width="1.4"/><text x="176" y="299" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">p&#8322;</text><text x="268" y="299" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">v&#8321;</text><text x="340" y="299" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">C&#8322;</text><rect x="248" y="288" width="40" height="16" rx="2" fill="none" stroke="#1C7E8F" stroke-width="1.4"/>
+  <text x="176" y="319" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">p&#8321;</text><text x="268" y="319" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">v&#8322;</text><text x="340" y="319" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">C&#8321;</text><text x="176" y="333" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">p&#8322;</text><text x="268" y="333" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">v&#8322;</text><text x="340" y="333" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#182A3D" text-anchor="middle">C&#8322;</text>
+  <text x="140" y="291" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#1C7E8F" text-anchor="end">pair 1</text><text x="140" y="326" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#1C7E8F" text-anchor="end">pair 2</text>
+  <text x="386" y="291" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#1C7E8F" text-anchor="start">compare</text><text x="386" y="303" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#1C7E8F" text-anchor="start">within</text><text x="386" y="315" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#1C7E8F" text-anchor="start">the pair</text>
+  <text x="260" y="356" font-family="IBM Plex Sans, sans-serif" font-size="10.5" fill="#5C6F84" text-anchor="middle">The signal is the change between paired values; classifiers that</text>
+  <text x="260" y="369" font-family="IBM Plex Sans, sans-serif" font-size="10.5" fill="#5C6F84" text-anchor="middle">treat instances alone miss it (standard C4.5: 52.12%).</text>
+
+  <!-- STAGE 3 -->
+  <text x="260" y="396" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">3 &#183; PWC4.5, a modified C4.5 decision tree</text>
+  <ellipse cx="260" cy="424" rx="118" ry="19" fill="#E3F1F4" stroke="#1C7E8F"/>
+  <text x="260" y="428" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#1C7E8F" text-anchor="middle">R( v&#8321;(p&#8321;), { v&#8321;(p&#8321;), v&#8321;(p&#8322;) } )</text>
+  <line x1="205" y1="440" x2="150" y2="466" stroke="#5C6F84" stroke-width="1.4"/><text x="170" y="452" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">min</text>
+  <line x1="315" y1="440" x2="370" y2="466" stroke="#5C6F84" stroke-width="1.4"/><text x="350" y="452" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">max</text>
+  <rect x="86" y="466" width="128" height="40" rx="7" fill="#fff" stroke="#D8E2EB"/>
+  <text x="150" y="483" font-family="IBM Plex Mono, monospace" font-size="11" fill="#182A3D" text-anchor="middle">p&#8321; &#8594; C&#8322;</text><text x="150" y="498" font-family="IBM Plex Mono, monospace" font-size="11" fill="#182A3D" text-anchor="middle">p&#8322; &#8594; C&#8321;</text>
+  <rect x="306" y="466" width="128" height="40" rx="7" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="370" y="483" font-family="IBM Plex Mono, monospace" font-size="11" fill="#1C7E8F" text-anchor="middle">p&#8321; &#8594; C&#8321;</text><text x="370" y="498" font-family="IBM Plex Mono, monospace" font-size="11" fill="#1C7E8F" text-anchor="middle">p&#8322; &#8594; C&#8322;</text>
+  <defs><marker id="mm" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker></defs>
+</svg></div><div class="result-body"><span class="tag">Pattern recognition</span><h3>Identifying translators from parallel translations</h3><p>Two translators produce different translations of one source, so the data is paired and the informative signal is the change between the paired feature values. We framed this as a Pairwise Comparative Classification Problem and modified the C4.5 decision tree into PWC4.5, which splits on a relationship over a pair's values rather than treating instances alone. On translator identification, standard C4.5 reached 52.12% while PWC4.5 reached 80.23%.</p><p class="fig-cite"><span class="venue">ACM TALLIP</span>, 2016. <a href="https://doi.org/10.1145/2898997">doi:10.1145/2898997</a><br><span class="venue">PLOS ONE</span>, 2019. <a href="https://doi.org/10.1371/journal.pone.0211809">doi:10.1371/journal.pone.0211809</a></p><p class="panel-more"><a class="more" href="software/pwc45.html">The full story, and the software, in plain language &rarr;</a></p></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="funding">
+  <div class="container prose">
+    <p class="eyebrow">Funded research</p>
+    <h2 class="sec-title">Backed by competitive funding</h2>
+    <hr class="sec-rule">
+    <p>I am a lead and co-investigator on competitive grants totalling over AUD 1.2M, spanning applied autonomy with industry and research partners, an industry-supported HDR scholarship, and shared research infrastructure for swarm and distributed-intelligence experimentation.</p>
+    <p class="eyebrow">The group</p>
+    <h2>People behind the work</h2>
+    <p>Ten higher degree research candidates and completions, working across both pillars. <a href="people.html">Meet the group &rarr;</a></p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div>
+      <div class="foot-name">Dr Heba El-Fiqi</div>
+      <p class="foot-line">Distributed and collaborative intelligence for autonomous systems. School of Systems and Computing, UNSW Canberra.</p>
+    </div>
+    <nav class="foot-links" aria-label="Profiles">
+      <a href="https://scholar.google.com/citations?user=6ySMBdQAAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8146-0110">ORCID</a>
+      <a href="https://www.linkedin.com/in/heba-el-fiqi-23503274/">LinkedIn</a>
+      <a href="https://github.com/Hebaelfiqi/">GitHub</a>
+    </nav>
+  </div>
+  <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
+</footer>
+<script src="assets/main.js?v=3"></script>
+</body>
+</html>
