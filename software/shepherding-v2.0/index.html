@@ -550,8 +550,8 @@ setInterval(() => {
 let settingsDirty = false;
 function markDirty() {
   settingsDirty = true;
-  $('run').textContent = 'Apply & Run';
-  if (running) { $('run').hidden = false; $('pause').hidden = true; running = false; }
+  // Apply and Run are separate buttons: Run never relabels to "Apply & Run".
+  if (running) { $('run').hidden = false; $('pause').hidden = true; running = false; $('run').textContent = 'Run'; }
 }
 function armDirtyTracking() {
   document.querySelectorAll('#paramGrid input, #pN, #pM, #pSeed, #pMax, #pObsD, #pObsR, #pGoalX, #pGoalY, #pDogForm')
