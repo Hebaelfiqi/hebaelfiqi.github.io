@@ -68,22 +68,12 @@
 </header>
 
 <div class="wrap">
-  <div class="card" style="margin-bottom:14px">
-    <h2>Set up a sweep</h2>
-    <p class="note" style="margin:0 0 14px">Pick what to vary; each choice multiplies the run count. Runs stream in below and download as results.csv. Everything is seeded and exactly repeatable. Heterogeneous profiles and custom start boxes run via the native CLI; this in-browser builder covers scalar and formation sweeps.</p>
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <label style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><input type="checkbox" id="wVaryN" checked> <b>Vary sheep N</b> <span style="color:var(--muted)">values</span> <input id="wNvals" value="20 30 40" style="background:#0e141b;color:inherit;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit;width:140px"></label>
-      <label style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><input type="checkbox" id="wVaryForm"> <b>Compare sheep formations</b> <span id="wFormTiles" style="display:inline-flex;gap:5px;flex-wrap:wrap"></span></label>
-      <label style="display:flex;gap:9px;align-items:center;flex-wrap:wrap"><input type="checkbox" id="wVaryParam"> <b>Vary a model parameter</b> <select id="wParam" style="background:#0e141b;color:inherit;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit"></select> <span style="color:var(--muted)">values</span> <input id="wPvals" value="1.0 1.5" style="background:#0e141b;color:inherit;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit;width:100px"></label>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;color:var(--muted);align-items:center">
-        <label>fixed N <input id="wNfixed" type="number" value="20" style="background:#0e141b;color:#e6edf3;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit;width:70px"></label>
-        <label>seeds <input id="wSeeds" type="number" value="5" min="1" style="background:#0e141b;color:#e6edf3;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit;width:60px"></label>
-        <label>steps/run <input id="wSteps" type="number" value="600" min="100" step="100" style="background:#0e141b;color:#e6edf3;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit;width:80px"></label>
-      </div>
-    </div>
-    <div class="row" style="margin-top:16px">
-      <button id="wRun">Run sweep</button>
-      <span class="pill" id="wCount">&mdash;</span>
+  <div class="card" id="wizcard" style="margin-bottom:14px">
+    <div id="wsteps" style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap"></div>
+    <div id="wbody" style="min-height:150px"></div>
+    <div class="row" style="margin-top:16px;justify-content:space-between;align-items:center">
+      <button id="wBack" class="ghost">Back</button>
+      <div style="display:flex;gap:14px;align-items:center"><span class="pill" id="wCount">&mdash;</span><button id="wNext">Next</button></div>
     </div>
   </div>
   <div class="grid">
@@ -349,42 +339,83 @@ $('dl-man').addEventListener('click', () => { if (lastSpec) download('manifest.t
 
 refreshCombos();
 
-// ---- guided sweep builder: writes the spec and drives the same engine ----
+// ---- guided stepped wizard: builds a sweep step by step and drives the same engine ----
 const WPARAMS = ['W_pi_beta', 'W_pi_pi', 'W_pi_Lambda', 'W_pi_upsilon', 'Ra_pi_pi', 'Rs_pi_pi', 'R_pi_beta', 'S_t_beta_j', 'eta'];
-$('wParam').innerHTML = WPARAMS.map((p) => '<option>' + p + '</option>').join('');
 const wForms = new Set(['1', '2', '3']);
-(function () {
-  const host = $('wFormTiles');
-  ['1', '2', '3', '4', '5', '6'].forEach((n) => {
-    const b = document.createElement('button'); b.type = 'button'; b.textContent = 'P' + n;
-    b.style.cssText = 'background:#0e141b;border:1px solid var(--border);border-radius:6px;padding:3px 8px;font:inherit;cursor:pointer';
-    const sync = () => { const on = wForms.has(n); b.style.borderColor = on ? '#69cddc' : 'var(--border)'; b.style.color = on ? '#69cddc' : 'var(--muted)'; };
-    b.onclick = () => { if (wForms.has(n)) { if (wForms.size > 1) wForms.delete(n); } else wForms.add(n); sync(); wizCount(); };
-    sync(); host.appendChild(b);
-  });
-})();
+const W = { step: 0, varyN: true, varyForm: false, varyParam: false,
+  nVals: '20 30 40', nFixed: '20', param: 'W_pi_beta', pVals: '1.0 1.5', seeds: '5', steps: '600' };
+const WSTEPS = ['Scope', 'Values & seeds', 'Review & run'];
+const wesc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const WIN = 'background:#0e141b;color:#e6edf3;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit';
+
 function wizSpec() {
-  const seedsN = Math.max(1, parseInt($('wSeeds').value) || 1);
+  const seedsN = Math.max(1, parseInt(W.seeds) || 1);
   const seeds = Array.from({ length: seedsN }, (_, i) => i).join(' ');
   const sw = [];
-  if ($('wVaryN').checked) sw.push('<Sweep param="N" values="' + ($('wNvals').value.trim() || '20') + '"/>');
-  else sw.push('<Sweep param="N" values="' + (parseInt($('wNfixed').value) || 20) + '"/>');
-  if ($('wVaryForm').checked) sw.push('<Sweep param="sheepPattern" values="' + [...wForms].join(' ') + '"/>');
-  if ($('wVaryParam').checked) sw.push('<Sweep param="' + $('wParam').value + '" values="' + ($('wPvals').value.trim() || '1') + '"/>');
-  return '<Experiment name="wizard_sweep">\n  <Steps>' + (parseInt($('wSteps').value) || 600) +
+  if (W.varyN) sw.push('<Sweep param="N" values="' + ((W.nVals || '').trim() || '20') + '"/>');
+  else sw.push('<Sweep param="N" values="' + (parseInt(W.nFixed) || 20) + '"/>');
+  if (W.varyForm) sw.push('<Sweep param="sheepPattern" values="' + [...wForms].join(' ') + '"/>');
+  if (W.varyParam) sw.push('<Sweep param="' + W.param + '" values="' + ((W.pVals || '').trim() || '1') + '"/>');
+  return '<Experiment name="wizard_sweep">\n  <Steps>' + (parseInt(W.steps) || 600) +
     '</Steps>\n  <Seeds>' + seeds + '</Seeds>\n  ' + sw.join('\n  ') + '\n</Experiment>';
 }
 function wizCount() {
   try { const s = parseSpec(wizSpec()); const c = comboCount(s);
-    $('wCount').textContent = c + ' combos × ' + s.seeds.length + ' seeds = ' + (c * s.seeds.length) + ' runs';
+    $('wCount').textContent = c + ' × ' + s.seeds.length + ' = ' + (c * s.seeds.length) + ' runs';
     $('wCount').style.color = '';
   } catch (e) { $('wCount').textContent = e.message; $('wCount').style.color = 'var(--fail)'; }
 }
-['wVaryN', 'wNvals', 'wVaryForm', 'wVaryParam', 'wParam', 'wPvals', 'wNfixed', 'wSeeds', 'wSteps'].forEach((id) => {
-  const el = $(id); if (el) { el.addEventListener('input', wizCount); el.addEventListener('change', wizCount); }
-});
-$('wRun').addEventListener('click', () => { specEl.value = wizSpec(); refreshCombos(); $('run').click(); });
-wizCount();
+function wSteps() {
+  const h = $('wsteps'); h.innerHTML = '';
+  WSTEPS.forEach((t, i) => {
+    const d = document.createElement('div'); d.textContent = (i + 1) + '. ' + t;
+    d.style.cssText = 'padding:6px 12px;border-radius:7px;border:1px solid var(--border);cursor:pointer;font-size:13px;' +
+      (i === W.step ? 'background:#69cddc;color:#07222a;border-color:#69cddc' : 'color:var(--muted)');
+    d.onclick = () => { W.step = i; wRender(); };
+    h.appendChild(d);
+  });
+}
+function wBody() {
+  const b = $('wbody');
+  if (W.step === 0) {
+    const chk = (k, t, d) => '<label style="display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer"><input type="checkbox" data-w="' + k + '" ' + (W[k] ? 'checked' : '') + ' style="margin-top:3px"><span><b>' + t + '</b><span style="display:block;color:var(--muted);font-size:12.5px">' + d + '</span></span></label>';
+    b.innerHTML = '<h2 style="margin:0 0 4px">What do you want to vary?</h2><p class="note" style="margin:0 0 12px">Each dimension you turn on multiplies the run count; everything else keeps its default.</p>' +
+      chk('varyN', 'Vary sheep N', 'sweep the number of sheep') +
+      chk('varyForm', 'Compare sheep formations', 'run each P1-P6 starting shape') +
+      chk('varyParam', 'Vary a model parameter', 'sweep one force weight or range');
+    b.querySelectorAll('[data-w]').forEach((c) => c.onchange = (e) => { W[e.target.dataset.w] = e.target.checked; wizCount(); });
+  } else if (W.step === 1) {
+    let h = '<h2 style="margin:0 0 4px">Values &amp; seeds</h2><p class="note" style="margin:0 0 12px">Set values for what you chose, plus seeds and steps.</p><div style="display:flex;flex-direction:column;gap:12px">';
+    if (W.varyN) h += '<label style="display:flex;gap:9px;align-items:center">sheep N values <input id="wNvals" value="' + W.nVals + '" style="' + WIN + ';width:160px"></label>';
+    else h += '<label style="display:flex;gap:9px;align-items:center">fixed sheep N <input id="wNfixed" type="number" value="' + W.nFixed + '" style="' + WIN + ';width:80px"></label>';
+    if (W.varyForm) h += '<div><div style="color:var(--muted);font-size:13px;margin-bottom:5px">formations to compare</div><div id="wFormTiles" style="display:flex;gap:5px;flex-wrap:wrap"></div></div>';
+    if (W.varyParam) h += '<label style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">parameter <select id="wParam" style="' + WIN + '">' + WPARAMS.map((p) => '<option ' + (W.param === p ? 'selected' : '') + '>' + p + '</option>').join('') + '</select> values <input id="wPvals" value="' + W.pVals + '" style="' + WIN + ';width:110px"></label>';
+    h += '<div style="display:flex;gap:20px;flex-wrap:wrap"><label style="display:flex;gap:8px;align-items:center">seeds <input id="wSeeds" type="number" min="1" value="' + W.seeds + '" style="' + WIN + ';width:60px"></label><label style="display:flex;gap:8px;align-items:center">steps/run <input id="wSteps" type="number" min="100" step="100" value="' + W.steps + '" style="' + WIN + ';width:80px"></label></div></div>';
+    b.innerHTML = h;
+    const bind = (id, key) => { const el = $(id); if (el) el.oninput = (e) => { W[key] = e.target.value; wizCount(); }; };
+    bind('wNvals', 'nVals'); bind('wNfixed', 'nFixed'); bind('wPvals', 'pVals'); bind('wSeeds', 'seeds'); bind('wSteps', 'steps');
+    const ps = $('wParam'); if (ps) ps.onchange = (e) => { W.param = e.target.value; wizCount(); };
+    const ft = $('wFormTiles');
+    if (ft) ['1', '2', '3', '4', '5', '6'].forEach((n) => {
+      const bn = document.createElement('button'); bn.type = 'button'; bn.textContent = 'P' + n;
+      bn.style.cssText = 'background:#0e141b;border:1px solid var(--border);border-radius:6px;padding:3px 9px;font:inherit;cursor:pointer';
+      const sync = () => { const on = wForms.has(n); bn.style.borderColor = on ? '#69cddc' : 'var(--border)'; bn.style.color = on ? '#69cddc' : 'var(--muted)'; };
+      bn.onclick = () => { if (wForms.has(n)) { if (wForms.size > 1) wForms.delete(n); } else wForms.add(n); sync(); wizCount(); };
+      sync(); ft.appendChild(bn);
+    });
+  } else {
+    b.innerHTML = '<h2 style="margin:0 0 4px">Review &amp; run</h2><p class="note" style="margin:0 0 12px">This is the sweep that will run; results stream in below and download as results.csv.</p><pre style="background:#0a1119;border:1px solid var(--border);border-radius:8px;padding:12px;overflow:auto;font-family:ui-monospace,monospace;font-size:12.5px;white-space:pre">' + wesc(wizSpec()) + '</pre>';
+  }
+}
+function wRender() {
+  wSteps(); wBody();
+  $('wBack').disabled = W.step === 0;
+  $('wNext').textContent = W.step === WSTEPS.length - 1 ? 'Run sweep' : 'Next';
+  wizCount();
+}
+$('wBack').onclick = () => { if (W.step > 0) { W.step--; wRender(); } };
+$('wNext').onclick = () => { if (W.step < WSTEPS.length - 1) { W.step++; wRender(); } else { specEl.value = wizSpec(); refreshCombos(); $('run').click(); } };
+wRender();
 </script>
 </body>
 </html>
