@@ -1,5 +1,4 @@
 <meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
 <title>Shepherding simulator - run the model in your browser</title>
 <style>
   :root {
@@ -130,6 +129,10 @@
             <input id="pSeed" type="number" min="0" max="99999" value="0"></div>
           <div class="field-row"><label for="pMax">max steps</label>
             <input id="pMax" type="number" min="100" max="8000" step="100" value="2000"></div>
+          <div class="field-row"><label for="pGoalX">goal X</label>
+            <input id="pGoalX" type="number" min="0" max="50" value="25"></div>
+          <div class="field-row"><label for="pGoalY">goal Y</label>
+            <input id="pGoalY" type="number" min="0" max="50" value="50"></div>
           <div class="param-cell" title="config: ObstaclesDensity">
             <div class="field-row"><label for="pObsD">obstacles %</label>
             <input id="pObsD" type="number" min="0" max="10" step="0.2" value="0"></div>
@@ -141,6 +144,11 @@
         </div>
         <div class="field-row" style="margin-top:8px"><label>sheep starting formation</label></div>
         <div class="patterns" id="patterns"></div>
+        <div class="field-row" style="margin-top:10px"><label for="pDogForm">sheepdog formation</label>
+          <select id="pDogForm"><option value="0">uniform</option><option value="1">P1</option><option value="2">P2</option><option value="3">P3</option><option value="4">P4</option><option value="5">P5</option><option value="6">P6</option></select></div>
+        <div class="field-row" style="margin-top:10px"><label>start boxes - drag to move</label></div>
+        <div id="initfield" style="position:relative;width:100%;max-width:230px;aspect-ratio:1/1;background:#0a1319;border:1px solid var(--line);border-radius:6px;touch-action:none;user-select:none;margin:4px auto 0"></div>
+        <div id="initread" style="font:10px ui-monospace,monospace;color:var(--muted);margin-top:5px;text-align:center"></div>
         <details>
           <summary>parameters (Table 2 of the paper)</summary>
           <div class="grid2" id="paramGrid"></div>
@@ -215,7 +223,8 @@ const PARAM_DEFS = [
   ["GoalRadius", 10, "goal r", "radius of the goal region a sheep must reach to be counted as herded"],
   ["StallingDistance", 1.2, "3R<sup>a</sup><sub>&pi;&pi;</sub>", "Stroembom baseline: sheepdog stops moving once this close to a sheep; paper text implies 3Ra = 1.2, shipped Config.xml uses 6 (pending confirmation)"],
 ];
-const FIELD = 50, GOAL = [25, 50];
+const FIELD = 50; let GOAL = [25, 50];
+let sheepBox = { x: 20, y: 20, w: 10, h: 10 }, dogBox = { x: 15, y: 45, w: 20, h: 5 };
 let mod = null, running = false, finished = false, model = "proposed";
 let trails = true, history = [], nDogs = 1, nSheep = 20, goalRadius = 10;
 let obstacles = [];   // [x, y, radius] for the current run
@@ -274,6 +283,35 @@ function buildParamGrid() {
 }
 const P = name => parseFloat($('pp_' + name).value);
 
+function initFieldBox() {
+  const el = $('initfield'); if (!el) return;
+  const N = FIELD; let drag = null; const nodes = {};
+  const px = v => v / N * el.clientWidth;
+  function place(k) { const b = (k === 'sheep' ? sheepBox : dogBox), n = nodes[k];
+    n.box.style.left = px(b.x) + 'px'; n.box.style.top = px(N - b.y - b.h) + 'px';
+    n.box.style.width = px(b.w) + 'px'; n.box.style.height = px(b.h) + 'px';
+    n.lab.style.left = px(b.x) + 'px'; n.lab.style.top = (px(N - b.y - b.h) - 13) + 'px'; }
+  const readout = () => { $('initread').textContent =
+    `sheep x${sheepBox.x} y${sheepBox.y} ${sheepBox.w}x${sheepBox.h}  .  dog x${dogBox.x} y${dogBox.y} ${dogBox.w}x${dogBox.h}`; };
+  [['sheep', css('--sheep')], ['dog', css('--dog')]].forEach(([k, c]) => {
+    const box = document.createElement('div'); box.dataset.k = k;
+    box.style.cssText = `position:absolute;border:1.5px solid ${c};border-radius:4px;background:${c};opacity:.18;cursor:move`;
+    const lab = document.createElement('div'); lab.textContent = k;
+    lab.style.cssText = `position:absolute;font:10px ui-monospace,monospace;color:${c};pointer-events:none`;
+    el.appendChild(box); el.appendChild(lab); nodes[k] = { box, lab }; });
+  const placeAll = () => { place('sheep'); place('dog'); };
+  placeAll(); readout();
+  el.addEventListener('pointerdown', e => { const t = e.target.closest('[data-k]'); if (!t) return; e.preventDefault();
+    drag = { k: t.dataset.k, sx: e.clientX, sy: e.clientY, b: { ...(t.dataset.k === 'sheep' ? sheepBox : dogBox) } }; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e => { if (!drag) return; const sc = N / el.clientWidth; const b = (drag.k === 'sheep' ? sheepBox : dogBox);
+    b.x = Math.max(0, Math.min(N - b.w, Math.round(drag.b.x + (e.clientX - drag.sx) * sc)));
+    b.y = Math.max(0, Math.min(N - b.h, Math.round(drag.b.y - (e.clientY - drag.sy) * sc)));
+    place(drag.k); readout(); markDirty(); });
+  el.addEventListener('pointerup', () => drag = null);
+  el.addEventListener('pointercancel', () => drag = null);
+  window.addEventListener('resize', placeAll);
+}
+
 function setModel(m) {
   model = m;
   $('mProposed').setAttribute('aria-pressed', m === 'proposed');
@@ -289,7 +327,9 @@ function createSim() {
   const strombom = model === 'strombom';
   nSheep = parseInt($('pN').value); nDogs = parseInt($('pM').value);
   goalRadius = P('GoalRadius');
+  GOAL = [parseInt($('pGoalX').value), parseInt($('pGoalY').value)];
   const pattern = parseInt(document.querySelector('.pat[data-active="1"]').dataset.key);
+  const dogPattern = parseInt($('pDogForm').value);
   mod._sim_create(
     parseInt($('pSeed').value), nSheep, nDogs, FIELD,
     P('R_pi_beta'), P('Ra_pi_pi'), P('Rs_pi_pi'), P('R_beta_beta'), P('R_beta_pi'),
@@ -302,8 +342,8 @@ function createSim() {
     P('R2'), P('R3'), strombom ? 0 : 1, strombom ? 0 : 1,
     strombom ? 0 : 1, strombom ? 0 : 1, strombom ? 0 : 1,
     P('ModulationDecayFactor'),
-    20, 20, 10, 10, pattern,
-    15, 45, 20, 5,
+    sheepBox.x, sheepBox.y, sheepBox.w, sheepBox.h, pattern,
+    dogBox.x, dogBox.y, dogBox.w, dogBox.h, dogPattern,
     parseFloat($('pObsD').value) / 100, parseFloat($('pObsR').value),
     parseInt($('pMax').value));
   obstacles = [];
@@ -495,7 +535,7 @@ function markDirty() {
   if (running) { $('run').hidden = false; $('pause').hidden = true; running = false; }
 }
 function armDirtyTracking() {
-  document.querySelectorAll('#paramGrid input, #pN, #pM, #pSeed, #pMax, #pObsD, #pObsR')
+  document.querySelectorAll('#paramGrid input, #pN, #pM, #pSeed, #pMax, #pObsD, #pObsR, #pGoalX, #pGoalY, #pDogForm')
     .forEach(el => el.addEventListener('change', markDirty));
 }
 
@@ -558,6 +598,7 @@ document.addEventListener('keydown', e => {
 
 buildPatternCards();
 buildParamGrid();
+initFieldBox();
 armDirtyTracking();
 setModel('proposed');
 createShepherdModule().then(m => {
