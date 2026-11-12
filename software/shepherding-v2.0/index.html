@@ -88,6 +88,7 @@
         <button id="pause" hidden>Pause</button>
         <button id="stepBtn" title="advance one timestep (pauses first)">Step</button>
         <button id="restart" title="apply current settings and start again from timestep 0">Restart</button>
+        <button id="apply" title="apply settings and show the starting layout, without running">Apply</button>
         <span class="ctl-label" id="spdLab">steps/s</span>
         <select id="speed" aria-labelledby="spdLab">
           <option value="1">1</option>
@@ -120,6 +121,14 @@
       </div>
       <div class="card">
         <h2>Scenario</h2>
+        <div class="field-row"><label>start boxes &amp; goal - drag to move</label></div>
+        <div id="initfield" style="position:relative;width:100%;max-width:230px;aspect-ratio:1/1;background:#0a1319;border:1px solid var(--line);border-radius:6px;touch-action:none;user-select:none;margin:4px auto 0"></div>
+        <div id="initread" style="font:10px ui-monospace,monospace;color:var(--muted);margin-top:5px;text-align:center"></div>
+        <div class="field-row" style="margin-top:10px"><label>sheep starting formation</label></div>
+        <div class="patterns" id="patterns"></div>
+        <div class="field-row" style="margin-top:10px"><label for="pDogForm">sheepdog formation</label>
+          <select id="pDogForm"><option value="0">uniform</option><option value="1">line</option><option value="2">arc</option><option value="3">angle</option></select></div>
+        <div class="field-row" style="margin-top:12px"><label style="color:var(--muted);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase">parameters</label></div>
         <div class="grid2">
           <div class="field-row"><label for="pN">sheep N</label>
             <input id="pN" type="number" min="10" max="200" step="10" value="20"></div>
@@ -142,13 +151,6 @@
             <input id="pObsR" type="number" min="0.25" max="3" step="0.25" value="0.25"></div>
             <div class="param-desc">radius of each circular obstacle; default 0.25 draws it the same size as an agent, as in the original simulator</div></div>
         </div>
-        <div class="field-row" style="margin-top:8px"><label>sheep starting formation</label></div>
-        <div class="patterns" id="patterns"></div>
-        <div class="field-row" style="margin-top:10px"><label for="pDogForm">sheepdog formation</label>
-          <select id="pDogForm"><option value="0">uniform</option><option value="1">P1</option><option value="2">P2</option><option value="3">P3</option><option value="4">P4</option><option value="5">P5</option><option value="6">P6</option></select></div>
-        <div class="field-row" style="margin-top:10px"><label>start boxes - drag to move</label></div>
-        <div id="initfield" style="position:relative;width:100%;max-width:230px;aspect-ratio:1/1;background:#0a1319;border:1px solid var(--line);border-radius:6px;touch-action:none;user-select:none;margin:4px auto 0"></div>
-        <div id="initread" style="font:10px ui-monospace,monospace;color:var(--muted);margin-top:5px;text-align:center"></div>
         <details>
           <summary>parameters (Table 2 of the paper)</summary>
           <div class="grid2" id="paramGrid"></div>
@@ -287,26 +289,43 @@ function initFieldBox() {
   const el = $('initfield'); if (!el) return;
   const N = FIELD; let drag = null; const nodes = {};
   const px = v => v / N * el.clientWidth;
-  function place(k) { const b = (k === 'sheep' ? sheepBox : dogBox), n = nodes[k];
+  function placeBox(k) { const b = (k === 'sheep' ? sheepBox : dogBox), n = nodes[k];
     n.box.style.left = px(b.x) + 'px'; n.box.style.top = px(N - b.y - b.h) + 'px';
     n.box.style.width = px(b.w) + 'px'; n.box.style.height = px(b.h) + 'px';
     n.lab.style.left = px(b.x) + 'px'; n.lab.style.top = (px(N - b.y - b.h) - 13) + 'px'; }
+  function placeGoal() { const g = nodes.goal;
+    g.box.style.left = (px(GOAL[0]) - 7) + 'px'; g.box.style.top = (px(N - GOAL[1]) - 7) + 'px';
+    g.lab.style.left = (px(GOAL[0]) - 9) + 'px'; g.lab.style.top = (px(N - GOAL[1]) - 22) + 'px'; }
   const readout = () => { $('initread').textContent =
-    `sheep x${sheepBox.x} y${sheepBox.y} ${sheepBox.w}x${sheepBox.h}  .  dog x${dogBox.x} y${dogBox.y} ${dogBox.w}x${dogBox.h}`; };
+    `sheep x${sheepBox.x} y${sheepBox.y}  .  dog x${dogBox.x} y${dogBox.y}  .  goal ${GOAL[0]},${GOAL[1]}`; };
   [['sheep', css('--sheep')], ['dog', css('--dog')]].forEach(([k, c]) => {
     const box = document.createElement('div'); box.dataset.k = k;
     box.style.cssText = `position:absolute;border:1.5px solid ${c};border-radius:4px;background:${c};opacity:.18;cursor:move`;
     const lab = document.createElement('div'); lab.textContent = k;
     lab.style.cssText = `position:absolute;font:10px ui-monospace,monospace;color:${c};pointer-events:none`;
     el.appendChild(box); el.appendChild(lab); nodes[k] = { box, lab }; });
-  const placeAll = () => { place('sheep'); place('dog'); };
+  { const gc = css('--goal'); const box = document.createElement('div'); box.dataset.k = 'goal';
+    box.style.cssText = `position:absolute;width:14px;height:14px;border:1.6px solid ${gc};border-radius:50%;background:${gc};opacity:.4;cursor:move`;
+    const lab = document.createElement('div'); lab.textContent = 'goal';
+    lab.style.cssText = `position:absolute;font:10px ui-monospace,monospace;color:${gc};pointer-events:none`;
+    el.appendChild(box); el.appendChild(lab); nodes.goal = { box, lab }; }
+  const placeAll = () => { placeBox('sheep'); placeBox('dog'); placeGoal(); };
   placeAll(); readout();
   el.addEventListener('pointerdown', e => { const t = e.target.closest('[data-k]'); if (!t) return; e.preventDefault();
-    drag = { k: t.dataset.k, sx: e.clientX, sy: e.clientY, b: { ...(t.dataset.k === 'sheep' ? sheepBox : dogBox) } }; el.setPointerCapture(e.pointerId); });
-  el.addEventListener('pointermove', e => { if (!drag) return; const sc = N / el.clientWidth; const b = (drag.k === 'sheep' ? sheepBox : dogBox);
-    b.x = Math.max(0, Math.min(N - b.w, Math.round(drag.b.x + (e.clientX - drag.sx) * sc)));
-    b.y = Math.max(0, Math.min(N - b.h, Math.round(drag.b.y - (e.clientY - drag.sy) * sc)));
-    place(drag.k); readout(); markDirty(); });
+    const k = t.dataset.k;
+    drag = { k, sx: e.clientX, sy: e.clientY, b: k === 'goal' ? { x: GOAL[0], y: GOAL[1] } : { ...(k === 'sheep' ? sheepBox : dogBox) } };
+    el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e => { if (!drag) return; const sc = N / el.clientWidth;
+    const nx = Math.round(drag.b.x + (e.clientX - drag.sx) * sc);
+    const ny = Math.round(drag.b.y - (e.clientY - drag.sy) * sc);
+    if (drag.k === 'goal') {
+      GOAL[0] = Math.max(0, Math.min(N, nx)); GOAL[1] = Math.max(0, Math.min(N, ny));
+      $('pGoalX').value = GOAL[0]; $('pGoalY').value = GOAL[1]; placeGoal();
+    } else {
+      const b = (drag.k === 'sheep' ? sheepBox : dogBox);
+      b.x = Math.max(0, Math.min(N - b.w, nx)); b.y = Math.max(0, Math.min(N - b.h, ny)); placeBox(drag.k);
+    }
+    readout(); markDirty(); });
   el.addEventListener('pointerup', () => drag = null);
   el.addEventListener('pointercancel', () => drag = null);
   window.addEventListener('resize', placeAll);
@@ -552,6 +571,7 @@ function startRun(forceNew) {
 
 $('run').onclick = () => startRun(false);
 $('restart').onclick = () => startRun(true);
+$('apply').onclick = () => { if (!mod) return; createSim(); settingsDirty = false; running = false; $('run').hidden = false; $('pause').hidden = true; $('run').textContent = 'Run'; };
 $('pause').onclick = () => {
   running = false;
   $('run').hidden = false; $('pause').hidden = true;
