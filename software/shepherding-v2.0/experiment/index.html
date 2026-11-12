@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shepherding experimenter</title>
+<style>
+  :root{
+    --bg:#0d0e10; --panel:#16181c; --panel2:#111316; --text:#c9ced6; --muted:#8a919b;
+    --accent:#1d9e75; --accent-dim:#155c46; --border:#22262c; --fail:#d0555f; --ok:#1d9e75;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:14px}
+  header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;
+    align-items:baseline;gap:12px;flex-wrap:wrap}
+  header h1{font-size:16px;margin:0;font-weight:600;letter-spacing:.2px}
+  header .sub{color:var(--muted);font-size:12.5px}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
+  .grid{display:grid;grid-template-columns:minmax(320px,1fr) minmax(280px,360px);gap:18px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px}
+  .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);
+    margin:0 0 12px;font-weight:600}
+  textarea{width:100%;height:230px;resize:vertical;background:var(--panel2);color:var(--text);
+    border:1px solid var(--border);border-radius:7px;padding:11px;font-family:var(--mono);
+    font-size:12.5px;line-height:1.5;tab-size:2}
+  textarea:focus{outline:none;border-color:var(--accent-dim)}
+  .row{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+  button{background:var(--accent);color:#05130d;border:0;border-radius:7px;padding:9px 16px;
+    font-size:13px;font-weight:650;cursor:pointer}
+  button:hover{filter:brightness(1.08)}
+  button:disabled{background:#2a2e34;color:var(--muted);cursor:default;filter:none}
+  button.ghost{background:transparent;color:var(--text);border:1px solid var(--border);font-weight:500}
+  button.ghost:disabled{color:var(--muted);opacity:.6}
+  .note{color:var(--muted);font-size:12px;line-height:1.6}
+  .note code{font-family:var(--mono);color:#9fd7c1;background:#0f1512;padding:1px 5px;border-radius:4px}
+  .prov div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;
+    border-bottom:1px solid #1b1e23;font-size:12.5px}
+  .prov div:last-child{border-bottom:0}
+  .prov .k{color:var(--muted)} .prov .v{font-family:var(--mono);text-align:right}
+  .bar{height:5px;background:#1b1e23;border-radius:3px;overflow:hidden;margin-top:14px}
+  .bar>div{height:100%;width:0;background:var(--accent);transition:width .12s linear}
+  .status{margin-top:9px;font-size:12.5px;color:var(--muted);min-height:16px}
+  .results{margin-top:18px}
+  .results .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:10px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;font-family:var(--mono)}
+  th,td{padding:7px 12px;text-align:right;white-space:nowrap;border-bottom:1px solid #1b1e23}
+  th{position:sticky;top:0;background:var(--panel2);color:var(--muted);font-weight:600;
+    text-align:right;z-index:1;font-family:-apple-system,Segoe UI,sans-serif;font-size:11px;
+    text-transform:uppercase;letter-spacing:.5px}
+  th:first-child,td:first-child{text-align:left}
+  tbody tr:hover{background:#14171b}
+  td.swept{color:#9fd7c1}
+  td.done{color:var(--ok)} td.fail{color:var(--fail)}
+  .empty{padding:34px;text-align:center;color:var(--muted);font-size:13px}
+  .pill{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--muted);
+    border:1px solid var(--border);border-radius:20px;padding:2px 9px}
+</style>
+<nav id="shepnav" style="position:fixed;top:8px;right:12px;z-index:99999;display:flex;gap:4px;align-items:center;padding:5px 7px;background:rgba(13,17,23,.9);border:1px solid #2b3440;border-radius:10px;font:12.5px/1 system-ui,-apple-system,sans-serif;box-shadow:0 2px 12px rgba(0,0,0,.35)"><a href="../" style="text-decoration:none;padding:4px 10px;border-radius:7px;font-weight:500;color:#ccd6e0;background:transparent">Simulator</a><a href="../viewer/" style="text-decoration:none;padding:4px 10px;border-radius:7px;font-weight:500;color:#ccd6e0;background:transparent">Viewer</a><a href="./" style="text-decoration:none;padding:4px 10px;border-radius:7px;font-weight:500;color:#6fd0e0;background:rgba(105,205,220,.16)">Experimenter</a></nav>
+</head>
+<body>
+<header>
+  <h1>Shepherding experimenter</h1>
+  <span class="sub">browser sweep runner &middot; same deterministic core as the <code>shepherd_experiment</code> CLI</span>
+</header>
+
+<div class="wrap">
+  <div class="card" id="wizcard" style="margin-bottom:14px">
+    <div id="wsteps" style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap"></div>
+    <div id="wbody" style="min-height:150px"></div>
+    <div class="row" style="margin-top:16px;justify-content:space-between;align-items:center">
+      <button id="wBack" class="ghost">Back</button>
+      <div style="display:flex;gap:14px;align-items:center"><span class="pill" id="wCount">&mdash;</span><button id="wNext">Next</button></div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h2>Experiment spec</h2>
+      <textarea id="spec" spellcheck="false"></textarea>
+      <div class="row">
+        <button id="run">Run sweep</button>
+        <button id="reset" class="ghost">Reset spec</button>
+        <span class="pill" id="combos">&mdash;</span>
+      </div>
+      <p class="note" style="margin-top:12px">
+        Edit the sweeps and seeds, then run. Every <code>&lt;Sweep&gt;</code> multiplies the run
+        count. In the browser the <code>&lt;Base file&gt;</code> is ignored and the built-in herding
+        defaults are used; sweeps override them. For large grids or CI, use the native CLI.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Run summary</h2>
+      <div class="prov" id="prov">
+        <div><span class="k">experiment</span><span class="v" id="p-name">&mdash;</span></div>
+        <div><span class="k">combinations</span><span class="v" id="p-combos">&mdash;</span></div>
+        <div><span class="k">seeds</span><span class="v" id="p-seeds">&mdash;</span></div>
+        <div><span class="k">steps / run</span><span class="v" id="p-steps">&mdash;</span></div>
+        <div><span class="k">total runs</span><span class="v" id="p-total">&mdash;</span></div>
+        <div><span class="k">core build</span><span class="v" id="p-commit">&mdash;</span></div>
+        <div><span class="k">deterministic</span><span class="v">yes</span></div>
+      </div>
+      <div class="bar"><div id="progbar"></div></div>
+      <div class="status" id="status">idle</div>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="head">
+      <h2 style="margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)">Results</h2>
+      <div class="row" style="margin:0">
+        <button id="dl-csv" class="ghost" disabled>Download results.csv</button>
+        <button id="dl-man" class="ghost" disabled>Download manifest.txt</button>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="tbl"><thead></thead><tbody></tbody></table>
+      <div class="empty" id="empty">No runs yet. Edit the spec and press <b>Run sweep</b>.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const BUILD_COMMIT = '9e28ef1';   // stamped at publish time
+
+const EXAMPLE_SPEC = `<Experiment name="cohesion_and_pressure_sweep">
+  <Steps>600</Steps>
+  <Seeds>0 1 2 3 4</Seeds>
+  <Sweep param="W_pi_Lambda" values="0.8 1.05 1.3"/>
+  <Sweep param="W_pi_beta"   values="1.0 1.5"/>
+  <Sweep param="N"           values="20 40"/>
+</Experiment>`;
+
+// Metric columns appended after the original outcome columns; order matches the wasm metric
+// vector (exp_wasm.cpp) and the native CSV (experiment_runner.cpp).
+const METRIC_COLS = ['radius_of_gyration', 'nnd', 'mean_polarization', 'rotational_order',
+                     'largest_cluster_frac', 'path_straightness', 'min_gap'];
+
+const $ = (id) => document.getElementById(id);
+const specEl = $('spec');
+specEl.value = EXAMPLE_SPEC;
+
+let lastRows = null, lastSpec = null, worker = null;
+
+// Parse the inline spec. Returns {name, steps, seeds:[int], sweeps:[{param,values:[float]}]}.
+function parseSpec(text) {
+  const doc = new DOMParser().parseFromString(text, 'application/xml');
+  if (doc.querySelector('parsererror')) throw new Error('spec is not valid XML');
+  const root = doc.querySelector('Experiment');
+  if (!root) throw new Error('spec has no <Experiment> root');
+  const nums = (s) => (s || '').trim().split(/\s+/).filter(Boolean);
+  const stepsEl = root.querySelector('Steps');
+  const seedsEl = root.querySelector('Seeds');
+  const spec = {
+    name: root.getAttribute('name') || 'experiment',
+    steps: stepsEl ? parseInt(stepsEl.textContent, 10) || 0 : 0,
+    seeds: seedsEl ? nums(seedsEl.textContent).map((x) => parseInt(x, 10)) : [0],
+    sweeps: [],
+  };
+  if (!spec.seeds.length) spec.seeds = [0];
+  root.querySelectorAll('Sweep').forEach((sw) => {
+    const param = sw.getAttribute('param') || '';
+    const values = nums(sw.getAttribute('values')).map(parseFloat);
+    if (!param || !values.length) throw new Error('a <Sweep> is missing param or values');
+    spec.sweeps.push({ param, values });
+  });
+  if (!spec.sweeps.length) throw new Error('spec has no <Sweep> elements');
+  return spec;
+}
+
+function comboCount(spec) {
+  return spec.sweeps.reduce((a, s) => a * s.values.length, 1);
+}
+
+// Live combination count as the spec is edited.
+function refreshCombos() {
+  try {
+    const spec = parseSpec(specEl.value);
+    const combos = comboCount(spec), total = combos * spec.seeds.length;
+    $('combos').textContent = combos + ' combos × ' + spec.seeds.length + ' seeds = ' + total + ' runs';
+    $('combos').style.color = '';
+  } catch (e) {
+    $('combos').textContent = e.message;
+    $('combos').style.color = 'var(--fail)';
+  }
+}
+specEl.addEventListener('input', refreshCombos);
+
+// %g-style formatting for the swept values, matching the CLI's fprintf("%g").
+function g(v) { return String(v); }
+
+function buildHeader(spec) {
+  const cols = ['run_id', ...spec.sweeps.map((s) => s.param),
+                'seed', 'completion_time', 'gcm_to_goal', 'cohesion', 'at_goal_frac', 'steps',
+                ...METRIC_COLS];
+  const thead = $('tbl').querySelector('thead');
+  thead.innerHTML = '<tr>' + cols.map((c) => '<th>' + c + '</th>').join('') + '</tr>';
+  return cols;
+}
+
+function rowCells(spec, r) {
+  const cells = [];
+  cells.push(['', r.run_id]);
+  r.sweptValues.forEach((v) => cells.push(['swept', g(v)]));
+  cells.push(['', r.seed]);
+  cells.push([r.completion >= 0 ? 'done' : 'fail', r.completion]);
+  cells.push(['', r.gcm.toFixed(4)]);
+  cells.push(['', r.cohesion.toFixed(4)]);
+  cells.push([r.atGoal >= 0.999 ? 'done' : '', r.atGoal.toFixed(4)]);
+  cells.push(['', r.steps]);
+  cells.push(['', r.rg.toFixed(4)]);
+  cells.push(['', r.nnd.toFixed(4)]);
+  cells.push([r.meanPol >= 0.5 ? 'done' : '', r.meanPol.toFixed(4)]);
+  cells.push([r.rot >= 0.5 ? 'done' : '', r.rot.toFixed(4)]);
+  cells.push(['', r.lcf.toFixed(4)]);
+  cells.push(['', r.straight.toFixed(4)]);
+  cells.push(['', r.minGap.toFixed(4)]);
+  return cells;
+}
+
+function appendRow(spec, r) {
+  const tb = $('tbl').querySelector('tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = rowCells(spec, r).map(([cls, val]) =>
+    '<td class="' + cls + '">' + val + '</td>').join('');
+  tb.appendChild(tr);
+}
+
+function toCSV(spec, rows) {
+  const header = ['run_id', ...spec.sweeps.map((s) => s.param),
+                  'seed', 'completion_time', 'gcm_to_goal', 'cohesion', 'at_goal_frac', 'steps',
+                  ...METRIC_COLS];
+  const lines = [header.join(',')];
+  for (const r of rows) {
+    const cols = [r.run_id, ...r.sweptValues.map(g), r.seed, r.completion,
+                  r.gcm.toFixed(4), r.cohesion.toFixed(4), r.atGoal.toFixed(4), r.steps,
+                  r.rg.toFixed(4), r.nnd.toFixed(4), r.meanPol.toFixed(4), r.rot.toFixed(4),
+                  r.lcf.toFixed(4), r.straight.toFixed(4), r.minGap.toFixed(4)];
+    lines.push(cols.join(','));
+  }
+  return lines.join('\n') + '\n';
+}
+
+function pad(s, n) { s = String(s); return s + ' '.repeat(Math.max(0, n - s.length)); }
+
+function toManifest(spec) {
+  const now = new Date();
+  const ts = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate()) +
+             ' ' + pad2(now.getHours()) + ':' + pad2(now.getMinutes()) + ':' + pad2(now.getSeconds());
+  const combos = comboCount(spec), total = combos * spec.seeds.length;
+  let m = '';
+  m += pad('experiment', 16) + spec.name + '\n';
+  m += pad('generated', 16) + ts + '\n';
+  m += pad('core build', 16) + BUILD_COMMIT + ' (web experimenter)\n';
+  m += pad('spec', 16) + 'inline (browser)\n';
+  m += pad('base config', 16) + 'built-in herding defaults\n';
+  m += pad('steps per run', 16) + (spec.steps > 0 ? spec.steps : 800) + '\n';
+  m += pad('seeds', 16) + spec.seeds.join(' ') + '\n';
+  m += 'sweeps\n';
+  for (const s of spec.sweeps) m += '  ' + pad(s.param, 16) + s.values.map(g).join(' ') + '\n';
+  m += pad('combinations', 16) + combos + '\n';
+  m += pad('total runs', 16) + total + '\n';
+  m += pad('results', 16) + 'results.csv\n';
+  m += pad('deterministic', 16) + 'yes (portable PRNG seeded per run)\n';
+  return m;
+}
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+function download(name, text) {
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function setRunning(on) {
+  $('run').disabled = on;
+  $('reset').disabled = on;
+  specEl.disabled = on;
+}
+
+$('run').addEventListener('click', () => {
+  let spec;
+  try { spec = parseSpec(specEl.value); }
+  catch (e) { $('status').textContent = 'spec error: ' + e.message; $('status').style.color = 'var(--fail)'; return; }
+  $('status').style.color = '';
+
+  const combos = comboCount(spec), total = combos * spec.seeds.length;
+  $('p-name').textContent = spec.name;
+  $('p-combos').textContent = combos;
+  $('p-seeds').textContent = spec.seeds.join(' ');
+  $('p-steps').textContent = spec.steps > 0 ? spec.steps : 800;
+  $('p-total').textContent = total;
+  $('p-commit').textContent = BUILD_COMMIT;
+
+  buildHeader(spec);
+  $('tbl').querySelector('tbody').innerHTML = '';
+  $('empty').style.display = 'none';
+  $('dl-csv').disabled = true; $('dl-man').disabled = true;
+  $('progbar').style.width = '0';
+  $('status').textContent = 'starting core…';
+  setRunning(true);
+  lastSpec = spec; lastRows = null;
+
+  if (!worker) worker = new Worker('worker.js');
+  worker.onmessage = (e) => {
+    const d = e.data;
+    if (d.type === 'progress') {
+      appendRow(spec, d.row);
+      $('progbar').style.width = (100 * d.done / d.total).toFixed(1) + '%';
+      $('status').textContent = 'run ' + d.done + ' / ' + d.total;
+    } else if (d.type === 'done') {
+      lastRows = d.rows;
+      $('status').textContent = 'done — ' + d.rows.length + ' runs';
+      $('dl-csv').disabled = false; $('dl-man').disabled = false;
+      setRunning(false);
+    } else if (d.type === 'error') {
+      $('status').textContent = 'error: ' + d.message;
+      $('status').style.color = 'var(--fail)';
+      setRunning(false);
+    }
+  };
+  worker.onerror = (err) => {
+    $('status').textContent = 'worker error: ' + err.message;
+    $('status').style.color = 'var(--fail)';
+    setRunning(false);
+  };
+  worker.postMessage(spec);
+});
+
+$('reset').addEventListener('click', () => { specEl.value = EXAMPLE_SPEC; refreshCombos(); });
+$('dl-csv').addEventListener('click', () => { if (lastRows) download('results.csv', toCSV(lastSpec, lastRows)); });
+$('dl-man').addEventListener('click', () => { if (lastSpec) download('manifest.txt', toManifest(lastSpec)); });
+
+refreshCombos();
+
+// ---- guided stepped wizard: builds a sweep step by step and drives the same engine ----
+const WPARAMS = ['W_pi_beta', 'W_pi_pi', 'W_pi_Lambda', 'W_pi_upsilon', 'Ra_pi_pi', 'Rs_pi_pi', 'R_pi_beta', 'S_t_beta_j', 'eta'];
+const wForms = new Set(['1', '2', '3']);
+const W = { step: 0, varyN: true, varyForm: false, varyParam: false,
+  nVals: '20 30 40', nFixed: '20', param: 'W_pi_beta', pVals: '1.0 1.5', seeds: '5', steps: '600' };
+const WSTEPS = ['Scope', 'Values & seeds', 'Review & run'];
+const wesc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const WIN = 'background:#0e141b;color:#e6edf3;border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit';
+
+function wizSpec() {
+  const seedsN = Math.max(1, parseInt(W.seeds) || 1);
+  const seeds = Array.from({ length: seedsN }, (_, i) => i).join(' ');
+  const sw = [];
+  if (W.varyN) sw.push('<Sweep param="N" values="' + ((W.nVals || '').trim() || '20') + '"/>');
+  else sw.push('<Sweep param="N" values="' + (parseInt(W.nFixed) || 20) + '"/>');
+  if (W.varyForm) sw.push('<Sweep param="sheepPattern" values="' + [...wForms].join(' ') + '"/>');
+  if (W.varyParam) sw.push('<Sweep param="' + W.param + '" values="' + ((W.pVals || '').trim() || '1') + '"/>');
+  return '<Experiment name="wizard_sweep">\n  <Steps>' + (parseInt(W.steps) || 600) +
+    '</Steps>\n  <Seeds>' + seeds + '</Seeds>\n  ' + sw.join('\n  ') + '\n</Experiment>';
+}
+function wizCount() {
+  try { const s = parseSpec(wizSpec()); const c = comboCount(s);
+    $('wCount').textContent = c + ' × ' + s.seeds.length + ' = ' + (c * s.seeds.length) + ' runs';
+    $('wCount').style.color = '';
+  } catch (e) { $('wCount').textContent = e.message; $('wCount').style.color = 'var(--fail)'; }
+}
+function wSteps() {
+  const h = $('wsteps'); h.innerHTML = '';
+  WSTEPS.forEach((t, i) => {
+    const d = document.createElement('div'); d.textContent = (i + 1) + '. ' + t;
+    d.style.cssText = 'padding:6px 12px;border-radius:7px;border:1px solid var(--border);cursor:pointer;font-size:13px;' +
+      (i === W.step ? 'background:#69cddc;color:#07222a;border-color:#69cddc' : 'color:var(--muted)');
+    d.onclick = () => { W.step = i; wRender(); };
+    h.appendChild(d);
+  });
+}
+function wBody() {
+  const b = $('wbody');
+  if (W.step === 0) {
+    const chk = (k, t, d) => '<label style="display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer"><input type="checkbox" data-w="' + k + '" ' + (W[k] ? 'checked' : '') + ' style="margin-top:3px"><span><b>' + t + '</b><span style="display:block;color:var(--muted);font-size:12.5px">' + d + '</span></span></label>';
+    b.innerHTML = '<h2 style="margin:0 0 4px">What do you want to vary?</h2><p class="note" style="margin:0 0 12px">Each dimension you turn on multiplies the run count; everything else keeps its default.</p>' +
+      chk('varyN', 'Vary sheep N', 'sweep the number of sheep') +
+      chk('varyForm', 'Compare sheep formations', 'run each P1-P6 starting shape') +
+      chk('varyParam', 'Vary a model parameter', 'sweep one force weight or range');
+    b.querySelectorAll('[data-w]').forEach((c) => c.onchange = (e) => { W[e.target.dataset.w] = e.target.checked; wizCount(); });
+  } else if (W.step === 1) {
+    let h = '<h2 style="margin:0 0 4px">Values &amp; seeds</h2><p class="note" style="margin:0 0 12px">Set values for what you chose, plus seeds and steps.</p><div style="display:flex;flex-direction:column;gap:12px">';
+    if (W.varyN) h += '<label style="display:flex;gap:9px;align-items:center">sheep N values <input id="wNvals" value="' + W.nVals + '" style="' + WIN + ';width:160px"></label>';
+    else h += '<label style="display:flex;gap:9px;align-items:center">fixed sheep N <input id="wNfixed" type="number" value="' + W.nFixed + '" style="' + WIN + ';width:80px"></label>';
+    if (W.varyForm) h += '<div><div style="color:var(--muted);font-size:13px;margin-bottom:5px">formations to compare</div><div id="wFormTiles" style="display:flex;gap:5px;flex-wrap:wrap"></div></div>';
+    if (W.varyParam) h += '<label style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">parameter <select id="wParam" style="' + WIN + '">' + WPARAMS.map((p) => '<option ' + (W.param === p ? 'selected' : '') + '>' + p + '</option>').join('') + '</select> values <input id="wPvals" value="' + W.pVals + '" style="' + WIN + ';width:110px"></label>';
+    h += '<div style="display:flex;gap:20px;flex-wrap:wrap"><label style="display:flex;gap:8px;align-items:center">seeds <input id="wSeeds" type="number" min="1" value="' + W.seeds + '" style="' + WIN + ';width:60px"></label><label style="display:flex;gap:8px;align-items:center">steps/run <input id="wSteps" type="number" min="100" step="100" value="' + W.steps + '" style="' + WIN + ';width:80px"></label></div></div>';
+    b.innerHTML = h;
+    const bind = (id, key) => { const el = $(id); if (el) el.oninput = (e) => { W[key] = e.target.value; wizCount(); }; };
+    bind('wNvals', 'nVals'); bind('wNfixed', 'nFixed'); bind('wPvals', 'pVals'); bind('wSeeds', 'seeds'); bind('wSteps', 'steps');
+    const ps = $('wParam'); if (ps) ps.onchange = (e) => { W.param = e.target.value; wizCount(); };
+    const ft = $('wFormTiles');
+    if (ft) ['1', '2', '3', '4', '5', '6'].forEach((n) => {
+      const bn = document.createElement('button'); bn.type = 'button'; bn.textContent = 'P' + n;
+      bn.style.cssText = 'background:#0e141b;border:1px solid var(--border);border-radius:6px;padding:3px 9px;font:inherit;cursor:pointer';
+      const sync = () => { const on = wForms.has(n); bn.style.borderColor = on ? '#69cddc' : 'var(--border)'; bn.style.color = on ? '#69cddc' : 'var(--muted)'; };
+      bn.onclick = () => { if (wForms.has(n)) { if (wForms.size > 1) wForms.delete(n); } else wForms.add(n); sync(); wizCount(); };
+      sync(); ft.appendChild(bn);
+    });
+  } else {
+    b.innerHTML = '<h2 style="margin:0 0 4px">Review &amp; run</h2><p class="note" style="margin:0 0 12px">This is the sweep that will run; results stream in below and download as results.csv.</p><pre style="background:#0a1119;border:1px solid var(--border);border-radius:8px;padding:12px;overflow:auto;font-family:ui-monospace,monospace;font-size:12.5px;white-space:pre">' + wesc(wizSpec()) + '</pre>';
+  }
+}
+function wRender() {
+  wSteps(); wBody();
+  $('wBack').disabled = W.step === 0;
+  $('wNext').textContent = W.step === WSTEPS.length - 1 ? 'Run sweep' : 'Next';
+  wizCount();
+}
+$('wBack').onclick = () => { if (W.step > 0) { W.step--; wRender(); } };
+$('wNext').onclick = () => { if (W.step < WSTEPS.length - 1) { W.step++; wRender(); } else { specEl.value = wizSpec(); refreshCombos(); $('run').click(); } };
+wRender();
+</script>
+</body>
+</html>

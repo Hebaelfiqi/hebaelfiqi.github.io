@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Air traffic control as shepherding, in plain language | Dr Heba El-Fiqi</title>
+<meta name="description" content="A plain-language story of our Springer chapter: how one air traffic controller can steer a whole UAV fleet by moving a single logical shepherd.">
+<meta property="og:title" content="Air traffic control as shepherding, in plain language | Dr Heba El-Fiqi">
+<meta property="og:description" content="How one air traffic controller can steer a whole UAV fleet by moving a single logical shepherd.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://hebaelfiqi.com/papers/atc-shepherding.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css?v=9">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="bar container">
+    <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true"></span> Dr Heba El-Fiqi</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav-links" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../research.html">Research</a>
+        <a href="../publications.html">Publications</a>
+        <a href="../software.html">Software</a>
+        <a href="../people.html">People</a>
+        <a href="../teaching.html">Teaching</a>
+        <a href="../service.html">Service</a>
+        <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-head"><div class="container">
+  <a class="backlink" href="../research.html#paper-atc">&larr; Back to the paper gallery</a>
+  <p class="eyebrow light">Paper story</p>
+  <h1>When the air traffic controller becomes a shepherd</h1>
+  <p class="lede">Package-delivery drones are multiplying faster than the people who could ever direct them one by one. Our Springer chapter proposes a different control room: the controller moves a single logical shepherd, and the whole fleet responds. Here is the story, without the mathematics.</p>
+</div></section>
+
+<section class="section"><div class="container prose">
+  <dl class="hdr-meta" style="margin:0 0 2.6em">
+    <div><dt>Chapter</dt><dd>Logical Shepherd Assisting Air Traffic Controllers for Swarm UAV Traffic Control Systems</dd></div>
+    <div><dt>Book</dt><dd>Shepherding UxVs for Human-Swarm Teaming (Springer)</dd></div>
+    <div><dt>Year</dt><dd>2021</dd></div>
+    <div><dt>DOI</dt><dd><a href="https://doi.org/10.1007/978-3-030-60898-9_11">10.1007/978-3-030-60898-9_11</a></dd></div>
+  </dl>
+
+  <p class="eyebrow">The problem</p>
+  <h2>Too many aircraft, one pair of hands</h2>
+  <p>Air traffic control was built around a simple loop: select an aircraft, issue an instruction, wait for confirmation, repeat. That loop works when the sky holds dozens of large, crewed aircraft. It cannot survive the sky that is coming, where delivery fleets, inspection drones, and autonomous platforms put hundreds of small aircraft into the same airspace at once. No human can run the select-and-command loop hundreds of times over, and hiring a controller per drone is not a plan.</p>
+  <p>Yet removing the human is not a plan either. When risk emerges in a monitored sector, someone accountable must be able to act on a large number of aircraft at once. The question is how one controller can meaningfully steer many.</p>
+
+  <p class="eyebrow">The idea</p>
+  <h2>One shepherd for the whole sky</h2>
+  <p>Shepherding already solves a version of this problem: one sheepdog steers a hundred sheep by influence rather than instruction. So we gave the air traffic controller a sheepdog. The controller moves a <strong>logical shepherd</strong>, a purely digital agent in the airspace picture, and its influence rotates the intended flight plan of the nearest aircraft. That aircraft then passes the influence on, aircraft to aircraft, until the whole affected fleet has adjusted. One gesture from one human updates everyone, with no per-aircraft commands and almost no communication overhead.</p>
+  <p>The translation from paddock to airspace is not one-to-one, and that is the point. A sheep needs five instincts; an aircraft already owns most of them. Attraction to the flock becomes the flight plan. Heading is managed by the autopilot. Collision avoidance belongs to onboard detect-and-resolve systems. The random jitter that keeps sheep from deadlocking has no place around aircraft and is removed. What remains is the one force worth borrowing: repulsion from the shepherd.</p>
+  <div class="story-fig"><svg viewBox="0 0 560 600" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Stage one shows the full shepherding scene translated to air traffic control: a focal sheep among a flock with a sheepdog, under five forces, beside the same scene with aircraft and a logical shepherd, where repulsion from the shepherd is kept and the other forces are handled by the flight plan, autopilot, and CD&amp;R. Stage two shows one controller moving the logical shepherd, whose influence propagates aircraft to aircraft and rotates each intended flight plan.">
+  <text x="8" y="20" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="2" fill="#1C7E8F">AIR TRAFFIC CONTROL AS SHEPHERDING</text>
+  <defs>
+    <marker id="atcT" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1C7E8F"/></marker>
+    <marker id="atcG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C6F84"/></marker>
+    <marker id="atcA" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#E0992F"/></marker>
+  </defs>
+  <!-- STAGE 1: force translation, full scene -->
+  <text x="280" y="44" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">1 &#183; the same forces, translated</text>
+  <rect x="20" y="56" width="250" height="250" rx="10" fill="#fff" stroke="#D8E2EB"/>
+  <text x="145" y="72" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84" text-anchor="middle">classic shepherding</text>
+  <!-- focal sheep forces -->
+  <text x="115" y="104" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">repulsion from the shepherd</text>
+  <line x1="115" y1="150" x2="115" y2="112" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="178" y="124" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">previous heading</text>
+  <line x1="132" y1="156" x2="160" y2="134" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="62" y="144" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">collision avoidance</text>
+  <line x1="92" y1="166" x2="58" y2="154" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <line x1="138" y1="176" x2="168" y2="181" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <rect x="173" y="175" width="10" height="10" rx="2" fill="#5C6F84"/><text x="188" y="184" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5C6F84">LCM</text>
+  <text x="150" y="202" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">attraction to LCM</text>
+  <line x1="100" y1="184" x2="76" y2="208" stroke="#5C6F84" stroke-width="1.5" marker-end="url(#atcG)"/>
+  <text x="68" y="222" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">jittering</text>
+  <!-- focal sheep -->
+  <g fill="#0A1B2E" transform="translate(115,170) scale(0.8)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <!-- flock -->
+  <g fill="#0A1B2E" transform="translate(228,104) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <g fill="#0A1B2E" transform="translate(226,170) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <g fill="#0A1B2E" transform="translate(206,244) scale(0.6)">
+    <circle cx="-16" cy="0" r="9"/><circle cx="-6" cy="-5" r="10"/><circle cx="5" cy="-2" r="10"/><circle cx="-4" cy="4" r="10"/><circle cx="12" cy="2" r="8"/>
+    <circle cx="20" cy="-8" r="5.5"/><circle cx="24" cy="-11" r="2.5"/>
+    <rect x="-16" y="8" width="3" height="11" rx="1.5"/><rect x="-8" y="9" width="3" height="10" rx="1.5"/><rect x="2" y="9" width="3" height="10" rx="1.5"/><rect x="10" y="8" width="3" height="11" rx="1.5"/>
+  </g>
+  <!-- sheepdog -->
+  <g fill="#0A1B2E" transform="translate(64,258)">
+    <ellipse cx="0" cy="0" rx="14" ry="7"/>
+    <circle cx="16" cy="-6" r="5"/><path d="M20,-8 L27,-5 L20,-3 Z"/><path d="M13,-10 L16,-16 L19,-9 Z"/>
+    <path d="M-13,-3 L-22,-11 L-17,-1 Z"/>
+    <rect x="-11" y="5" width="2.6" height="10" rx="1.3"/><rect x="-5" y="6" width="2.6" height="9" rx="1.3"/><rect x="3" y="6" width="2.6" height="9" rx="1.3"/><rect x="9" y="5" width="2.6" height="10" rx="1.3"/>
+  </g>
+  <text x="64" y="286" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">sheepdog</text>
+  <text x="280" y="180" font-family="IBM Plex Sans, sans-serif" font-size="16" fill="#5C6F84" text-anchor="middle">&#8594;</text>
+  <rect x="290" y="56" width="250" height="250" rx="10" fill="#fff" stroke="#D8E2EB"/>
+  <text x="415" y="72" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1" fill="#5C6F84" text-anchor="middle">air traffic control</text>
+  <!-- focal aircraft forces -->
+  <text x="385" y="104" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#182A3D" text-anchor="middle">repulsion from the shepherd</text>
+  <line x1="385" y1="150" x2="385" y2="112" stroke="#1C7E8F" stroke-width="2" marker-end="url(#atcT)"/>
+  <text x="450" y="124" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">heading (autopilot)</text>
+  <line x1="402" y1="156" x2="432" y2="134" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <text x="332" y="144" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">collision (CD&amp;R)</text>
+  <line x1="362" y1="166" x2="328" y2="154" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <line x1="408" y1="176" x2="438" y2="181" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <rect x="443" y="175" width="10" height="10" rx="2" fill="#5C6F84"/><text x="458" y="184" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5C6F84">LCM</text>
+  <text x="424" y="202" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">attraction (flight plan)</text>
+  <line x1="370" y1="184" x2="346" y2="208" stroke="#5C6F84" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#atcG)"/>
+  <text x="338" y="222" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#5C6F84" text-anchor="middle">no jittering</text>
+  <!-- focal aircraft -->
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(385,170) rotate(35) scale(1.5) translate(-12,-12)" fill="#0A1B2E"/>
+  <!-- other aircraft -->
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(498,102) rotate(40) scale(1.05) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(496,168) rotate(55) scale(1.05) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(478,244) rotate(25) scale(1.05) translate(-12,-12)" fill="#0A1B2E"/>
+  <!-- logical shepherd -->
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(334,258) rotate(45) scale(1.2)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="334" y="286" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#1C7E8F" text-anchor="middle" font-weight="600">logical shepherd</text>
+  <line x1="120" y1="322" x2="142" y2="322" stroke="#1C7E8F" stroke-width="2.2"/><text x="148" y="326" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">kept</text>
+  <line x1="190" y1="322" x2="212" y2="322" stroke="#5C6F84" stroke-width="1.6" stroke-dasharray="4 4"/><text x="218" y="326" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#182A3D">handled by the aircraft: autopilot &#183; flight plan &#183; CD&amp;R</text>
+  <!-- STAGE 2: one controller steers the fleet -->
+  <text x="280" y="350" font-family="IBM Plex Mono, monospace" font-size="10" fill="#1C7E8F" text-anchor="middle">2 &#183; one controller steers the whole fleet</text>
+  <line x1="10" y1="372" x2="34" y2="372" stroke="#1C7E8F" stroke-width="2.4"/><text x="40" y="376" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">updated flight plan</text>
+  <line x1="10" y1="390" x2="34" y2="390" stroke="#D8E2EB" stroke-width="2" stroke-dasharray="5 4"/><text x="40" y="394" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#182A3D">previous flight plan</text>
+  <path d="M212,496 C262,499 312,500 356,500" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M212,492 C260,482 312,472 356,464" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M292,442 C342,445 392,447 436,448" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M292,438 C340,426 392,416 436,410" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M372,388 C420,391 468,393 504,394" fill="none" stroke="#D8E2EB" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#atcG)"/>
+  <path d="M372,384 C418,374 468,366 504,360" fill="none" stroke="#1C7E8F" stroke-width="2.2" marker-end="url(#atcT)"/>
+  <path d="M340,496 A26,26 0 0 1 336,472" fill="none" stroke="#5C6F84" stroke-width="1.3" marker-end="url(#atcG)"/>
+  <text x="344" y="518" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5C6F84">flight plan rotates</text>
+  <line x1="106" y1="524" x2="186" y2="502" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="212" y1="482" x2="266" y2="450" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <line x1="292" y1="428" x2="346" y2="396" stroke="#E0992F" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#atcA)"/>
+  <text x="250" y="544" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5C6F84" text-anchor="middle">influence propagates aircraft to aircraft</text>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(200,494) rotate(78) scale(1.15) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(280,440) rotate(78) scale(1.15) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z" transform="translate(360,386) rotate(78) scale(1.15) translate(-12,-12)" fill="#0A1B2E"/>
+  <path d="M0,-12 L7,10 L0,4.5 L-7,10 Z" transform="translate(95,536) rotate(62) scale(1.5)" fill="#E3F1F4" stroke="#1C7E8F" stroke-width="1.6"/>
+  <text x="95" y="566" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#1C7E8F" text-anchor="middle" font-weight="600">Logical shepherd</text>
+  <text x="95" y="580" font-family="IBM Plex Mono, monospace" font-size="8.8" fill="#5C6F84" text-anchor="middle">moved by one controller</text>
+</svg></div>
+  <p class="fig-note">Top: the five shepherding forces, translated. Only repulsion from the shepherd is kept; the aircraft&rsquo;s own systems absorb the rest. Bottom: the controller moves the logical shepherd, and the influence propagates aircraft to aircraft, rotating each intended flight plan.</p>
+
+  <p class="eyebrow">The design choices</p>
+  <h2>Steer plans, not positions</h2>
+  <p>Two decisions make this safe enough to contemplate. First, the shepherd never pushes an aircraft&rsquo;s <em>position</em> around, the way a dog displaces sheep; it rotates the aircraft&rsquo;s <em>intended flight plan</em>, once, and the autopilot flies the amended plan. Continuous force on positions would mean continuous, jittery corrections in a safety-critical domain. Second, the propagation is asynchronous and previewable: the controller can see the predicted effect of a shepherd move on every affected flight plan before committing it, so a gesture never launches a cascade the human did not intend.</p>
+
+  <p class="eyebrow">What we demonstrated</p>
+  <h2>A new control interface, in a real simulator</h2>
+  <p>We built the approach into ATOMS, an air traffic operations simulator used in ATM research, alongside its original one-command-one-aircraft interface. The new interface lets the controller display the shepherd, drag it, preview the influence on the displayed flight plans, and accept the change, at which point the modified asynchronous shepherding algorithm updates the affected fleet. The contrast with the original interface is the argument in miniature: the same human, given a shepherd, controls a crowd instead of a queue.</p>
+
+  <p class="eyebrow">Who should care</p>
+  <h2>The people designing tomorrow's airspace</h2>
+  <p>Uncrewed traffic management is being designed right now, and most proposals push the human toward strategic oversight only, because tactical control of hundreds of aircraft seems impossible. This chapter argues it is not impossible; it just needs the right lever. The same pattern extends beyond airspace to any setting where one accountable human must steer many autonomous agents. It also connects to the rest of my shepherding work: <a href="shepherding-limits.html">the limits study</a> maps where reactive influence works, and <a href="adversarial-patrolling.html">the patrolling study</a> turns the same lever to defence.</p>
+
+  <p class="eyebrow">Cite &amp; explore</p>
+  <h2>The formal version</h2>
+  <p class="note" style="max-width:70ch">H. El-Fiqi, K. Kasmarik and H. A. Abbass, &ldquo;Logical Shepherd Assisting Air Traffic Controllers for Swarm UAV Traffic Control Systems,&rdquo; in <em style="all:unset;font-style:italic">Shepherding UxVs for Human-Swarm Teaming: An Artificial Intelligence Approach to Unmanned X Vehicles</em>, H. A. Abbass and R. A. Hunjet, Eds. Springer, 2021, pp. 245&ndash;263. <a class="doi" href="https://doi.org/10.1007/978-3-030-60898-9_11">doi:10.1007/978-3-030-60898-9_11</a></p>
+  <p><a class="more" href="shepherding-limits.html">Where reactive shepherding breaks: the companion story &rarr;</a><br>
+     <a class="more" href="../research.html#paper-atc">Back to the paper gallery &rarr;</a></p>
+
+  <div class="colophon">
+    <p><strong>How this page was written.</strong> The research, the results, and the ideas here are mine and my co-authors&rsquo;. To retell them in plain language, I worked with an AI writing assistant that helped draft the text and render the diagrams in this site&rsquo;s style. I reviewed and edited everything, and the technical responsibility rests with me. If the prose reads a little differently from my papers, that is why.</p>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="container foot">
+    <div>
+      <div class="foot-name">Dr Heba El-Fiqi</div>
+      <p class="foot-line">Distributed and collaborative intelligence for autonomous systems. School of Systems and Computing, UNSW Canberra.</p>
+    </div>
+    <nav class="foot-links" aria-label="Profiles">
+      <a href="https://scholar.google.com/citations?user=6ySMBdQAAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-8146-0110">ORCID</a>
+      <a href="https://www.linkedin.com/in/heba-el-fiqi-23503274/">LinkedIn</a>
+      <a href="https://github.com/Hebaelfiqi/">GitHub</a>
+    </nav>
+  </div>
+  <div class="container foot-meta">&copy; <span id="year"></span> Heba El-Fiqi. Built as a static site for GitHub Pages.</div>
+</footer>
+<script src="../assets/main.js?v=3"></script>
+</body>
+</html>
