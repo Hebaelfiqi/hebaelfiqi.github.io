@@ -93,8 +93,8 @@
         <select id="speed" aria-labelledby="spdLab">
           <option value="1">1</option>
           <option value="3">3</option>
-          <option value="10">10</option>
-          <option value="30" selected>30</option>
+          <option value="10" selected>10</option>
+          <option value="30">30</option>
           <option value="60">60</option>
           <option value="120">120</option>
           <option value="300">300</option>
@@ -123,7 +123,7 @@
         <h2>Scenario</h2>
         <div class="grid2">
           <div class="field-row"><label for="pN">sheep N</label>
-            <input id="pN" type="number" min="10" max="200" step="10" value="100"></div>
+            <input id="pN" type="number" min="10" max="200" step="10" value="20"></div>
           <div class="field-row"><label for="pM">sheepdogs M</label>
             <input id="pM" type="number" min="1" max="10" value="1"></div>
           <div class="field-row"><label for="pSeed">seed</label>
@@ -217,7 +217,7 @@ const PARAM_DEFS = [
 ];
 const FIELD = 50, GOAL = [25, 50];
 let mod = null, running = false, finished = false, model = "proposed";
-let trails = true, history = [], nDogs = 1, nSheep = 100, goalRadius = 10;
+let trails = true, history = [], nDogs = 1, nSheep = 20, goalRadius = 10;
 let obstacles = [];   // [x, y, radius] for the current run
 
 const cv = document.getElementById('field'), cx = cv.getContext('2d');
@@ -385,11 +385,15 @@ function draw() {
   for (let i = nDogs; i < frame.pos.length; i++) {
     cx.beginPath(); cx.arc(X(frame.pos[i][0]), Y(frame.pos[i][1]), 0.25 * S, 0, 7); cx.fill();
   }
-  cx.fillStyle = css('--dog');
   for (let i = 0; i < nDogs; i++) {
-    cx.beginPath(); cx.arc(X(frame.pos[i][0]), Y(frame.pos[i][1]), 5.5, 0, 7); cx.fill();
-    cx.strokeStyle = 'rgba(98,182,203,.45)';
-    cx.beginPath(); cx.arc(X(frame.pos[i][0]), Y(frame.pos[i][1]), 9, 0, 7); cx.stroke();
+    const dx = X(frame.pos[i][0]), dy = Y(frame.pos[i][1]);
+    cx.strokeStyle = 'rgba(98,182,203,.55)'; cx.lineWidth = 1.2;
+    cx.beginPath(); cx.arc(dx, dy, 12, 0, 7); cx.stroke();           // sensing ring
+    cx.fillStyle = css('--dog');
+    cx.beginPath(); cx.arc(dx, dy, 6, 0, 7); cx.fill();              // dog body
+    cx.lineWidth = 1.8; cx.strokeStyle = '#eef8fb';
+    cx.beginPath(); cx.arc(dx, dy, 6, 0, 7); cx.stroke();           // bright outline so it reads at the goal
+    cx.lineWidth = 1;
   }
   $('tStep').textContent = frame.t;
   $('tAtGoal').textContent = st.atGoal + ' / ' + nSheep;
